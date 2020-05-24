@@ -1,9 +1,9 @@
 package com.legion.standprojectapp.entity;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -12,10 +12,10 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    @Pattern(regexp = "\\d+\\.\\d+")
+    @Pattern(regexp = "\\d+|\\d+\\.\\d+")
     private String width;
     @NotNull
-    @Pattern(regexp = "\\d+\\.\\d+")
+    @Pattern(regexp = "\\d+|\\d+\\.\\d+")
     private String depth;
     @NotNull
     @ManyToOne
@@ -23,7 +23,7 @@ public class Project {
     private boolean withFloor;
     private boolean withHanger;
     @NotNull
-    @Pattern(regexp = "\\d+\\.\\d+")
+    @Pattern(regexp = "\\d+|\\d+\\.\\d+")
     private String standHeight;
     private boolean utilityRoom;
     private boolean vipRoom;
@@ -39,7 +39,33 @@ public class Project {
     @NotBlank
     private String companyName;
     @Email
+    @NotBlank
     private String companyMail;
+    private LocalDateTime created;
+    @OneToMany
+    @NotNull
+    private List<CurrentEvent> events;
+
+    @PrePersist
+    public void prePersist() {
+        created = LocalDateTime.now();
+    }
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public List<CurrentEvent> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<CurrentEvent> events) {
+        this.events = events;
+    }
 
     public Long getId() {
         return id;

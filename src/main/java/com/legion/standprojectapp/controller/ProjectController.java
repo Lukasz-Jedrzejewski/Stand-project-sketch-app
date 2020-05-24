@@ -51,14 +51,14 @@ public class ProjectController {
 
     @GetMapping("/add")
     public String addProjectData(Model model) {
-        model.addAttribute("projectData", new Project());
+        model.addAttribute("project", new Project());
         return "addProjectData";
     }
 
     @GetMapping("/add/{id}")
     public String addProjectData(Model model, @PathVariable long id) {
         Optional<Project> byId = projectRepository.findById(id);
-        model.addAttribute("projectData", byId);
+        model.addAttribute("project", byId);
         return "addProjectData";
     }
 

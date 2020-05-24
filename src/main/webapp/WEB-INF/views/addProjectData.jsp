@@ -5,7 +5,7 @@
     <title>Add Project Data</title>
 </head>
 <body>
-<form:form modelAttribute="projectData" method="post" action="/project/add">
+<form:form modelAttribute="project" method="post" action="/project/add">
     <form:hidden path="id" />
     <div>
         <label>
