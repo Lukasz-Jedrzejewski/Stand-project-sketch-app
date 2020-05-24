@@ -10,16 +10,6 @@ public class CurrentEvent {
     private Long id;
     private String name;
     private String city;
-    @ManyToOne
-    private Project project;
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
 
     public Long getId() {
         return id;

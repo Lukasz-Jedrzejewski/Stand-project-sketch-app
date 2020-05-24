@@ -42,9 +42,6 @@ public class Project {
     @NotBlank
     private String companyMail;
     private LocalDateTime created;
-    @OneToMany
-    @NotNull
-    private List<CurrentEvent> events;
 
     @PrePersist
     public void prePersist() {
@@ -57,14 +54,6 @@ public class Project {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
-    }
-
-    public List<CurrentEvent> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<CurrentEvent> events) {
-        this.events = events;
     }
 
     public Long getId() {

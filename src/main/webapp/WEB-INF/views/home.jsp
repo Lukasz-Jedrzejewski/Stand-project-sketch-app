@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-    <a href="/project/add">Uzupełnij dane do projektu</a>
+    <a href="/event/get">Uzupełnij dane do projektu</a>
 </header>
 </body>
 </html>
