@@ -38,4 +38,16 @@ public class CurrentEvent {
     public String eventData() {
         return name + " " + city;
     }
+
+    @Override
+    public String toString() {
+        return "CurrentEvent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
+    public String toHtml() {
+        return "<ul><li>nazwa = " + name + "</li><li>city='" + city + "</li></ul>";
+    }
 }

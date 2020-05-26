@@ -3,7 +3,6 @@ package com.legion.standprojectapp.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "projects")
@@ -166,5 +165,44 @@ public class Project {
 
     public void setCompanyMail(String companyMail) {
         this.companyMail = companyMail;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", width='" + width + '\'' +
+                ", depth='" + depth + '\'' +
+                ", typeOfBuilding=" + typeOfBuilding +
+                ", withFloor=" + withFloor +
+                ", withHanger=" + withHanger +
+                ", standHeight='" + standHeight + '\'' +
+                ", utilityRoom=" + utilityRoom +
+                ", vipRoom=" + vipRoom +
+                ", floorBoard=" + floorBoard +
+                ", walls=" + walls +
+                ", branch=" + branch +
+                ", companyName='" + companyName + '\'' +
+                ", companyMail='" + companyMail + '\'' +
+                ", created=" + created +
+                '}';
+    }
+
+    public String toHtml() {
+        return "<section><ul><li>szerokość stoiska = " + width + "</li>" +
+                "<li>głębokość stoiska = " + depth + "</li>" +
+                "<li>rodzaj zabudowy = " + typeOfBuilding.getName() +"</li>" +
+                "<li>piętro = " + withFloor +"</li>" +
+                "<li>podwieszenie = " + withHanger +"</li>" +
+                "<li>wysokość stoiska = " + standHeight + "</li>" +
+                "<li>zaplecze użytkowe = " + utilityRoom +"</li>" +
+                "<li>vip room = " + vipRoom +"</li>" +
+                "<li>podłoga = " + floorBoard.getName() +"</li>" +
+                "<li>ilość ścian = " + walls +"</li>" +
+                "<li>branża = " + branch.getName() +"</li>" +
+                "<li>nazwa klienta = " + companyName + "</li>" +
+                "<li>mail klienta = " + companyMail + "</li>" +
+                "<li>data utworzenia = " + created +"</li>" +
+                "</ul></section>";
     }
 }

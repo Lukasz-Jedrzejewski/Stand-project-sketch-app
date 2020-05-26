@@ -1,25 +1,32 @@
 package com.legion.standprojectapp.controller;
 
-import com.legion.standprojectapp.entity.Branch;
-import com.legion.standprojectapp.entity.FloorBoard;
-import com.legion.standprojectapp.entity.Project;
-import com.legion.standprojectapp.entity.TypeOfBuilding;
+import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.repository.BranchRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
 import com.legion.standprojectapp.service.ProjectService;
+import org.hibernate.type.CurrencyType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
+
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     private ProjectService projectService;
     private TypeOfBuildingRepository typeOfBuildingRepository;
@@ -49,7 +56,6 @@ public class ProjectController {
         return branchRepository.findAll();
     }
 
-
     @GetMapping("/add")
     public String addProjectData(Model model) {
         model.addAttribute("project", new Project());
@@ -64,11 +70,21 @@ public class ProjectController {
     }
 
     @PostMapping("/add")
-    public String saveProjectData(@Valid @ModelAttribute Project project, BindingResult bindingResult) {
+    public String saveProjectData(@Valid @ModelAttribute Project project, BindingResult bindingResult, HttpSession session) throws IOException, MessagingException {
         if (bindingResult.hasErrors()) {
             return "addProjectData";
         }
+
+        CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("event");
+        session.setAttribute("project", project);
         projectService.save(project);
+
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo("generaljedrzejewski@gmail.com");
+        helper.setSubject("New sketch");
+        helper.setText("<h1>You have new project data!</h1>"+project.toHtml()+ " " + currentEvent.toHtml(), true);
+        javaMailSender.send(msg);
         return "redirect:/home";
     }
 }

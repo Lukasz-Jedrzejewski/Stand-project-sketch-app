@@ -36,4 +36,16 @@ public class FloorBoard {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "FloorBoard{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", projects=" + projects +
+                '}';
+    }
+    public String toHtml() {
+        return "<ul><li>nazwa = " + name + "</li></ul>";
+    }
 }

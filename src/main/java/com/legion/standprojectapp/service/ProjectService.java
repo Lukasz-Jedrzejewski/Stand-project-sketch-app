@@ -3,7 +3,6 @@ package com.legion.standprojectapp.service;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Service
@@ -21,4 +20,6 @@ public class ProjectService {
     public Optional<Project> findProjectById(long id){
         return this.projectRepository.findById(id);
     }
+
+
 }

@@ -45,14 +45,8 @@ public class CurrentEventController {
             return "event";
         }
 
+        session.setAttribute("event", currentEvent);
 
-        Map<String,String> formData = (Map<String, String>) session.getAttribute("formData");
-        if (formData == null) {
-            formData = new HashMap<>();
-            session.setAttribute("formData", formData);
-        }
-        formData.put("city", currentEvent.getCity());
-        formData.put("city", currentEvent.getName());
         currentEventService.save(currentEvent);
         return "redirect:/project/add";
     }
