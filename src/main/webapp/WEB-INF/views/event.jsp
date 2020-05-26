@@ -26,14 +26,12 @@ Uzupełnij dane
 lub wybierz z listy:
     <div>
         <label>
-            <form method="post">
                 <select>
                 <c:forEach items="${events}" var="event">
                     <option>${event.name} | ${event.city}</option>
                 </c:forEach>
                 <input type="submit" value="Zatwierdź"/>
             </select>
-            </form>
         </label>
     </div>
 

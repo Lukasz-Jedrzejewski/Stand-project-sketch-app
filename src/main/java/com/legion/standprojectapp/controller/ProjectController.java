@@ -6,8 +6,8 @@ import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.entity.TypeOfBuilding;
 import com.legion.standprojectapp.repository.BranchRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
-import com.legion.standprojectapp.repository.ProjectRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
+import com.legion.standprojectapp.service.ProjectService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,15 +21,16 @@ import java.util.Optional;
 @RequestMapping("/project")
 public class ProjectController {
 
+    private ProjectService projectService;
     private TypeOfBuildingRepository typeOfBuildingRepository;
     private FloorBoarRepository floorBoarRepository;
-    private ProjectRepository projectRepository;
     private BranchRepository branchRepository;
 
-    public ProjectController(TypeOfBuildingRepository typeOfBuildingRepository, FloorBoarRepository floorBoarRepository, ProjectRepository projectRepository, BranchRepository branchRepository) {
+    public ProjectController(ProjectService projectService, TypeOfBuildingRepository typeOfBuildingRepository,
+                             FloorBoarRepository floorBoarRepository, BranchRepository branchRepository) {
+        this.projectService = projectService;
         this.typeOfBuildingRepository = typeOfBuildingRepository;
         this.floorBoarRepository = floorBoarRepository;
-        this.projectRepository = projectRepository;
         this.branchRepository = branchRepository;
     }
 
@@ -57,7 +58,7 @@ public class ProjectController {
 
     @GetMapping("/add/{id}")
     public String addProjectData(Model model, @PathVariable long id) {
-        Optional<Project> byId = projectRepository.findById(id);
+        Optional<Project> byId = projectService.findProjectById(id);
         model.addAttribute("project", byId);
         return "addProjectData";
     }
@@ -67,11 +68,7 @@ public class ProjectController {
         if (bindingResult.hasErrors()) {
             return "addProjectData";
         }
-        if (project.getId() != null) {
-            projectRepository.save(project);
-        } else {
-            projectRepository.save(project);
-        }
+        projectService.save(project);
         return "redirect:/home";
     }
 }
