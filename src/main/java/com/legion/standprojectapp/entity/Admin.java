@@ -6,8 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "admin")
+public class Admin {
     @Id
     @GeneratedValue
     private Long id;
@@ -15,7 +15,7 @@ public class User {
     private String companyMail;
     private String password;
 
-    public User() {
+    public Admin() {
     }
 
     public String getPassword() {
@@ -51,6 +51,6 @@ public class User {
     }
 
     public String toHtml() {
-        return "<ul><li>nazwa klienta = " + companyName + "</li><li>mail klienta = " + companyMail + "</li></ul>";
+        return "<ul><li>nazwa firmy = " + companyName + "</li><li>mail firmy = " + companyMail + "</li></ul>";
     }
 }
