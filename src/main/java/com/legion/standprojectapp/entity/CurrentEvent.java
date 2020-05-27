@@ -1,6 +1,7 @@
 package com.legion.standprojectapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "event")
@@ -8,7 +9,9 @@ public class CurrentEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
+    @NotBlank
     private String city;
 
     public Long getId() {
@@ -48,6 +51,6 @@ public class CurrentEvent {
                 '}';
     }
     public String toHtml() {
-        return "<ul><li>nazwa = " + name + "</li><li>city='" + city + "</li></ul>";
+        return "<ul><li>wydarzenie = " + name + "</li><li>miasto = " + city + "</li></ul>";
     }
 }

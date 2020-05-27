@@ -3,12 +3,10 @@ package com.legion.standprojectapp.controller;
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.service.CurrentEventService;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -34,8 +32,15 @@ public class CurrentEventController {
 
     @GetMapping("/get")
     public String getEvent(Model model) {
-        model.addAttribute("currrentEvent", new CurrentEvent());
+        model.addAttribute("currentEvent", new CurrentEvent());
         return "event";
+    }
+
+    @GetMapping("/project/prepare/{id}")
+
+    public String readCurrentEvent(@PathVariable long id, HttpSession session) {
+        session.setAttribute("currentEvent", currentEventService.getOne(id));
+        return "redirect:/project/add";
     }
 
     @PostMapping("/get")
@@ -45,7 +50,7 @@ public class CurrentEventController {
             return "event";
         }
 
-        session.setAttribute("event", currentEvent);
+        session.setAttribute("currentEvent", currentEvent);
 
         currentEventService.save(currentEvent);
         return "redirect:/project/add";

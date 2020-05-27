@@ -21,4 +21,8 @@ public class CurrentEventService {
     public List<CurrentEvent> findAll() {
         return currentEventRepository.findAll();
     }
+
+    public CurrentEvent getOne(long id) {
+        return currentEventRepository.getOne(id);
+    }
 }

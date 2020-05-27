@@ -6,8 +6,11 @@
     <title>Event</title>
 </head>
 <body>
+<button id="btn_form">Uzupełnij dane</button>
+<button id ="btn_ready">Wybierz z listy</button>
+<section class="form">
 Uzupełnij dane
-<form:form modelAttribute="currrentEvent" method="post" action="/event/get">
+<form:form modelAttribute="currentEvent" method="post" action="/event/get">
     <div>
         <label>
             Nazwa wydarzenia<form:input path="name"/>
@@ -20,20 +23,23 @@ Uzupełnij dane
         </label>
         <form:errors path="city"/>
     </div>
-    <input type="submit" value="Zatwierdź"/>
+    <input id="b1" type="submit" value="Zatwierdź"/>
 </form:form>
-
-lub wybierz z listy:
+</section>
+<section class="ready">
+wybierz z listy:
     <div>
         <label>
-                <select>
+                <select id="event_ready">
                 <c:forEach items="${events}" var="event">
-                    <option>${event.name} | ${event.city}</option>
+                    <option value="${event.id}">${event.name} | ${event.city}</option>
                 </c:forEach>
-                <input type="submit" value="Zatwierdź"/>
-            </select>
+                </select>
+
+                <input id="b2" type="submit" value="Zatwierdź"/>
         </label>
     </div>
-
+</section>
+<script src="<c:url value="/resources/js/js.js"/>"></script>
 </body>
 </html>

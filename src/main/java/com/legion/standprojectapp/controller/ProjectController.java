@@ -2,10 +2,10 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.repository.BranchRepository;
+import com.legion.standprojectapp.repository.CurrentEventRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
 import com.legion.standprojectapp.service.ProjectService;
-import org.hibernate.type.CurrencyType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -69,22 +69,20 @@ public class ProjectController {
         return "addProjectData";
     }
 
+
+
     @PostMapping("/add")
     public String saveProjectData(@Valid @ModelAttribute Project project, BindingResult bindingResult, HttpSession session) throws IOException, MessagingException {
         if (bindingResult.hasErrors()) {
             return "addProjectData";
         }
 
-        CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("event");
+        CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("currentEvent");
         session.setAttribute("project", project);
         projectService.save(project);
 
-        MimeMessage msg = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        helper.setTo("generaljedrzejewski@gmail.com");
-        helper.setSubject("New sketch");
-        helper.setText("<h1>You have new project data!</h1>"+project.toHtml()+ " " + currentEvent.toHtml(), true);
-        javaMailSender.send(msg);
+        projectService.sendMail(project, currentEvent);
+
         return "redirect:/home";
     }
 }
