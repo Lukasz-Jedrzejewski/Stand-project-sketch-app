@@ -53,4 +53,8 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByCompanyMail(companyMail);
     }
 
+    public User findById(long id){
+        return this.userRepository.getOne(id);
+    }
+
 }

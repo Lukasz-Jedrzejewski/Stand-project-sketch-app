@@ -44,4 +44,19 @@ public class UserController {
         model.addAttribute("user", user);
         return "panel";
     }
+
+    @GetMapping("/edit/{id}")
+    public String editUser(@PathVariable long id, Model model){
+        model.addAttribute("userToEdit", userServiceImpl.findById(id));
+        return "editUserForm";
+    }
+
+    @PostMapping("/edit")
+    public String editUser(@Valid @ModelAttribute User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "editUserForm";
+        }
+        userServiceImpl.save(user);
+        return "redirect:/user/about";
+    }
 }

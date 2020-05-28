@@ -6,6 +6,7 @@
     <title>Panel</title>
 </head>
 <body>
+<a href="/user/edit/${user.id}">Edytuj swoje konto</a>
 <nav>
             <sec:authorize access="isAuthenticated()">
                 <p>Zalogowany jako: ${user.companyMail}</p>
