@@ -26,9 +26,6 @@ public class UserController {
 //        return "panel";
     }
 
-    @GetMapping("/403")
-    public String page403(){
-        return "403";
-    }
+
 
 }
