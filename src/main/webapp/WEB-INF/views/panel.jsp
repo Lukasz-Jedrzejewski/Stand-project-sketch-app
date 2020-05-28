@@ -6,13 +6,9 @@
     <title>Panel</title>
 </head>
 <body>
-AAAAAAAAAAAAAAAAAAAAA
 <nav>
-    bbbb
             <sec:authorize access="isAuthenticated()">
-                <p>Zalogowany jako: <sec:authentication property="companyName"/></p>
-                <p>Posiada role: <sec:authentication property="authorities"/></p>
-
+                <p>Zalogowany jako: ${user.companyMail}</p>
             </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">

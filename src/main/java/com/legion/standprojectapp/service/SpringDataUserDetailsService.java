@@ -25,9 +25,9 @@ public class SpringDataUserDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String mail) {
-        User user = userService.findByCompanyMail(mail);
-        if (user == null) {throw new UsernameNotFoundException(mail); }
+    public UserDetails loadUserByUsername(String companyMail) {
+        User user = userService.findByCompanyMail(companyMail);
+        if (user == null) {throw new UsernameNotFoundException(companyMail); }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         Set<Role> roles =  user.getRoles();
         roles.forEach(r -> grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
@@ -36,7 +36,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
 //                user.getUsername(), user.getPassword(), grantedAuthorities);
 
 //        Change to own implementation
-        return (UserDetails) new CurrentUser(user.getCompanyMail(), user.getPassword(), grantedAuthorities, user);
+        return new CurrentUser(user.getCompanyMail(), user.getPassword(), grantedAuthorities, user);
     }
 }
 //

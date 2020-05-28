@@ -1,10 +1,15 @@
 package com.legion.standprojectapp.controller;
 
+import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.service.UserServiceImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -16,16 +21,27 @@ public class UserController {
         this.userServiceImpl = userServiceImpl;
     }
 
-    @GetMapping("/about")
-    @ResponseBody
-    public String about(
-            @AuthenticationPrincipal CurrentUser currentUser
-            ) {
-        return currentUser.getUser().getCompanyMail();
-
-//        return "panel";
+    @GetMapping("/register")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "register";
     }
 
+    @PostMapping("/register")
+    public String addUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
 
+        userServiceImpl.save(user);
+        return "redirect:/user/about";
 
+    }
+
+    @GetMapping("/about")
+    public String about(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        User user = currentUser.getUser();
+        model.addAttribute("user", user);
+        return "panel";
+    }
 }

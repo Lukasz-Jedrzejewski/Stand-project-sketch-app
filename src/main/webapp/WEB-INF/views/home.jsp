@@ -12,7 +12,8 @@
 </head>
 <body>
 <header>
-    <a href="/user/login">Rejestracja/logowanie</a>
+    <a href="/user/about">logowanie</a>
+    <a href="/user/register">Rejestracja</a>
 
 </header>
 </body>
