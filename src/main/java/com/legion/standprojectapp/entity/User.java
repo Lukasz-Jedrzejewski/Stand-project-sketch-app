@@ -1,10 +1,12 @@
 package com.legion.standprojectapp.entity;
 
+import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.groups.Default;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,13 +17,13 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    @NotBlank
+    @NotBlank(groups = {Default.class, UserEditValidationGroup.class})
     private String companyName;
-    @NotBlank
-    @Email
+    @NotBlank(groups = {Default.class, UserEditValidationGroup.class})
+    @Email(groups = {Default.class, UserEditValidationGroup.class})
     @Column(nullable = false, unique = true, length = 60)
     private String companyMail;
-    @NotBlank
+    @NotBlank(groups = Default.class)
     private String password;
     private boolean enabled;
     private boolean admin;

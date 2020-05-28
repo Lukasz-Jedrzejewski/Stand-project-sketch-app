@@ -5,7 +5,7 @@
     <title>Edit user form</title>
 </head>
 <body>
-<form:form modelAttribute="userToEdit" method="post" action="/user/edit">
+<form:form modelAttribute="user" method="post" action="/user/edit">
     <form:hidden path="id" />
     <div>
         <label>
