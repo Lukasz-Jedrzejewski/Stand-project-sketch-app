@@ -13,7 +13,7 @@
 <body>
 <header>
     <a href="/user/login">Rejestracja/logowanie</a>
-    <a href="/event/get">Uzupełnij dane do projektu</a>
+
 </header>
 </body>
 </html>

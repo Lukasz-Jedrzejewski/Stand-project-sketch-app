@@ -6,14 +6,14 @@
     <title>Panel</title>
 </head>
 <body>
-
+AAAAAAAAAAAAAAAAAAAAA
 <nav>
-<%--            Możliwe dopiero jak będą dane z bazy - bo korzysta z getterów --%>
-<%--            <sec:authorize access="isAuthenticated()">--%>
-<%--                <p>Zalogowany jako: <sec:authentication property="companyName"/></p>--%>
-<%--                <p>Posiada role: <sec:authentication property="authorities"/></p>--%>
+    bbbb
+            <sec:authorize access="isAuthenticated()">
+                <p>Zalogowany jako: <sec:authentication property="companyName"/></p>
+                <p>Posiada role: <sec:authentication property="authorities"/></p>
 
-<%--            </sec:authorize>--%>
+            </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">
         <form action="<c:url value="/logout"/>" method="post">
@@ -22,6 +22,6 @@
         </form>
     </sec:authorize>
 </nav>
-
+<a href="/event/get">Uzupełnij dane do projektu</a>
 </body>
 </html>
