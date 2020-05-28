@@ -59,7 +59,7 @@
         <form:errors path="floorBoard"/>
     </div>
     <div>
-        <label>1 <form:radiobutton path="walls" value="0"/></label>
+        <label>0 <form:radiobutton path="walls" value="0"/></label>
         <label>1 <form:radiobutton path="walls" value="1"/></label>
         <label>2 <form:radiobutton path="walls" value="2"/></label>
         <label>3 <form:radiobutton path="walls" value="3"/></label>

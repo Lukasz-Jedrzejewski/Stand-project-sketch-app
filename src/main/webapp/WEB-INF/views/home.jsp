@@ -12,8 +12,9 @@
 </head>
 <body>
 <header>
-    <a href="/user/login">Rejestracja/logowanie</a>
-    <a href="/event/get">Uzupełnij dane do projektu</a>
+    <a href="/user/about">logowanie</a>
+    <a href="/user/register">Rejestracja</a>
+
 </header>
 </body>
 </html>

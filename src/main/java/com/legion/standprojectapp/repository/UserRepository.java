@@ -11,4 +11,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select u from User u where u.admin = true")
     List<User> findByAdmin();
+
+    User findByCompanyMail(String companyMail);
+
 }
