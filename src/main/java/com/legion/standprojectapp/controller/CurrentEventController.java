@@ -1,33 +1,30 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.CurrentEvent;
-import com.legion.standprojectapp.service.CurrentEventService;
+import com.legion.standprojectapp.service.CurrentEventServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 
 @RequestMapping("/event")
 public class CurrentEventController {
 
-    private CurrentEventService currentEventService;
+    private CurrentEventServiceImpl currentEventServiceImpl;
 
-    public CurrentEventController(CurrentEventService currentEventService) {
-        this.currentEventService = currentEventService;
+    public CurrentEventController(CurrentEventServiceImpl currentEventServiceImpl) {
+        this.currentEventServiceImpl = currentEventServiceImpl;
     }
 
     @ModelAttribute("events")
     public List<CurrentEvent> events () {
-        return currentEventService.findAll();
+        return currentEventServiceImpl.findAll();
     }
 
     @GetMapping("/get")
@@ -39,7 +36,7 @@ public class CurrentEventController {
     @GetMapping("/project/prepare/{id}")
 
     public String readCurrentEvent(@PathVariable long id, HttpSession session) {
-        session.setAttribute("currentEvent", currentEventService.getOne(id));
+        session.setAttribute("currentEvent", currentEventServiceImpl.getOne(id));
         return "redirect:/project/add";
     }
 
@@ -52,7 +49,7 @@ public class CurrentEventController {
 
         session.setAttribute("currentEvent", currentEvent);
 
-        currentEventService.save(currentEvent);
+        currentEventServiceImpl.save(currentEvent);
         return "redirect:/project/add";
     }
 }

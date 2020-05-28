@@ -1,7 +1,7 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
-import com.legion.standprojectapp.service.UserService;
+import com.legion.standprojectapp.service.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,10 +17,10 @@ import javax.validation.Valid;
 @RequestMapping("/user")
 public class UserController {
 
-    private UserService userService;
+    private UserServiceImpl userServiceImpl;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserServiceImpl userServiceImpl) {
+        this.userServiceImpl = userServiceImpl;
     }
 
     @GetMapping("/login")
@@ -35,14 +35,9 @@ public class UserController {
             return "login";
         }
 
-        userService.save(user);
+        userServiceImpl.save(user);
         return "redirect:/user/about";
 
-    }
-
-    @GetMapping("/admin")
-    public String admin(){
-        return "Admin page";
     }
 
     @GetMapping("/about")

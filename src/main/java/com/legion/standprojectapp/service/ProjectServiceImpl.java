@@ -2,6 +2,7 @@ package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.entity.Project;
+import com.legion.standprojectapp.interfaces.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,23 +14,26 @@ import javax.mail.internet.MimeMessage;
 import java.util.Optional;
 
 @Service
-public class ProjectService {
+public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 
+    @Override
     public void save(Project project) {
         this.projectRepository.save(project);
     }
 
+    @Override
     public Optional<Project> findProjectById(long id){
         return this.projectRepository.findById(id);
     }
 
+    @Override
     public void sendMail(Project project, CurrentEvent currentEvent) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);

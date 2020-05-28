@@ -1,11 +1,9 @@
 package com.legion.standprojectapp.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +12,7 @@ public class User {
     @GeneratedValue
     private Long id;
     @NotBlank
+    @Column(nullable = false, unique = true, length = 60)
     private String companyName;
     @NotBlank
     @Email
@@ -21,8 +20,18 @@ public class User {
     @NotBlank
     private String password;
     private boolean admin;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     public User() {
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public boolean isAdmin() {

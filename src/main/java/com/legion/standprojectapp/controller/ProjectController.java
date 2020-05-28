@@ -2,20 +2,17 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.repository.BranchRepository;
-import com.legion.standprojectapp.repository.CurrentEventRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
-import com.legion.standprojectapp.service.ProjectService;
+import com.legion.standprojectapp.service.ProjectServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
@@ -28,14 +25,14 @@ public class ProjectController {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    private ProjectService projectService;
+    private ProjectServiceImpl projectServiceImpl;
     private TypeOfBuildingRepository typeOfBuildingRepository;
     private FloorBoarRepository floorBoarRepository;
     private BranchRepository branchRepository;
 
-    public ProjectController(ProjectService projectService, TypeOfBuildingRepository typeOfBuildingRepository,
+    public ProjectController(ProjectServiceImpl projectServiceImpl, TypeOfBuildingRepository typeOfBuildingRepository,
                              FloorBoarRepository floorBoarRepository, BranchRepository branchRepository) {
-        this.projectService = projectService;
+        this.projectServiceImpl = projectServiceImpl;
         this.typeOfBuildingRepository = typeOfBuildingRepository;
         this.floorBoarRepository = floorBoarRepository;
         this.branchRepository = branchRepository;
@@ -64,7 +61,7 @@ public class ProjectController {
 
     @GetMapping("/add/{id}")
     public String addProjectData(Model model, @PathVariable long id) {
-        Optional<Project> byId = projectService.findProjectById(id);
+        Optional<Project> byId = projectServiceImpl.findProjectById(id);
         model.addAttribute("project", byId);
         return "addProjectData";
     }
@@ -79,9 +76,9 @@ public class ProjectController {
 
         CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("currentEvent");
         session.setAttribute("project", project);
-        projectService.save(project);
+        projectServiceImpl.save(project);
 
-        projectService.sendMail(project, currentEvent);
+        projectServiceImpl.sendMail(project, currentEvent);
 
         return "redirect:/home";
     }
