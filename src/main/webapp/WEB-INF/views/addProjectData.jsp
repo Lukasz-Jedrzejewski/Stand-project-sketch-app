@@ -66,12 +66,12 @@
         <label>4 <form:radiobutton path="walls" value="4"/></label>
         <form:errors path="walls"/>
     </div>
-    <div>
-        <label>
-            Branża<form:select path="branch" items="${branches}" itemLabel="name" itemValue="id"/>
-        </label>
-        <form:errors path="branch"/>
-    </div>
+<%--    <div>--%>
+<%--        <label>--%>
+<%--            Branża<form:select path="branch" items="${branches}" itemLabel="name" itemValue="id"/>--%>
+<%--        </label>--%>
+<%--        <form:errors path="branch"/>--%>
+<%--    </div>--%>
     <div>
         <label>
             Nazwa Twojej firmy<form:input path="companyName"/>
@@ -84,6 +84,7 @@
         </label>
         <form:errors path="companyMail"/>
     </div>
+    <form:errors path="*"/>
 
     <input type="submit" value="Zatwierdź"/>
 </form:form>

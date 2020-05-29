@@ -48,10 +48,10 @@ public class ProjectController {
         return floorBoarRepository.findAll();
     }
 
-    @ModelAttribute("branches")
-    public List<Branch> branches() {
-        return branchRepository.findAll();
-    }
+//    @ModelAttribute("branches")
+//    public List<Branch> branches() {
+//        return branchRepository.findAll();
+//    }
 
     @GetMapping("/add")
     public String addProjectData(Model model) {
@@ -69,17 +69,19 @@ public class ProjectController {
 
 
     @PostMapping("/add")
-    public String saveProjectData(@Valid @ModelAttribute Project project, BindingResult bindingResult, HttpSession session) throws IOException, MessagingException {
+    public String saveProjectData(@Valid @ModelAttribute Project project, BindingResult bindingResult, HttpSession session) throws MessagingException {
+        Branch branch = (Branch) session.getAttribute("branch");
+        CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("currentEvent");
+        session.setAttribute("project", project);
+        project.setBranch(branch);
         if (bindingResult.hasErrors()) {
             return "addProjectData";
         }
 
-        CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("currentEvent");
-        session.setAttribute("project", project);
         projectServiceImpl.save(project);
 
-        projectServiceImpl.sendMail(project, currentEvent);
+        projectServiceImpl.sendMail(project, currentEvent, branch);
 
-        return "redirect:/home";
+        return "redirect:/user/about";
     }
 }

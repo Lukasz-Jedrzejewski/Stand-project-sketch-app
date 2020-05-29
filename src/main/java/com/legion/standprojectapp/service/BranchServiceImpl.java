@@ -1,0 +1,32 @@
+package com.legion.standprojectapp.service;
+
+import com.legion.standprojectapp.entity.Branch;
+import com.legion.standprojectapp.interfaces.BranchService;
+import com.legion.standprojectapp.repository.BranchRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class BranchServiceImpl implements BranchService {
+    private BranchRepository branchRepository;
+
+    public BranchServiceImpl(BranchRepository branchRepository) {
+        this.branchRepository = branchRepository;
+    }
+
+    @Override
+    public List<Branch> findAll() {
+        return branchRepository.findAll();
+    }
+
+    @Override
+    public Branch getOne(long id) {
+        return branchRepository.getOne(id);
+    }
+
+    @Override
+    public void save(Branch branch){
+        this.branchRepository.save(branch);
+    }
+}

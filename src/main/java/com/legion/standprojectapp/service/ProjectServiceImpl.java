@@ -1,5 +1,6 @@
 package com.legion.standprojectapp.service;
 
+import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.interfaces.ProjectService;
@@ -34,12 +35,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void sendMail(Project project, CurrentEvent currentEvent) throws MessagingException {
+    public void sendMail(Project project, CurrentEvent currentEvent, Branch branch) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
         helper.setTo("generaljedrzejewski@gmail.com");
         helper.setSubject("New sketch");
-        helper.setText("<h1>You have new project data!</h1>"+project.toHtml()+ " " + currentEvent.toHtml(), true);
+        helper.setText("<h1>You have new project data!</h1>"+project.toHtml()+ " "
+                + currentEvent.toHtml() + " " + branch.toHtml(),true);
         javaMailSender.send(msg);
     }
 

@@ -34,10 +34,9 @@ public class CurrentEventController {
     }
 
     @GetMapping("/project/prepare/{id}")
-
     public String readCurrentEvent(@PathVariable long id, HttpSession session) {
         session.setAttribute("currentEvent", currentEventServiceImpl.getOne(id));
-        return "redirect:/project/add";
+        return "redirect:/branch/get";
     }
 
     @PostMapping("/get")
@@ -50,6 +49,6 @@ public class CurrentEventController {
         session.setAttribute("currentEvent", currentEvent);
 
         currentEventServiceImpl.save(currentEvent);
-        return "redirect:/project/add";
+        return "redirect:/branch/get";
     }
 }

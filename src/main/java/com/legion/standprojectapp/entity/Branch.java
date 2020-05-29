@@ -1,6 +1,7 @@
 package com.legion.standprojectapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -9,6 +10,7 @@ public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
     @OneToMany
     private List<Project> projects;
@@ -46,6 +48,6 @@ public class Branch {
                 '}';
     }
     public String toHtml() {
-        return "<ul><li>nazwa = " + name + "</li></ul>";
+        return "<ul><li>branża = " + name + "</li></ul>";
     }
 }

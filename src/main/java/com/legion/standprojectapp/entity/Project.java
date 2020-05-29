@@ -32,7 +32,6 @@ public class Project {
     @NotNull
     @Max(4)
     private int walls;
-    @NotNull
     @ManyToOne
     private Branch branch;
     @NotBlank
@@ -199,7 +198,6 @@ public class Project {
                 "<li>vip room = " + vipRoom +"</li>" +
                 "<li>podłoga = " + floorBoard.getName() +"</li>" +
                 "<li>ilość ścian = " + walls +"</li>" +
-                "<li>branża = " + branch.getName() +"</li>" +
                 "<li>nazwa klienta = " + companyName + "</li>" +
                 "<li>mail klienta = " + companyMail + "</li>" +
                 "<li>data utworzenia = " + created +"</li>" +

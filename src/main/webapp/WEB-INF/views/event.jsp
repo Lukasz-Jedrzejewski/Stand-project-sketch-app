@@ -6,9 +6,9 @@
     <title>Event</title>
 </head>
 <body>
-<button id="btn_form">Uzupełnij dane</button>
-<button id ="btn_ready">Wybierz z listy</button>
-<section class="form">
+<button id="btnEvent_form">Uzupełnij dane</button>
+<button id ="btnEvent_ready">Wybierz z listy</button>
+<section class="eventForm">
 Uzupełnij dane
 <form:form modelAttribute="currentEvent" method="post" action="/event/get">
     <div>
@@ -23,10 +23,10 @@ Uzupełnij dane
         </label>
         <form:errors path="city"/>
     </div>
-    <input id="b1" type="submit" value="Zatwierdź"/>
+    <input id="e1" type="submit" value="Zatwierdź"/>
 </form:form>
 </section>
-<section class="ready">
+<section class="eventReady">
 wybierz z listy:
     <div>
         <label>
@@ -36,10 +36,10 @@ wybierz z listy:
                 </c:forEach>
                 </select>
 
-                <input id="b2" type="submit" value="Zatwierdź"/>
+                <input id="e2" type="submit" value="Zatwierdź"/>
         </label>
     </div>
 </section>
-<script src="<c:url value="/resources/js/js.js"/>"></script>
+<script src="<c:url value="/resources/js/event.js"/>"></script>
 </body>
 </html>

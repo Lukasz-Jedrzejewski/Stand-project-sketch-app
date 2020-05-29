@@ -4,15 +4,12 @@ import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.service.UserServiceImpl;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
-import com.legion.standprojectapp.validation.groups.UserRegisterValidationGroup;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import javax.validation.groups.Default;
 
 @Controller
