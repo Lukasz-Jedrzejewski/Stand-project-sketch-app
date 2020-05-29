@@ -7,6 +7,7 @@
 </head>
 <body>
 <header>Panel administratora</header>
+<a href="/admin/branches">Zarządzaj listą branż</a>
 <nav>
     <sec:authorize access="isAuthenticated()">
         <p>Zalogowany jako: ${user.companyMail}</p>

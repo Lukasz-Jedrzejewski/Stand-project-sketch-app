@@ -47,7 +47,7 @@ public class UserController {
         if (!userServiceImpl.checkRole(user.getId()))
             return "panel";
         else
-            return "adminPanel";
+            return "redirect:/admin/adminPanel";
     }
 
     @GetMapping("/edit/{id}")
