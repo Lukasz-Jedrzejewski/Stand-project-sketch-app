@@ -6,6 +6,7 @@
     <title>Event</title>
 </head>
 <body>
+<button type="button" name="back" onclick="history.back()">back</button>
 <button id="btnEvent_form">Uzupełnij dane</button>
 <button id ="btnEvent_ready">Wybierz z listy</button>
 <section class="eventForm">

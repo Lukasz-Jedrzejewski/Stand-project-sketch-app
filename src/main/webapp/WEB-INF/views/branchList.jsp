@@ -4,6 +4,10 @@
 <head>
     <title>Branch list</title>
 </head>
+<button type="button" name="back" onclick="history.back()">back</button>
+<form action="/admin/adminPanel">
+    <input type="submit" value="admin panel"/>
+</form>
 <body>
 <table>
     <tr>
@@ -14,11 +18,12 @@
         <tr>
             <td>${branch.name}</td>
             <td>
-                <a href="/admin/edit/${branch.id}">edytuj</a>
-                <a href="/admin/delete/${branch.id}">usuń</a>
+                <a href="/admin/editBranch/${branch.id}">edytuj</a>
+                <a href="/admin/deleteBranch/${branch.id}">usuń</a>
             </td>
         </tr>
     </c:forEach>
 </table>
+<a href="/admin/addBranch">dodaj</a>
 </body>
 </html>

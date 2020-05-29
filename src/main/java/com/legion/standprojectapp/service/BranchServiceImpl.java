@@ -29,4 +29,9 @@ public class BranchServiceImpl implements BranchService {
     public void save(Branch branch){
         this.branchRepository.save(branch);
     }
+
+    @Override
+    public void delete(long id) {
+        this.branchRepository.delete(getOne(id));
+    }
 }

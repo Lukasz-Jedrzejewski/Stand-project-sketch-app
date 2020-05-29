@@ -6,6 +6,7 @@
     <title>Branch</title>
 </head>
 <body>
+<button type="button" name="back" onclick="history.back()">back</button>
 <button id="btnBranch_form">Uzupełnij dane</button>
 <button id ="btnBranch_ready">Wybierz z listy</button>
 <section class="branchForm">

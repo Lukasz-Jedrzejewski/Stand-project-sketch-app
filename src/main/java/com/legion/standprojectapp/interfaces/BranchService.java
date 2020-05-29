@@ -8,4 +8,5 @@ public interface BranchService {
     List<Branch> findAll();
     Branch getOne(long id);
     void save(Branch branch);
+    void delete(long id);
 }

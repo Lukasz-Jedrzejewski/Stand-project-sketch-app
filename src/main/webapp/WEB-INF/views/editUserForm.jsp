@@ -5,6 +5,7 @@
     <title>Edit user form</title>
 </head>
 <body>
+<button type="button" name="back" onclick="history.back()">back</button>
 <form:form modelAttribute="user" method="post" action="/user/edit">
     <form:hidden path="id" />
     <div>
