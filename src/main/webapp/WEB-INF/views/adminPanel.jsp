@@ -3,15 +3,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Panel</title>
+    <title>Admin panel</title>
 </head>
 <body>
-<header>Panel użytkownika</header>
-<a href="/user/edit/${user.id}">Edytuj swoje konto</a>
+<header>Panel administratora</header>
 <nav>
-            <sec:authorize access="isAuthenticated()">
-                <p>Zalogowany jako: ${user.companyMail}</p>
-            </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+        <p>Zalogowany jako: ${user.companyMail}</p>
+    </sec:authorize>
 
     <sec:authorize access="isAuthenticated()">
         <form action="<c:url value="/logout"/>" method="post">
@@ -20,6 +19,5 @@
         </form>
     </sec:authorize>
 </nav>
-<a href="/event/get">Uzupełnij dane do projektu</a>
 </body>
 </html>

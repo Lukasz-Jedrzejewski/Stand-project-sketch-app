@@ -6,5 +6,5 @@ public interface UserService {
     boolean checkAdmin();
     void save(User user);
     User findByCompanyMail(String companyMail);
-
+    boolean checkRole(long id);
 }

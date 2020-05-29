@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import javax.validation.groups.Default;
 
 @Controller
@@ -43,18 +44,21 @@ public class UserController {
     public String about(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         User user = currentUser.getUser();
         model.addAttribute("user", user);
-        return "panel";
+        if (!userServiceImpl.checkRole(user.getId()))
+            return "panel";
+        else
+            return "adminPanel";
     }
 
     @GetMapping("/edit/{id}")
-    public String editUser(@PathVariable long id, Model model){
+    public String editUser(@PathVariable long id, Model model) {
         model.addAttribute("user", userServiceImpl.findById(id));
         return "editUserForm";
     }
 
     @PostMapping("/edit")
-    public String editUser(@Validated(UserEditValidationGroup.class) @ModelAttribute User user, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
+    public String editUser(@Validated(UserEditValidationGroup.class) @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "editUserForm";
         }
         userServiceImpl.save(user);

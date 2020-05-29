@@ -57,4 +57,9 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.getOne(id);
     }
 
+    @Override
+    public boolean checkRole(long id) {
+        User one = this.userRepository.getOne(id);
+        return one.isAdmin();
+    }
 }
