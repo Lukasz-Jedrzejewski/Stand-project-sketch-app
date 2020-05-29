@@ -29,4 +29,9 @@ public class CurrentEventServiceImpl implements CurrentEventService {
     public CurrentEvent getOne(long id) {
         return currentEventRepository.getOne(id);
     }
+
+    @Override
+    public void delete(long id) {
+        this.currentEventRepository.delete(getOne(id));
+    }
 }

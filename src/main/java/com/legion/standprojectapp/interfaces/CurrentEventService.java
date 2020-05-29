@@ -8,4 +8,5 @@ public interface CurrentEventService {
     void save(CurrentEvent currentEvent);
     List<CurrentEvent> findAll();
     CurrentEvent getOne(long id);
+    void delete(long id);
 }

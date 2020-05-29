@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Branch list</title>
+    <title>Type of building list</title>
 </head>
 <button type="button" name="back" onclick="history.back()">back</button>
 <form action="/admin/adminPanel">
@@ -14,16 +14,16 @@
         <th>nazwa</th>
         <th>Akcje</th>
     </tr>
-    <c:forEach items="${branchList}" var="branch">
+    <c:forEach items="${typeOfBuildingList}" var="type">
         <tr>
-            <td>${branch.name}</td>
+            <td>${type.name}</td>
             <td>
-                <a href="/admin/addBranch/${branch.id}">edytuj</a>
-                <a href="/admin/deleteBranch/${branch.id}">usuń</a>
+                <a href="/admin/addTypeOfBuilding/${type.id}">edytuj</a>
+                <a href="/admin/deleteTypeOfBuilding/${type.id}">usuń</a>
             </td>
         </tr>
     </c:forEach>
 </table>
-<a href="/admin/addBranch">dodaj</a>
+<a href="/admin/addTypeOfBuilding">dodaj</a>
 </body>
 </html>

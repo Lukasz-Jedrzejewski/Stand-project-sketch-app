@@ -9,13 +9,19 @@
 <form action="/admin/adminPanel">
     <input type="submit" value="admin panel"/>
 </form>
-<form:form modelAttribute="branch" method="post" action="/admin/addBranch">
+<form:form modelAttribute="event" method="post" action="/admin/addEvent">
     <form:hidden path="id"/>
     <div>
         <label>
             nazwa branży <form:input path="name"/>
         </label>
         <form:errors path="name"/>
+    </div>
+    <div>
+        <label>
+            miasto <form:input path="city"/>
+        </label>
+        <form:errors path="city"/>
     </div>
     <input type="submit" value="Zatwierdź"/>
 </form:form>

@@ -35,7 +35,7 @@ public class Project {
     @NotNull
     @Max(4)
     private int walls;
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Branch branch;
     @NotBlank
     private String companyName;
