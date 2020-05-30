@@ -1,10 +1,7 @@
 package com.legion.standprojectapp.service;
 
-import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.FloorBoard;
-import com.legion.standprojectapp.interfaces.BranchService;
 import com.legion.standprojectapp.interfaces.FloorBoardService;
-import com.legion.standprojectapp.repository.BranchRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import org.springframework.stereotype.Service;
 
