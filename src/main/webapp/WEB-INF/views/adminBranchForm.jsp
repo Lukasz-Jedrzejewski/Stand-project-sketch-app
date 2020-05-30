@@ -4,11 +4,9 @@
 <head>
     <title>Add branch form</title>
 </head>
+<h4>Panel administratora</h4>
+<%@include file="headerAdmin.jsp" %>
 <body>
-<button type="button" name="back" onclick="history.back()">back</button>
-<form action="/admin/adminPanel">
-    <input type="submit" value="admin panel"/>
-</form>
 <form:form modelAttribute="branch" method="post" action="/admin/addBranch">
     <form:hidden path="id"/>
     <div>

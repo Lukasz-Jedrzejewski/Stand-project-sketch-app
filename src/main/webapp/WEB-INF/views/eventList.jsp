@@ -4,10 +4,8 @@
 <head>
     <title>Branch list</title>
 </head>
-<button type="button" name="back" onclick="history.back()">back</button>
-<form action="/admin/adminPanel">
-    <input type="submit" value="admin panel"/>
-</form>
+<h4>Panel administratora</h4>
+<%@include file="headerAdmin.jsp" %>
 <body>
 <table>
     <tr>

@@ -4,16 +4,14 @@
 <head>
     <title>Add branch form</title>
 </head>
+<h4>Panel administratora</h4>
+<%@include file="headerAdmin.jsp" %>
 <body>
-<button type="button" name="back" onclick="history.back()">back</button>
-<form action="/admin/adminPanel">
-    <input type="submit" value="admin panel"/>
-</form>
 <form:form modelAttribute="event" method="post" action="/admin/addEvent">
     <form:hidden path="id"/>
     <div>
         <label>
-            nazwa branży <form:input path="name"/>
+            nazwa wydarzenia <form:input path="name"/>
         </label>
         <form:errors path="name"/>
     </div>
