@@ -11,4 +11,6 @@ public interface ProjectService {
     Optional<Project> findProjectById(long id);
     void sendMail(Project project, CurrentEvent currentEvent, Branch branch) throws MessagingException;
     void changeBranchId(long id);
+    void changeFloorBoardId(long id);
+    void changeTypeOfBuildingId(long id);
 }

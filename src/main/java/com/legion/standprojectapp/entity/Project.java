@@ -21,8 +21,9 @@ public class Project {
     @NotNull
     @Pattern(regexp = "\\d+|\\d+\\.\\d+")
     private String depth;
-    @NotNull
     @ManyToOne
+    @JoinColumn(name="type_of_building_id")
+    @Convert(converter = LongToIntFunction.class)
     private TypeOfBuilding typeOfBuilding;
     private boolean withFloor;
     private boolean withHanger;
@@ -31,8 +32,9 @@ public class Project {
     private String standHeight;
     private boolean utilityRoom;
     private boolean vipRoom;
-    @NotNull
     @ManyToOne
+    @JoinColumn(name="floor_board_id")
+    @Convert(converter = LongToIntFunction.class)
     private FloorBoard floorBoard;
     @NotNull
     @Max(4)

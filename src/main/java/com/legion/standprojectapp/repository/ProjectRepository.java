@@ -16,4 +16,14 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(value = "update Project p set p.branch.id = null where p.branch.id = :id")
     int setBranchIdToNull(@Param("id") long id);
 
+    @Modifying
+    @Transactional
+    @Query(value = "update Project p set p.floorBoard.id = null where p.floorBoard.id = :id")
+    int setFloorBoardIdToNull(@Param("id") long id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update Project p set p.typeOfBuilding.id = null where p.typeOfBuilding.id = :id")
+    int setTypeOfBuildingIdToNull(@Param("id") long id);
+
 }

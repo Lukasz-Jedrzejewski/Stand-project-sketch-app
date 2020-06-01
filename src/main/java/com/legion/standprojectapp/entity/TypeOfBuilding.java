@@ -10,7 +10,7 @@ public class TypeOfBuilding {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "typeOfBuilding", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
     public List<Project> getProjects() {

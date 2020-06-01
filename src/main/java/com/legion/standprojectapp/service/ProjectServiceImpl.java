@@ -50,4 +50,14 @@ public class ProjectServiceImpl implements ProjectService {
     public void changeBranchId(long id) {
         projectRepository.setBranchIdToNull(id);
     }
+
+    @Override
+    public void changeFloorBoardId(long id) {
+        projectRepository.setFloorBoardIdToNull(id);
+    }
+
+    @Override
+    public void changeTypeOfBuildingId(long id) {
+        projectRepository.setTypeOfBuildingIdToNull(id);
+    }
 }

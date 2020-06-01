@@ -113,6 +113,7 @@ public class AdminController {
 
     @GetMapping("/deleteFloorBoard/{id}")
     public String deleteFloorBoard(@PathVariable long id){
+        projectService.changeFloorBoardId(id);
         floorBoardService.delete(id);
         return "redirect:/admin/floorBoards";
     }
@@ -147,6 +148,7 @@ public class AdminController {
 
     @GetMapping("/deleteTypeOfBuilding/{id}")
     public String deleteTypeOfBuilding(@PathVariable long id){
+        projectService.changeTypeOfBuildingId(id);
         typeOfBuildingService.delete(id);
         return "redirect:/admin/buildingTypes";
     }

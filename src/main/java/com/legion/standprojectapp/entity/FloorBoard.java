@@ -10,7 +10,7 @@ public class FloorBoard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "floorBoard", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
     public List<Project> getProjects() {
