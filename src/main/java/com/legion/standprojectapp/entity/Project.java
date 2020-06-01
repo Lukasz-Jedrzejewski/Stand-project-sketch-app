@@ -1,8 +1,13 @@
 package com.legion.standprojectapp.entity;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.function.LongToIntFunction;
 
 @Entity
 @Table(name = "projects")
@@ -33,6 +38,8 @@ public class Project {
     @Max(4)
     private int walls;
     @ManyToOne
+    @JoinColumn(name="branch_id")
+    @Convert(converter = LongToIntFunction.class)
     private Branch branch;
     @NotBlank
     private String companyName;

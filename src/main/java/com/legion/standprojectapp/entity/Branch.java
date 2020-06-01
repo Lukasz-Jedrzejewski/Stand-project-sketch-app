@@ -1,8 +1,6 @@
 package com.legion.standprojectapp.entity;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,7 +14,7 @@ public class Branch {
     private Long id;
     @NotBlank
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "branch", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
     public List<Project> getProjects() {

@@ -2,10 +2,7 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.model.CurrentUser;
-import com.legion.standprojectapp.service.BranchServiceImpl;
-import com.legion.standprojectapp.service.CurrentEventServiceImpl;
-import com.legion.standprojectapp.service.FloorBoardServiceImpl;
-import com.legion.standprojectapp.service.TypeOfBuildingServiceImpl;
+import com.legion.standprojectapp.service.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +19,14 @@ public class AdminController {
     private CurrentEventServiceImpl currentEventService;
     private FloorBoardServiceImpl floorBoardService;
     private TypeOfBuildingServiceImpl typeOfBuildingService;
+    private ProjectServiceImpl projectService;
 
-    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService) {
+    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService) {
         this.branchService = branchService;
         this.currentEventService = currentEventService;
         this.floorBoardService = floorBoardService;
         this.typeOfBuildingService = typeOfBuildingService;
+        this.projectService = projectService;
     }
 
     @GetMapping("/adminPanel")
@@ -45,6 +44,7 @@ public class AdminController {
 
     @GetMapping("/deleteBranch/{id}")
     public String deleteBranch(@PathVariable long id){
+        projectService.changeBranchId(id);
         branchService.delete(id);
         return "redirect:/admin/branches";
     }

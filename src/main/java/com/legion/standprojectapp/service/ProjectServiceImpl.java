@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,4 +46,8 @@ public class ProjectServiceImpl implements ProjectService {
         javaMailSender.send(msg);
     }
 
+    @Override
+    public void changeBranchId(long id) {
+        projectRepository.setBranchIdToNull(id);
+    }
 }
