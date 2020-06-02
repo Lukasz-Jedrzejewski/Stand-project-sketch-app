@@ -16,4 +16,5 @@ public interface ProjectService {
     void changeTypeOfBuildingId(long id);
     List<Project> findAllProjects();
     Project readSingleProject(long id);
+    List<Project> findUserProjects(String companyMail);
 }

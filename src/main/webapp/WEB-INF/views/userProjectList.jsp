@@ -2,13 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sketch list</title>
+    <title>User projects list</title>
 </head>
 <h4>Panel administratora</h4>
 <%@include file="headerAdmin.jsp" %>
-<form action="/admin/getUserMail">
-    <input type="submit" value="szukaj projektów użytkownika"/>
-</form>
 <body>
 <table>
     <tr>
@@ -16,12 +13,12 @@
         <th>Utworzone przez</th>
         <th>Akcje</th>
     </tr>
-    <c:forEach items="${sketches}" var="sk">
+    <c:forEach items="${userProjects}" var="up">
         <tr>
-            <td>${sk.created}</td>
-            <td>${sk.companyName}</td>
+            <td>${up.created}</td>
+            <td>${up.companyName}</td>
             <td>
-                <a href="/admin/showDetails/${sk.id}">szczegóły</a>
+                <a href="/admin/showDetails/${up.id}">szczegóły</a>
             </td>
         </tr>
     </c:forEach>

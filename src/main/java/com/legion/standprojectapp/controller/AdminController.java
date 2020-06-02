@@ -186,4 +186,15 @@ public class AdminController {
         model.addAttribute("sketch", projectService.readSingleProject(id));
         return "sketchDetails";
     }
+
+    @GetMapping("/getUserMail")
+    public String getUserMail() {
+        return "searchByMail";
+    }
+
+    @GetMapping("/userProjects/{companyMail}")
+    public String singleUserProjects(Model model, @PathVariable String companyMail) {
+       model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
+        return "userProjectList";
+    }
 }

@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
@@ -26,4 +28,6 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query(value = "update Project p set p.typeOfBuilding.id = null where p.typeOfBuilding.id = :id")
     int setTypeOfBuildingIdToNull(@Param("id") long id);
 
+    @Query("select p from Project p where p.companyMail like ?1%")
+    List<Project> findAllByCompanyMailLike(@Param("companyMail") String companyMail);
 }

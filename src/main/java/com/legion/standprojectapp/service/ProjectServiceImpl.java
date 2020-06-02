@@ -70,4 +70,9 @@ public class ProjectServiceImpl implements ProjectService {
     public Project readSingleProject(long id) {
         return projectRepository.getOne(id);
     }
+
+    @Override
+    public List<Project> findUserProjects(String companyMail) {
+        return projectRepository.findAllByCompanyMailLike(companyMail);
+    }
 }
