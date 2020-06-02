@@ -12,6 +12,9 @@
     <form action="/admin/buildingTypes">
         <input type="submit" value="zarządzaj rodzajami zabudowy "/>
     </form>
+    <form action="/admin/sketches">
+        <input type="submit" value="lista wzorców"/>
+    </form>
     <form action="/admin/adminPanel">
         <input type="submit" value="panel"/>
     </form>

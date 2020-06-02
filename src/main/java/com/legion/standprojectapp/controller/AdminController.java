@@ -30,20 +30,20 @@ public class AdminController {
     }
 
     @GetMapping("/adminPanel")
-    public String getAdminPanel(@AuthenticationPrincipal CurrentUser currentUser, Model model){
+    public String getAdminPanel(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         User user = currentUser.getUser();
         model.addAttribute("user", user);
         return "adminPanel";
     }
 
     @GetMapping("/branches")
-    public String branchList(Model model){
+    public String branchList(Model model) {
         model.addAttribute("branchList", branchService.findAll());
         return "branchList";
     }
 
     @GetMapping("/deleteBranch/{id}")
-    public String deleteBranch(@PathVariable long id){
+    public String deleteBranch(@PathVariable long id) {
         projectService.changeBranchId(id);
         branchService.delete(id);
         return "redirect:/admin/branches";
@@ -72,13 +72,13 @@ public class AdminController {
     }
 
     @GetMapping("/events")
-    public String eventList(Model model){
+    public String eventList(Model model) {
         model.addAttribute("eventList", currentEventService.findAll());
         return "eventList";
     }
 
     @GetMapping("/deleteEvent/{id}")
-    public String deleteEvent(@PathVariable long id){
+    public String deleteEvent(@PathVariable long id) {
         currentEventService.delete(id);
         return "redirect:/admin/events";
     }
@@ -106,13 +106,13 @@ public class AdminController {
     }
 
     @GetMapping("/floorBoards")
-    public String floorBoardList(Model model){
+    public String floorBoardList(Model model) {
         model.addAttribute("floorBoardList", floorBoardService.findAll());
         return "floorBoardList";
     }
 
     @GetMapping("/deleteFloorBoard/{id}")
-    public String deleteFloorBoard(@PathVariable long id){
+    public String deleteFloorBoard(@PathVariable long id) {
         projectService.changeFloorBoardId(id);
         floorBoardService.delete(id);
         return "redirect:/admin/floorBoards";
@@ -141,13 +141,13 @@ public class AdminController {
     }
 
     @GetMapping("/buildingTypes")
-    public String typeOfBuildingList(Model model){
+    public String typeOfBuildingList(Model model) {
         model.addAttribute("typeOfBuildingList", typeOfBuildingService.findAll());
         return "typeOfBuildingList";
     }
 
     @GetMapping("/deleteTypeOfBuilding/{id}")
-    public String deleteTypeOfBuilding(@PathVariable long id){
+    public String deleteTypeOfBuilding(@PathVariable long id) {
         projectService.changeTypeOfBuildingId(id);
         typeOfBuildingService.delete(id);
         return "redirect:/admin/buildingTypes";
@@ -173,5 +173,17 @@ public class AdminController {
             typeOfBuildingService.save(typeOfBuilding);
         }
         return "redirect:/admin/buildingTypes";
+    }
+
+    @GetMapping("/sketches")
+    public String sketchList(Model model) {
+        model.addAttribute("sketches", projectService.findAllProjects());
+        return "sketchList";
+    }
+
+    @GetMapping("/showDetails/{id}")
+    public String sketchDetails(Model model, @PathVariable long id) {
+        model.addAttribute("sketch", projectService.readSingleProject(id));
+        return "sketchDetails";
     }
 }

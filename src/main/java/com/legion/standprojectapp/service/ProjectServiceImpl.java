@@ -60,4 +60,14 @@ public class ProjectServiceImpl implements ProjectService {
     public void changeTypeOfBuildingId(long id) {
         projectRepository.setTypeOfBuildingIdToNull(id);
     }
+
+    @Override
+    public List<Project> findAllProjects() {
+        return projectRepository.findAll();
+    }
+
+    @Override
+    public Project readSingleProject(long id) {
+        return projectRepository.getOne(id);
+    }
 }

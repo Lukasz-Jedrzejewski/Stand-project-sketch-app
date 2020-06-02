@@ -47,11 +47,6 @@ public class ProjectController {
         return floorBoarRepository.findAll();
     }
 
-//    @ModelAttribute("branches")
-//    public List<Branch> branches() {
-//        return branchRepository.findAll();
-//    }
-
     @GetMapping("/add")
     public String addProjectData(Model model) {
         model.addAttribute("project", new Project());
