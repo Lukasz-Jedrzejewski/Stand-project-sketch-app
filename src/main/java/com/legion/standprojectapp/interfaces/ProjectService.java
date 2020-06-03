@@ -17,4 +17,5 @@ public interface ProjectService {
     List<Project> findAllProjects();
     Project readSingleProject(long id);
     List<Project> findUserProjects(String companyMail);
+    List<Project> findSorted();
 }

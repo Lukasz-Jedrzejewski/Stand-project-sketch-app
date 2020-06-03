@@ -1,6 +1,7 @@
 package com.legion.standprojectapp.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Entity
@@ -9,6 +10,7 @@ public class FloorBoard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String name;
     @OneToMany(mappedBy = "floorBoard", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;

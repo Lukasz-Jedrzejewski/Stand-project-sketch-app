@@ -7,7 +7,7 @@
 <h4>Panel administratora</h4>
 <%@include file="headerAdmin.jsp" %>
 <body>
-<form:form modelAttribute="event" method="post" action="/admin/addEvent">
+<form:form modelAttribute="currentEvent" method="post" action="/admin/addEvent">
     <form:hidden path="id"/>
     <div>
         <label>

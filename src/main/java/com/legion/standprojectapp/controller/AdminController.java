@@ -85,13 +85,13 @@ public class AdminController {
 
     @GetMapping("/addEvent")
     public String addEvent(Model model) {
-        model.addAttribute("event", new CurrentEvent());
+        model.addAttribute("currentEvent", new CurrentEvent());
         return "adminEventForm";
     }
 
     @GetMapping("/addEvent/{id}")
     public String editEvent(Model model, @PathVariable long id) {
-        model.addAttribute("event", currentEventService.getOne(id));
+        model.addAttribute("currentEvent", currentEventService.getOne(id));
         return "adminEventForm";
     }
 
@@ -196,5 +196,11 @@ public class AdminController {
     public String singleUserProjects(Model model, @RequestParam String mail) {
        model.addAttribute("userProjects", projectService.findUserProjects(mail));
         return "userProjectList";
+    }
+
+    @GetMapping("sorted")
+    public String getSorted(Model model) {
+        model.addAttribute("sorted", projectService.findSorted());
+        return "sortedList";
     }
 }

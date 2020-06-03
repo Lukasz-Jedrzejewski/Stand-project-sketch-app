@@ -75,4 +75,9 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findUserProjects(String companyMail) {
         return projectRepository.findAllByCompanyMailLike(companyMail);
     }
+
+    @Override
+    public List<Project> findSorted() {
+        return projectRepository.findAllByOrderByCreatedAsc();
+    }
 }
