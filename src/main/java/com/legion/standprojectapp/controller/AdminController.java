@@ -20,13 +20,15 @@ public class AdminController {
     private FloorBoardServiceImpl floorBoardService;
     private TypeOfBuildingServiceImpl typeOfBuildingService;
     private ProjectServiceImpl projectService;
+    private UserServiceImpl userService;
 
-    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService) {
+    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService, UserServiceImpl userService) {
         this.branchService = branchService;
         this.currentEventService = currentEventService;
         this.floorBoardService = floorBoardService;
         this.typeOfBuildingService = typeOfBuildingService;
         this.projectService = projectService;
+        this.userService = userService;
     }
 
     @GetMapping("/adminPanel")
@@ -193,9 +195,14 @@ public class AdminController {
     }
 
     @GetMapping("/userProjects/")
-    public String singleUserProjects(Model model, @RequestParam String mail) {
-       model.addAttribute("userProjects", projectService.findUserProjects(mail));
-        return "userProjectList";
+    public String singleUserProjects(Model model, @RequestParam String companyMail) {
+        boolean exist = userService.existByMail(companyMail);
+        model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
+        if (exist) {
+            return "userProjectList";
+        } else {
+            return "userNotExist";
+        }
     }
 
     @GetMapping("sorted")

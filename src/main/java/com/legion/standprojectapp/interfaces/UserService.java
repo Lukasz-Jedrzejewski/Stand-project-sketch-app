@@ -7,4 +7,5 @@ public interface UserService {
     void save(User user);
     User findByCompanyMail(String companyMail);
     boolean checkRole(long id);
+    boolean existByMail(String companyMail);
 }

@@ -6,8 +6,8 @@
 <body>
 Przekierowanie
 <form action="/admin/userProjects/" method="get">
-    <label for="mail">Szukany zleceniodawca</label>
-    <input id="mail" type="text" name="mail">
+    <label for="companyMail">Szukany zleceniodawca</label>
+    <input id="companyMail" type="text" name="companyMail">
     <input type="submit">
 </form>
 </body>

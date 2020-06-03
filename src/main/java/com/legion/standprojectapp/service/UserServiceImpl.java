@@ -26,9 +26,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkAdmin(){
+    public boolean checkAdmin() {
         List<User> byAdmin = this.userRepository.findByAdmin();
-        return byAdmin.size()>0;
+        return byAdmin.size() > 0;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByCompanyMail(companyMail);
     }
 
-    public User findById(long id){
+    public User findById(long id) {
         return this.userRepository.getOne(id);
     }
 
@@ -62,4 +62,10 @@ public class UserServiceImpl implements UserService {
         User one = this.userRepository.getOne(id);
         return one.isAdmin();
     }
+
+    @Override
+    public boolean existByMail(String companyMail) {
+        return userRepository.existsUserByCompanyMail(companyMail);
+    }
+
 }
