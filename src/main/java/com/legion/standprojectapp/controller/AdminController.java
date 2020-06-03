@@ -192,9 +192,9 @@ public class AdminController {
         return "searchByMail";
     }
 
-    @GetMapping("/userProjects/{companyMail}")
-    public String singleUserProjects(Model model, @PathVariable String companyMail) {
-       model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
+    @GetMapping("/userProjects/")
+    public String singleUserProjects(Model model, @RequestParam String mail) {
+       model.addAttribute("userProjects", projectService.findUserProjects(mail));
         return "userProjectList";
     }
 }

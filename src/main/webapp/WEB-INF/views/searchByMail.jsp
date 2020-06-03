@@ -5,7 +5,7 @@
 </head>
 <body>
 Przekierowanie
-<form action="/admin/userProjects" method="get">
+<form action="/admin/userProjects/" method="get">
     <label for="mail">Szukany zleceniodawca</label>
     <input id="mail" type="text" name="mail">
     <input type="submit">
