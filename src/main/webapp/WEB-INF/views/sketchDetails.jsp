@@ -9,8 +9,8 @@
 <body>
 <table>
     <tr>
-        <th>Wysokość</th>
-        <th>Głębokość</th>
+        <th>Szerokość stoiska</th>
+        <th>Głębokość stoiska</th>
         <th>Rodzaj zabudowy</th>
         <th>Piętro</th>
         <th>Podwieszenie</th>

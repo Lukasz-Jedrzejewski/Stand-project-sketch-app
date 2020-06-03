@@ -6,7 +6,9 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.function.LongToIntFunction;
 
 @Entity
@@ -48,18 +50,18 @@ public class Project {
     @Email
     @NotBlank
     private String companyMail;
-    private LocalDateTime created;
+    private LocalDate created;
 
     @PrePersist
     public void prePersist() {
-        created = LocalDateTime.now();
+        created = LocalDate.now();
     }
 
-    public LocalDateTime getCreated() {
+    public LocalDate getCreated() {
         return created;
     }
 
-    public void setCreated(LocalDateTime created) {
+    public void setCreated(LocalDate created) {
         this.created = created;
     }
 
