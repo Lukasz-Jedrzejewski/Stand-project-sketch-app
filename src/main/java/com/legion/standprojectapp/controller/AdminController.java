@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -21,14 +22,16 @@ public class AdminController {
     private TypeOfBuildingServiceImpl typeOfBuildingService;
     private ProjectServiceImpl projectService;
     private UserServiceImpl userService;
+    private FileServiceImpl fileService;
 
-    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService, UserServiceImpl userService) {
+    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService, UserServiceImpl userService, FileServiceImpl fileService) {
         this.branchService = branchService;
         this.currentEventService = currentEventService;
         this.floorBoardService = floorBoardService;
         this.typeOfBuildingService = typeOfBuildingService;
         this.projectService = projectService;
         this.userService = userService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/adminPanel")
@@ -209,5 +212,26 @@ public class AdminController {
     public String getSorted(Model model) {
         model.addAttribute("sorted", projectService.findSorted());
         return "sortedList";
+    }
+
+    @GetMapping("/showFiles")
+    public String show(Model model) {
+        model.addAttribute("files", fileService.readFiles());
+        return "filesList";
+    }
+
+    @GetMapping("/addProposition")
+    public String getFiles(Model model) {
+        model.addAttribute("files", new File());
+        return "fileForm";
+    }
+
+    @PostMapping("/addProposition")
+    public String addFiles(@RequestParam("files") MultipartFile[] files) {
+        for (MultipartFile file : files) {
+            fileService.save(file);
+            
+        }
+        return "redirect:/admin/showFiles";
     }
 }
