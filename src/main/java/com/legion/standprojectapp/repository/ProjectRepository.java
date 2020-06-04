@@ -31,5 +31,5 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     @Query("select p from Project p where p.companyMail like ?1%")
     List<Project> findAllByCompanyMailLike(@Param("companyMail") String companyMail);
 
-    List<Project> findAllByOrderByCreatedAsc();
+    List<Project> findAllByOrderByCreatedDesc();
 }

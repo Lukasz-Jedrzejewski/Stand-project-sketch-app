@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> findSorted() {
-        return projectRepository.findAllByOrderByCreatedAsc();
+        return projectRepository.findAllByOrderByCreatedDesc();
     }
 
 
