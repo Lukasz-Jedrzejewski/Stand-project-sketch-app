@@ -44,7 +44,6 @@ public class FloorBoard {
         return "FloorBoard{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", projects=" + projects +
                 '}';
     }
     public String toHtml() {
