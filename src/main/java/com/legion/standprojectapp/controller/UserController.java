@@ -42,9 +42,10 @@ public class UserController {
     }
 
     @GetMapping("/about")
-    public String about(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
+    public String about(@AuthenticationPrincipal CurrentUser currentUser, Model model, HttpSession session) {
         User user = currentUser.getUser();
         model.addAttribute("user", user);
+        session.setAttribute("user", user);
         if (!userServiceImpl.checkRole(user.getId()))
             return "panel";
         else

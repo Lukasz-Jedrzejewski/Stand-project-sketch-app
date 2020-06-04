@@ -3,6 +3,7 @@ package com.legion.standprojectapp.interfaces;
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.entity.Project;
+
 import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;

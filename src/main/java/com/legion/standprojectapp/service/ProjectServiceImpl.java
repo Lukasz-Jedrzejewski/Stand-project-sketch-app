@@ -18,6 +18,7 @@ import java.util.Optional;
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
+
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -80,4 +81,6 @@ public class ProjectServiceImpl implements ProjectService {
     public List<Project> findSorted() {
         return projectRepository.findAllByOrderByCreatedAsc();
     }
+
+
 }

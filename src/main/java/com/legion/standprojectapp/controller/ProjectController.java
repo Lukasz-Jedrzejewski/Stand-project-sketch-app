@@ -5,8 +5,6 @@ import com.legion.standprojectapp.repository.BranchRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
 import com.legion.standprojectapp.service.ProjectServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,9 +18,6 @@ import java.util.*;
 @Controller
 @RequestMapping("/project")
 public class ProjectController {
-
-    @Autowired
-    private JavaMailSender javaMailSender;
 
     private ProjectServiceImpl projectServiceImpl;
     private TypeOfBuildingRepository typeOfBuildingRepository;
@@ -66,8 +61,11 @@ public class ProjectController {
     public String saveProjectData(@Valid @ModelAttribute Project project, BindingResult bindingResult, HttpSession session) throws MessagingException {
         Branch branch = (Branch) session.getAttribute("branch");
         CurrentEvent currentEvent = (CurrentEvent) session.getAttribute("currentEvent");
+        User user = (User) session.getAttribute("user");
         session.setAttribute("project", project);
         project.setBranch(branch);
+        project.setCompanyName(user.getCompanyName());
+        project.setCompanyMail(user.getCompanyMail());
         if (bindingResult.hasErrors()) {
             return "addProjectData";
         }

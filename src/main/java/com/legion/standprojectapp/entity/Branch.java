@@ -1,7 +1,5 @@
 package com.legion.standprojectapp.entity;
 
-import org.hibernate.annotations.OnDelete;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -46,7 +44,6 @@ public class Branch {
         return "Branch{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", projects=" + projects +
                 '}';
     }
     public String toHtml() {

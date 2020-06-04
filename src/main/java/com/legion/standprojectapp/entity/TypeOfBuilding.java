@@ -44,7 +44,6 @@ public class TypeOfBuilding {
         return "TypeOfBuilding{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", projects=" + projects +
                 '}';
     }
     public String toHtml() {
