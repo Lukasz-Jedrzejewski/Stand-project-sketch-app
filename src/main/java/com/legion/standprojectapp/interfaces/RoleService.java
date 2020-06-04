@@ -6,5 +6,5 @@ import com.legion.standprojectapp.entity.Role;
 public interface RoleService {
     void save(Role role);
 
-    Role findOneByName(String admin);
+    boolean existsByName(String name);
 }

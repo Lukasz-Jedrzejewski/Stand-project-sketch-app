@@ -19,13 +19,15 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void save(Role role) {
-        this.roleRepository.save(role);
+        boolean existUser = existsByName("ROLE_USER");
+        boolean existAdmin = existsByName("ROLE_ADMIN");
+        if (!existUser || !existAdmin) {
+            this.roleRepository.save(role);
+        }
     }
 
     @Override
-    public Role findOneByName(String roleName) {
-        return this.roleRepository.findByName(roleName);
+    public boolean existsByName(String name) {
+        return roleRepository.existsRoleByName(name);
     }
-
-
 }
