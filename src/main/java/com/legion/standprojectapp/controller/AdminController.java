@@ -14,7 +14,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -246,5 +248,16 @@ public class AdminController {
                 .contentType(MediaType.parseMediaType(file.getFileType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+file.getFileName()+"\"")
                 .body(new ByteArrayResource(file.getData()));
+    }
+
+    @GetMapping("/display/{id}")
+    public void displayFile(@PathVariable int id, HttpServletResponse response) throws IOException {
+        File file = fileService.getFile(id);
+
+        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+        response.getOutputStream().write(file.getData());
+
+        response.getOutputStream().close();
+
     }
 }
