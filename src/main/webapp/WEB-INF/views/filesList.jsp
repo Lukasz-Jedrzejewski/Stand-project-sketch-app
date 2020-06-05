@@ -10,12 +10,17 @@
     <table>
         <tr>
             <th>Id</th>
-            <th>Name</th>
+            <th>nazwa</th>
+            <th>akcje</th>
         </tr>
             <c:forEach items="${files}" var="file">
                 <tr>
                     <td>${file.id}</td>
                     <td>${file.fileName}</td>
+                    <td>
+                        <a href="/admin/download/${file.id}">pobierz</a>
+                        <a href="/admin/display/${file.id}">wyświetl</a>
+                    </td>
                 </tr>
             </c:forEach>
     </table>

@@ -32,4 +32,9 @@ public class FileServiceImpl implements FileService {
     public List<File> readFiles() {
         return fileRepository.findAll();
     }
+
+    @Override
+    public File getFile(int id) {
+        return fileRepository.getOne(id);
+    }
 }

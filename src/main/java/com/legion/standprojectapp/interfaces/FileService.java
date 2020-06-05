@@ -8,4 +8,5 @@ import java.util.List;
 public interface FileService {
     File save(MultipartFile file);
     List<File> readFiles();
+    File getFile(int id);
 }

@@ -3,6 +3,10 @@ package com.legion.standprojectapp.controller;
 import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.service.*;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -233,5 +237,14 @@ public class AdminController {
             
         }
         return "redirect:/admin/showFiles";
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable int id) {
+        File file = fileService.getFile(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(file.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+file.getFileName()+"\"")
+                .body(new ByteArrayResource(file.getData()));
     }
 }
