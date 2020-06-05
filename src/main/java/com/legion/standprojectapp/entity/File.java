@@ -13,14 +13,26 @@ public class File {
     private String fileType;
     @Lob
     private byte[] data;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public File() {
     }
 
-    public File(String fileName, String fileType, byte[] data) {
+    public File(String fileName, String fileType, byte[] data, Project project) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;
+        this.project = project;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public Integer getId() {
@@ -62,6 +74,7 @@ public class File {
                 ", fileName='" + fileName + '\'' +
                 ", fileType='" + fileType + '\'' +
                 ", data=" + Arrays.toString(data) +
+                ", project=" + project +
                 '}';
     }
 }

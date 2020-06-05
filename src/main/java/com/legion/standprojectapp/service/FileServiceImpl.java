@@ -1,6 +1,7 @@
 package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.File;
+import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.interfaces.FileService;
 import com.legion.standprojectapp.repository.FileRepository;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,14 @@ public class FileServiceImpl implements FileService {
 
     public FileServiceImpl(FileRepository fileRepository) {
         this.fileRepository = fileRepository;
+
     }
 
     @Override
-    public File save(MultipartFile file) {
+    public File save(MultipartFile file, Project project) {
         String fileName = file.getOriginalFilename();
         try {
-            File newFile = new File(fileName, file.getContentType(), file.getBytes());
+            File newFile = new File(fileName, file.getContentType(), file.getBytes(), project);
             return fileRepository.save(newFile);
         } catch (Exception e) {
             e.printStackTrace();

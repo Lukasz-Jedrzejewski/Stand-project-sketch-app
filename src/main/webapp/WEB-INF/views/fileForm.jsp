@@ -6,6 +6,7 @@
 </head>
 <body>
 <div>
+
     <form:form modelAttribute="files" method="post" action="/admin/addProposition" enctype="multipart/form-data">
         <input type="file" name="files" multiple required/>
         <button type="submit">Zapisz</button>

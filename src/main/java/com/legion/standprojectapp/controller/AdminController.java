@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 
@@ -226,16 +227,20 @@ public class AdminController {
         return "filesList";
     }
 
-    @GetMapping("/addProposition")
-    public String getFiles(Model model) {
-        model.addAttribute("files", new File());
+    @GetMapping("/addProposition/{id}")
+    public String getFiles(Model model, @PathVariable long id, HttpSession session) {
+        File file = new File();
+        Project project = projectService.readSingleProject(id);
+        session.setAttribute("pr", project);
+        model.addAttribute("files", file);
         return "fileForm";
     }
 
     @PostMapping("/addProposition")
-    public String addFiles(@RequestParam("files") MultipartFile[] files) {
+    public String addFiles(@RequestParam("files") MultipartFile[] files, HttpSession session) {
+        Project project = (Project) session.getAttribute("pr");
         for (MultipartFile file : files) {
-            fileService.save(file);
+            fileService.save(file, project);
             
         }
         return "redirect:/admin/showFiles";

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,7 +42,7 @@
             <td>${sketch.companyMail}</td>
             <td>${sketch.created}</td>
             <td>
-                <a href="/admin/addProposition/">dodaj wizualizację</a>
+                <a href="/admin/addProposition/${sketch.id}">dodaj wizualizację</a>
             </td>
         </tr>
 </table>
