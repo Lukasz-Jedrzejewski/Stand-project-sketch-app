@@ -3,6 +3,7 @@ package com.legion.standprojectapp.entity;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.function.LongToIntFunction;
 
 @Entity
@@ -43,10 +44,20 @@ public class Project {
     @Email
     private String companyMail;
     private LocalDate created;
+    @OneToMany(mappedBy = "project")
+    private List<File> files;
 
     @PrePersist
     public void prePersist() {
         created = LocalDate.now();
+    }
+
+    public List<File> getFiles() {
+        return files;
+    }
+
+    public void setFiles(List<File> files) {
+        this.files = files;
     }
 
     public LocalDate getCreated() {

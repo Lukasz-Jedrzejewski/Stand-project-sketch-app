@@ -3,13 +3,21 @@ package com.legion.standprojectapp.controller;
 import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.service.*;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -21,14 +29,16 @@ public class AdminController {
     private TypeOfBuildingServiceImpl typeOfBuildingService;
     private ProjectServiceImpl projectService;
     private UserServiceImpl userService;
+    private FileServiceImpl fileService;
 
-    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService, UserServiceImpl userService) {
+    public AdminController(BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService, ProjectServiceImpl projectService, UserServiceImpl userService, FileServiceImpl fileService) {
         this.branchService = branchService;
         this.currentEventService = currentEventService;
         this.floorBoardService = floorBoardService;
         this.typeOfBuildingService = typeOfBuildingService;
         this.projectService = projectService;
         this.userService = userService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/adminPanel")
@@ -209,5 +219,50 @@ public class AdminController {
     public String getSorted(Model model) {
         model.addAttribute("sorted", projectService.findSorted());
         return "sortedList";
+    }
+
+    @GetMapping("/showFiles")
+    public String show(Model model) {
+        model.addAttribute("files", fileService.readFiles());
+        return "filesList";
+    }
+
+    @GetMapping("/addProposition/{id}")
+    public String getFiles(Model model, @PathVariable long id, HttpSession session) {
+        File file = new File();
+        Project project = projectService.readSingleProject(id);
+        session.setAttribute("pr", project);
+        model.addAttribute("files", file);
+        return "fileForm";
+    }
+
+    @PostMapping("/addProposition")
+    public String addFiles(@RequestParam("files") MultipartFile[] files, HttpSession session) {
+        Project project = (Project) session.getAttribute("pr");
+        for (MultipartFile file : files) {
+            fileService.save(file, project);
+            
+        }
+        return "redirect:/admin/showFiles";
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable int id) {
+        File file = fileService.getFile(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(file.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+file.getFileName()+"\"")
+                .body(new ByteArrayResource(file.getData()));
+    }
+
+    @GetMapping("/display/{id}")
+    public void displayFile(@PathVariable int id, HttpServletResponse response) throws IOException {
+        File file = fileService.getFile(id);
+
+        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+        response.getOutputStream().write(file.getData());
+
+        response.getOutputStream().close();
+
     }
 }
