@@ -7,7 +7,9 @@
 </head>
 <body>
 <header>Panel użytkownika</header>
-<a href="/user/edit/${user.id}">Edytuj swoje konto</a>
+<form action="/user/edit/${user.id}">
+    <input type="submit" value="Edytuj swoje konto">
+</form>
 <nav>
             <sec:authorize access="isAuthenticated()">
                 <p>Zalogowany jako: ${user.companyMail}</p>
@@ -20,7 +22,11 @@
         </form>
     </sec:authorize>
 </nav>
-<a href="/event/get">Uzupełnij dane do projektu</a>
-<a href="/user/mySketches">Twoje szkice</a>
+<form action="/event/get">
+    <input type="submit" value="Uzupełnij dane do projektu">
+</form>
+<form action="/user/mySketches">
+    <input type="submit" value="Twoje szkice">
+</form>
 </body>
 </html>
