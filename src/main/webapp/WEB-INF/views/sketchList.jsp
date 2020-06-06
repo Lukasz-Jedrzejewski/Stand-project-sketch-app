@@ -13,6 +13,9 @@
     <form action="/admin/sorted">
         <input type="submit" value="sortuj od najnowszych"/>
     </form>
+    <form action="/admin/showFiles">
+        <input type="submit" value="Wyświetl wszystkie pliki"/>
+    </form>
 </div>
 <body>
 <table>

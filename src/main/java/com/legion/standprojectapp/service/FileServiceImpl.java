@@ -7,6 +7,7 @@ import com.legion.standprojectapp.repository.FileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -38,5 +39,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public File getFile(int id) {
         return fileRepository.getOne(id);
+    }
+
+    @Override
+    public List<File> readAllById(long id) {
+        return fileRepository.findAllByProjectId(id);
     }
 }

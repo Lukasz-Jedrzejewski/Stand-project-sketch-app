@@ -227,6 +227,12 @@ public class AdminController {
         return "filesList";
     }
 
+    @GetMapping("/showFiles/{id}")
+    public String showById(Model model, @PathVariable long id) {
+        model.addAttribute("files", fileService.readAllById(id));
+        return "filesList";
+    }
+
     @GetMapping("/addProposition/{id}")
     public String getFiles(Model model, @PathVariable long id, HttpSession session) {
         File file = new File();

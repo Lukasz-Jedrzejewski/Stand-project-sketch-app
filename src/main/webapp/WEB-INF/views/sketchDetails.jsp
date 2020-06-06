@@ -42,7 +42,12 @@
             <td>${sketch.companyMail}</td>
             <td>${sketch.created}</td>
             <td>
-                <a href="/admin/addProposition/${sketch.id}">dodaj wizualizację</a>
+                <form action="/admin/showFiles/${sketch.id}">
+                    <input type="submit" value="pokaż pliki"/>
+                </form>
+                <form action="/admin/addProposition/${sketch.id}">
+                    <input type="submit" value="dodaj wizualizację"/>
+                </form>
             </td>
         </tr>
 </table>

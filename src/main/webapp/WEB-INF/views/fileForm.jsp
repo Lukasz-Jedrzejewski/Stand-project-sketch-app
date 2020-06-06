@@ -4,6 +4,7 @@
 <head>
     <title>File form</title>
 </head>
+<%@include file="headerAdmin.jsp"%>
 <body>
 <div>
 
