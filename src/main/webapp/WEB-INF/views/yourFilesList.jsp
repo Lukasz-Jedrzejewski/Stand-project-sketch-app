@@ -18,8 +18,8 @@
                     <td>${file.id}</td>
                     <td>${file.fileName}</td>
                     <td>
-                        <a href="/user/download/${file.id}">pobierz</a>
-                        <a href="/user/display/${file.id}">wyświetl</a>
+                        <a href="/file/download/${file.id}">pobierz</a>
+                        <a href="/file/display/${file.id}">wyświetl</a>
                     </td>
                 </tr>
             </c:forEach>

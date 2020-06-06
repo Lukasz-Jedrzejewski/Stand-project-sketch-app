@@ -3,10 +3,6 @@ package com.legion.standprojectapp.controller;
 import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.service.*;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -215,7 +209,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("sorted")
+    @GetMapping("/sorted")
     public String getSorted(Model model) {
         model.addAttribute("sorted", projectService.findSorted());
         return "sortedList";
@@ -229,7 +223,7 @@ public class AdminController {
 
     @GetMapping("/showFiles/{id}")
     public String showById(Model model, @PathVariable long id) {
-        model.addAttribute("files", fileService.readAllById(id));
+        model.addAttribute("files", fileService.readAllByProjectId(id));
         return "filesList";
     }
 
@@ -252,23 +246,4 @@ public class AdminController {
         return "redirect:/admin/showFiles";
     }
 
-    @GetMapping("/download/{id}")
-    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable int id) {
-        File file = fileService.getFile(id);
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(file.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+file.getFileName()+"\"")
-                .body(new ByteArrayResource(file.getData()));
-    }
-
-    @GetMapping("/display/{id}")
-    public void displayFile(@PathVariable int id, HttpServletResponse response) throws IOException {
-        File file = fileService.getFile(id);
-
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-        response.getOutputStream().write(file.getData());
-
-        response.getOutputStream().close();
-
-    }
 }

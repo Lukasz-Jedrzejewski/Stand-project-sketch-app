@@ -42,7 +42,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<File> readAllById(long id) {
+    public List<File> readAllByProjectId(long id) {
         return fileRepository.findAllByProjectId(id);
     }
 }

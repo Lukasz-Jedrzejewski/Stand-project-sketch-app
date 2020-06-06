@@ -10,5 +10,5 @@ public interface FileService {
     File save(MultipartFile file, Project project);
     List<File> readFiles();
     File getFile(int id);
-    List<File> readAllById(long id);
+    List<File> readAllByProjectId(long id);
 }
