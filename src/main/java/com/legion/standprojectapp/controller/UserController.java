@@ -1,9 +1,16 @@
 package com.legion.standprojectapp.controller;
 
+import com.legion.standprojectapp.entity.File;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
+import com.legion.standprojectapp.service.FileServiceImpl;
+import com.legion.standprojectapp.service.ProjectServiceImpl;
 import com.legion.standprojectapp.service.UserServiceImpl;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,17 +18,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.groups.Default;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     private UserServiceImpl userServiceImpl;
+    private ProjectServiceImpl projectService;
+    private FileServiceImpl fileService;
 
-    public UserController(UserServiceImpl userServiceImpl) {
+    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService) {
         this.userServiceImpl = userServiceImpl;
+        this.projectService = projectService;
+        this.fileService = fileService;
     }
 
     @GetMapping("/register")
@@ -47,7 +60,7 @@ public class UserController {
         model.addAttribute("user", user);
         session.setAttribute("user", user);
         if (!userServiceImpl.checkRole(user.getId()))
-            return "panel";
+            return "userPanel";
         else
             return "redirect:/admin/adminPanel";
     }
@@ -65,5 +78,45 @@ public class UserController {
         }
         userServiceImpl.save(user);
         return "redirect:/user/about";
+    }
+
+    @GetMapping("/mySketches")
+    public String mySketches(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        String companyMail = user.getCompanyMail();
+        model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
+        return "yourProjectList";
+    }
+
+    @GetMapping("/showDetails/{id}")
+    public String sketchDetails(Model model, @PathVariable long id) {
+        model.addAttribute("sketch", projectService.readSingleProject(id));
+        return "yourSketchDetails";
+    }
+
+    @GetMapping("/showFiles/{id}")
+    public String showById(Model model, @PathVariable long id) {
+        model.addAttribute("files", fileService.readAllById(id));
+        return "yourFilesList";
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable int id) {
+        File file = fileService.getFile(id);
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(file.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION,"attachment:filename=\""+file.getFileName()+"\"")
+                .body(new ByteArrayResource(file.getData()));
+    }
+
+    @GetMapping("/display/{id}")
+    public void displayFile(@PathVariable int id, HttpServletResponse response) throws IOException {
+        File file = fileService.getFile(id);
+
+        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+        response.getOutputStream().write(file.getData());
+
+        response.getOutputStream().close();
+
     }
 }

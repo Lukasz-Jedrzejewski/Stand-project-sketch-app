@@ -21,5 +21,6 @@
     </sec:authorize>
 </nav>
 <a href="/event/get">Uzupełnij dane do projektu</a>
+<a href="/user/mySketches">Twoje szkice</a>
 </body>
 </html>
