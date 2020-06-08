@@ -3,6 +3,7 @@ package com.legion.standprojectapp.service;
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.interfaces.UserService;
+import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.repository.RoleRepository;
 import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -68,4 +69,16 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsUserByCompanyMail(companyMail);
     }
 
+    @Override
+    public void changePassword(CurrentUser currentUser, User user) {
+        User current = currentUser.getUser();
+        User userDb = userRepository.getOne(current.getId());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCompanyName(currentUser.getUser().getCompanyName());
+        user.setCompanyMail(currentUser.getUser().getCompanyMail());
+        user.setAdmin(false);
+        user.setEnabled(true);
+        user.setRoles(userDb.getRoles());
+        userRepository.save(user);
+    }
 }

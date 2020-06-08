@@ -14,6 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import javax.validation.groups.Default;
 
 @Controller
@@ -91,6 +92,21 @@ public class UserController {
     public String showById(Model model, @PathVariable long id) {
         model.addAttribute("files", fileService.readAllByProjectId(id));
         return "yourFilesList";
+    }
+
+    @GetMapping("/changePass")
+    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model, HttpSession session) {
+        model.addAttribute("userPass", currentUser.getUser());
+        return "changePass";
+    }
+
+    @PostMapping("/changePass")
+    public String changePassword(@Valid @AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute User userPass, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "changePass";
+        }
+        userServiceImpl.changePassword(currentUser, userPass);
+        return "redirect:/user/about";
     }
 
 

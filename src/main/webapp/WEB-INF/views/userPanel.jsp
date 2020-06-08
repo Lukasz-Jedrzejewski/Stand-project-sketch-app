@@ -10,6 +10,9 @@
 <form action="/user/edit/${user.id}">
     <input type="submit" value="Edytuj swoje konto">
 </form>
+<form action="/user/changePass">
+    <input type="submit" value="Zmień hasło">
+</form>
 <nav>
             <sec:authorize access="isAuthenticated()">
                 <p>Zalogowany jako: ${user.companyMail}</p>

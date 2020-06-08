@@ -1,6 +1,7 @@
 package com.legion.standprojectapp.interfaces;
 
 import com.legion.standprojectapp.entity.User;
+import com.legion.standprojectapp.model.CurrentUser;
 
 public interface UserService {
     boolean checkAdmin();
@@ -8,4 +9,5 @@ public interface UserService {
     User findByCompanyMail(String companyMail);
     boolean checkRole(long id);
     boolean existByMail(String companyMail);
+    void changePassword(CurrentUser currentUser, User user);
 }
