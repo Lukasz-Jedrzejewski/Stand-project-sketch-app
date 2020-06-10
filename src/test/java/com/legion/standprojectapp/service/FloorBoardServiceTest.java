@@ -1,7 +1,7 @@
 package com.legion.standprojectapp.service;
 
-import com.legion.standprojectapp.entity.Branch;
-import com.legion.standprojectapp.repository.BranchRepository;
+import com.legion.standprojectapp.entity.FloorBoard;
+import com.legion.standprojectapp.repository.FloorBoarRepository;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -18,46 +18,46 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-class BranchServiceImplTest {
+class FloorBoardServiceTest {
 
     @InjectMocks
-    BranchServiceImpl branchService;
+    FloorBoardServiceImpl floorBoardService;
 
     @Mock
-    BranchRepository branchRepository;
+    FloorBoarRepository floorBoardRepository;
 
     private static final long ID = 1;
 
     @Before
     public void setUp(){
-        this.branchService = new BranchServiceImpl(branchRepository);
+        this.floorBoardService = new FloorBoardServiceImpl(floorBoardRepository);
 
     }
-    
+
     @Test
     void findAll() {
-        List<Branch> branches = branchService.findAll();
-        assertNotNull(branches);
+        List<FloorBoard> floorBoards = floorBoardService.findAll();
+        assertNotNull(floorBoards);
     }
 
     @Test
     void getOne() {
-        branchService.getOne(ID);
-        verify(branchRepository).getOne(ID);
+        floorBoardService.getOne(ID);
+        verify(floorBoardRepository).getOne(ID);
     }
 
     @Test
     void save() {
-        Branch branch = mock(Branch.class);
-        branchService.save(branch);
-        verify(branchRepository).save(branch);
+        FloorBoard floorBoard = mock(FloorBoard.class);
+        floorBoardService.save(floorBoard);
+        verify(floorBoardRepository).save(floorBoard);
 
     }
 
     @Test
     void delete() {
-        branchService.delete(ID);
-        verify(branchRepository).delete(branchService.getOne(ID));
+        floorBoardService.delete(ID);
+        verify(floorBoardRepository).delete(floorBoardService.getOne(ID));
 
     }
 }
