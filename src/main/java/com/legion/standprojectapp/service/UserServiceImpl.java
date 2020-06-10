@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -73,6 +74,7 @@ public class UserServiceImpl implements UserService {
     public void changePassword(CurrentUser currentUser, User user) {
         User current = currentUser.getUser();
         User userDb = userRepository.getOne(current.getId());
+        user.setId(currentUser.getUser().getId());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setCompanyName(currentUser.getUser().getCompanyName());
         user.setCompanyMail(currentUser.getUser().getCompanyMail());
