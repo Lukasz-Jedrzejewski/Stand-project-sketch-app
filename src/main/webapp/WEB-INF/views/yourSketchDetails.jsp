@@ -6,6 +6,10 @@
     <title>Sketch Details</title>
 </head>
 <body>
+<form action="/user/about">
+    <input type="submit" value="Panel użytkownika">
+</form>
+<button type="button" name="back" onclick="history.back()">back</button>
 <table>
     <tr>
         <th>Szerokość stoiska</th>

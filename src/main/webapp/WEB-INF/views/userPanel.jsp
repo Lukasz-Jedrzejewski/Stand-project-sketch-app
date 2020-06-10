@@ -6,13 +6,6 @@
     <title>Panel</title>
 </head>
 <body>
-<header>Panel użytkownika</header>
-<form action="/user/edit/${user.id}">
-    <input type="submit" value="Edytuj swoje konto">
-</form>
-<form action="/user/changePass">
-    <input type="submit" value="Zmień hasło">
-</form>
 <nav>
             <sec:authorize access="isAuthenticated()">
                 <p>Zalogowany jako: ${user.companyMail}</p>
@@ -25,11 +18,15 @@
         </form>
     </sec:authorize>
 </nav>
-<form action="/event/get">
-    <input type="submit" value="Uzupełnij dane do projektu">
-</form>
-<form action="/user/mySketches">
-    <input type="submit" value="Twoje szkice">
-</form>
+<header>Panel użytkownika</header>
+<%@include file="headerUser.jsp" %>
+<header style="display: flex; flex-direction: row">
+    <form action="/user/edit/${user.id}">
+        <input type="submit" value="Edytuj swoje konto">
+    </form>
+    <form action="/user/changePass">
+        <input type="submit" value="Zmień hasło">
+    </form>
+</header>
 </body>
 </html>

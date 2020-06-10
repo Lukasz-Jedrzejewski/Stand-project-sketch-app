@@ -5,6 +5,10 @@
     <title>Your projects list</title>
 </head>
 <body>
+<form action="/user/about">
+    <input type="submit" value="Panel użytkownika">
+</form>
+<button type="button" name="back" onclick="history.back()">back</button>
 <table>
     <tr>
         <th>Data utworzenia</th>

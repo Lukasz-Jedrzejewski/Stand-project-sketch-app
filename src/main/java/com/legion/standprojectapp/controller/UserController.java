@@ -95,7 +95,7 @@ public class UserController {
     }
 
     @GetMapping("/changePass")
-    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model, HttpSession session) {
+    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("userPass", currentUser.getUser());
         return "changePass";
     }
