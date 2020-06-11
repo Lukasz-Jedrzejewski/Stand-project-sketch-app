@@ -6,8 +6,6 @@ import com.legion.standprojectapp.interfaces.FileService;
 import com.legion.standprojectapp.repository.FileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.Collections;
 import java.util.List;
 
 @Service
