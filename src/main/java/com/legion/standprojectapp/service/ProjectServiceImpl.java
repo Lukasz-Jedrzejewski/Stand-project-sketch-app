@@ -3,8 +3,10 @@ package com.legion.standprojectapp.service;
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.entity.Project;
+import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.interfaces.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
+import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -18,12 +20,14 @@ import java.util.Optional;
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository) {
         this.projectRepository = projectRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,7 +44,12 @@ public class ProjectServiceImpl implements ProjectService {
     public void sendMail(Project project, CurrentEvent currentEvent, Branch branch) throws MessagingException {
         MimeMessage msg = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        helper.setTo("generaljedrzejewski@gmail.com");
+        List<User> admins = userRepository.findByAdmin();
+        String mailAddress = "";
+        for (User user : admins) {
+            mailAddress = user.getCompanyMail();
+        }
+        helper.setTo(mailAddress);
         helper.setSubject("New sketch");
         helper.setText("<h1>You have new project data!</h1>"+project.toHtml()+ " "
                 + currentEvent.toHtml() + " " + branch.toHtml(),true);
