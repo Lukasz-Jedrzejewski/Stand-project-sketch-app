@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CurrentEventRepository extends JpaRepository<CurrentEvent, Long> {
-
+    boolean existsCurrentEventByName(String name);
 }

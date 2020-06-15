@@ -17,7 +17,10 @@ public class CurrentEventServiceImpl implements CurrentEventService {
 
     @Override
     public void save(CurrentEvent currentEvent){
-        this.currentEventRepository.save(currentEvent);
+        boolean existEvent = existsByName(currentEvent.getName());
+        if (!existEvent) {
+            this.currentEventRepository.save(currentEvent);
+        }
     }
 
     @Override
@@ -33,5 +36,10 @@ public class CurrentEventServiceImpl implements CurrentEventService {
     @Override
     public void delete(long id) {
         this.currentEventRepository.delete(getOne(id));
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return currentEventRepository.existsCurrentEventByName(name);
     }
 }

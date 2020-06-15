@@ -16,6 +16,7 @@ public class HomeController {
     public String home() {
         initData.initRoles();
         initData.initBranches();
+        initData.initEvents();
         return "home";
     }
 }

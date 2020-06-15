@@ -9,4 +9,5 @@ public interface CurrentEventService {
     List<CurrentEvent> findAll();
     CurrentEvent getOne(long id);
     void delete(long id);
+    boolean existsByName(String name);
 }
