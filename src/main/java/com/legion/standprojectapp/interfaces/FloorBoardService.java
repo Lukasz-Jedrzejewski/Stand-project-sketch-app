@@ -9,4 +9,5 @@ public interface FloorBoardService {
     FloorBoard getOne(long id);
     void save(FloorBoard floorBoard);
     void delete(long id);
+    boolean existsByName(String name);
 }

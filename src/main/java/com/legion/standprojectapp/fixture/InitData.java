@@ -2,9 +2,11 @@ package com.legion.standprojectapp.fixture;
 
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.CurrentEvent;
+import com.legion.standprojectapp.entity.FloorBoard;
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.service.BranchServiceImpl;
 import com.legion.standprojectapp.service.CurrentEventServiceImpl;
+import com.legion.standprojectapp.service.FloorBoardServiceImpl;
 import com.legion.standprojectapp.service.RoleServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +15,13 @@ public class InitData {
     private RoleServiceImpl roleService;
     private BranchServiceImpl branchService;
     private CurrentEventServiceImpl currentEventService;
+    private FloorBoardServiceImpl floorBoardService;
 
-    public InitData(RoleServiceImpl roleService, BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService) {
+    public InitData(RoleServiceImpl roleService, BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService) {
         this.roleService = roleService;
         this.branchService = branchService;
         this.currentEventService = currentEventService;
+        this.floorBoardService = floorBoardService;
     }
 
     public void initRoles() {
@@ -61,5 +65,17 @@ public class InitData {
         currentEventService.save(event3);
     }
 
+    public void initFloorBoard() {
+        FloorBoard floor1 = new FloorBoard();
+        floor1.setName("wykładzina");
+        floorBoardService.save(floor1);
 
+        FloorBoard floor2 = new FloorBoard();
+        floor2.setName("panele");
+        floorBoardService.save(floor2);
+
+        FloorBoard floor3 = new FloorBoard();
+        floor3.setName("laminat");
+        floorBoardService.save(floor3);
+    }
 }

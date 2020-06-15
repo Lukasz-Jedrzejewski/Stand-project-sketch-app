@@ -17,6 +17,7 @@ public class HomeController {
         initData.initRoles();
         initData.initBranches();
         initData.initEvents();
+        initData.initFloorBoard();
         return "home";
     }
 }

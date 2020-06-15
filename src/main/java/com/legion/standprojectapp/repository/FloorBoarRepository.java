@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FloorBoarRepository extends JpaRepository<FloorBoard, Long> {
-
+    boolean existsFloorBoardByName(String name);
 }

@@ -27,11 +27,19 @@ public class FloorBoardServiceImpl implements FloorBoardService {
 
     @Override
     public void save(FloorBoard floorBoard){
-        this.floorBoarRepository.save(floorBoard);
+        boolean existFloorBoard = existsByName(floorBoard.getName());
+        if (!existFloorBoard) {
+            this.floorBoarRepository.save(floorBoard);
+        }
     }
 
     @Override
     public void delete(long id) {
         this.floorBoarRepository.delete(getOne(id));
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return floorBoarRepository.existsFloorBoardByName(name);
     }
 }
