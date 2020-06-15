@@ -28,11 +28,19 @@ public class BranchServiceImpl implements BranchService {
 
     @Override
     public void save(Branch branch){
-        this.branchRepository.save(branch);
+        boolean existBranch = existsByName(branch.getName());
+        if (!existBranch) {
+            this.branchRepository.save(branch);
+        }
     }
 
     @Override
     public void delete(long id) {
         this.branchRepository.delete(getOne(id));
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return branchRepository.existsBranchByName(name);
     }
 }

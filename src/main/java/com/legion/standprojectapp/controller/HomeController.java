@@ -15,6 +15,7 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
         initData.initRoles();
+        initData.initBranches();
         return "home";
     }
 }

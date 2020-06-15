@@ -9,4 +9,5 @@ public interface BranchService {
     Branch getOne(long id);
     void save(Branch branch);
     void delete(long id);
+    boolean existsByName(String name);
 }
