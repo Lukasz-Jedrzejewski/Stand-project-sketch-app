@@ -12,7 +12,7 @@ public class HomeController {
         this.initData = initData;
     }
 
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home() {
         initData.initRoles();
         return "home";
