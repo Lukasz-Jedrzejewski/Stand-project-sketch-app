@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TypeOfBuildingRepository extends JpaRepository<TypeOfBuilding, Long> {
-
+    boolean existsTypeOfBuildingByName(String name);
 }

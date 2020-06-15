@@ -28,11 +28,19 @@ public class TypeOfBuildingServiceImpl implements TypeOfBuildingService {
 
     @Override
     public void save(TypeOfBuilding typeOfBuilding){
-        this.typeOfBuildingRepository.save(typeOfBuilding);
+        boolean existTypeOfBuilding = existsByName(typeOfBuilding.getName());
+        if (!existTypeOfBuilding) {
+            this.typeOfBuildingRepository.save(typeOfBuilding);
+        }
     }
 
     @Override
     public void delete(long id) {
         this.typeOfBuildingRepository.delete(getOne(id));
+    }
+
+    @Override
+    public boolean existsByName(String name) {
+        return typeOfBuildingRepository.existsTypeOfBuildingByName(name);
     }
 }

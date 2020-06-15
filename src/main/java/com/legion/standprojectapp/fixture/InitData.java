@@ -1,13 +1,7 @@
 package com.legion.standprojectapp.fixture;
 
-import com.legion.standprojectapp.entity.Branch;
-import com.legion.standprojectapp.entity.CurrentEvent;
-import com.legion.standprojectapp.entity.FloorBoard;
-import com.legion.standprojectapp.entity.Role;
-import com.legion.standprojectapp.service.BranchServiceImpl;
-import com.legion.standprojectapp.service.CurrentEventServiceImpl;
-import com.legion.standprojectapp.service.FloorBoardServiceImpl;
-import com.legion.standprojectapp.service.RoleServiceImpl;
+import com.legion.standprojectapp.entity.*;
+import com.legion.standprojectapp.service.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,12 +10,14 @@ public class InitData {
     private BranchServiceImpl branchService;
     private CurrentEventServiceImpl currentEventService;
     private FloorBoardServiceImpl floorBoardService;
+    private TypeOfBuildingServiceImpl typeOfBuildingService;
 
-    public InitData(RoleServiceImpl roleService, BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService) {
+    public InitData(RoleServiceImpl roleService, BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService) {
         this.roleService = roleService;
         this.branchService = branchService;
         this.currentEventService = currentEventService;
         this.floorBoardService = floorBoardService;
+        this.typeOfBuildingService = typeOfBuildingService;
     }
 
     public void initRoles() {
@@ -77,5 +73,19 @@ public class InitData {
         FloorBoard floor3 = new FloorBoard();
         floor3.setName("laminat");
         floorBoardService.save(floor3);
+    }
+
+    public void initBuildingTypes() {
+        TypeOfBuilding type1 = new TypeOfBuilding();
+        type1.setName("baner");
+        typeOfBuildingService.save(type1);
+
+        TypeOfBuilding type2 = new TypeOfBuilding();
+        type2.setName("drewno");
+        typeOfBuildingService.save(type2);
+
+        TypeOfBuilding type3 = new TypeOfBuilding();
+        type3.setName("system");
+        typeOfBuildingService.save(type3);
     }
 }

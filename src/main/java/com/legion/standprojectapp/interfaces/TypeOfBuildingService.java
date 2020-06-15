@@ -9,4 +9,5 @@ public interface TypeOfBuildingService {
     TypeOfBuilding getOne(long id);
     void save(TypeOfBuilding typeOfBuilding);
     void delete(long id);
+    boolean existsByName(String name);
 }
