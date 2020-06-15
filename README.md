@@ -8,3 +8,6 @@ Another task to be performed by the application is to save files with ready prop
 In the future, an extended search engine is foreseen for the administrator so that he can match ready files to current queries.
 
 The application can also be extended with the administrator's ability to manage the home page so that it becomes a showcase of the contractor.
+
+The first registration is carried out by the administrator, in other words the company carrying out the order.
+Each subsequent registration belongs to the client.
