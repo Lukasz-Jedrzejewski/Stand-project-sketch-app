@@ -14,9 +14,9 @@ Each subsequent registration belongs to the client.
 
 Technologies
 
-Java
-Spring Boot 
-Spring Data
-Spring Security
-MySQL
-Hibernate
+    Java (v 13.0.2)
+    Spring Boot 
+    Spring Data
+    Spring Security
+    MySQL
+    Hibernate
