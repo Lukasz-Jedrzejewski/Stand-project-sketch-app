@@ -11,3 +11,12 @@ The application can also be extended with the administrator's ability to manage 
 
 The first registration is carried out by the administrator, in other words the company carrying out the order.
 Each subsequent registration belongs to the client.
+
+Technologies
+
+Java
+Spring Boot 
+Spring Data
+Spring Security
+MySQL
+Hibernate
