@@ -14,11 +14,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        initData.initRoles();
-        initData.initBranches();
-        initData.initEvents();
-        initData.initFloorBoard();
-        initData.initBuildingTypes();
         return "home";
     }
 }
