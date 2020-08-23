@@ -1,7 +1,7 @@
 package com.legion.standprojectapp.fixture;
 
 import com.legion.standprojectapp.entity.*;
-import com.legion.standprojectapp.service.*;
+import com.legion.standprojectapp.service.serviceImpl.*;
 import org.springframework.stereotype.Service;
 
 @Service

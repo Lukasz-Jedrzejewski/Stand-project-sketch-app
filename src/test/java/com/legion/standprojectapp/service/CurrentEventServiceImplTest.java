@@ -1,9 +1,8 @@
 package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.CurrentEvent;
-import com.legion.standprojectapp.entity.FloorBoard;
 import com.legion.standprojectapp.repository.CurrentEventRepository;
-import com.legion.standprojectapp.repository.FloorBoarRepository;
+import com.legion.standprojectapp.service.serviceImpl.CurrentEventServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

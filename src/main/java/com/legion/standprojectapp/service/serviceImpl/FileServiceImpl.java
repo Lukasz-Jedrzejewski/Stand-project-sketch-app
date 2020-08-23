@@ -1,8 +1,8 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.File;
 import com.legion.standprojectapp.entity.Project;
-import com.legion.standprojectapp.interfaces.FileService;
+import com.legion.standprojectapp.service.FileService;
 import com.legion.standprojectapp.repository.FileRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

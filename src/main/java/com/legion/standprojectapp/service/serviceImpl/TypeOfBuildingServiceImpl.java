@@ -1,7 +1,7 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.TypeOfBuilding;
-import com.legion.standprojectapp.interfaces.TypeOfBuildingService;
+import com.legion.standprojectapp.service.TypeOfBuildingService;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
 import org.springframework.stereotype.Service;
 

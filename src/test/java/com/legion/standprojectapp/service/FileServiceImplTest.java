@@ -3,7 +3,7 @@ package com.legion.standprojectapp.service;
 import com.legion.standprojectapp.entity.File;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.repository.FileRepository;
-import org.junit.Assert;
+import com.legion.standprojectapp.service.serviceImpl.FileServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.List;
 
 import static org.junit.Assert.assertNotNull;

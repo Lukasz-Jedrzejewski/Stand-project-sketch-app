@@ -1,8 +1,8 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.entity.User;
-import com.legion.standprojectapp.interfaces.UserService;
+import com.legion.standprojectapp.service.UserService;
 import com.legion.standprojectapp.model.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,26 +31,9 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         Set<Role> roles =  user.getRoles();
         roles.forEach(r -> grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
-
-//        return new org.springframework.security.core.userdetails.User(
-//                user.getUsername(), user.getPassword(), grantedAuthorities);
-
-//        Change to own implementation
         return new CurrentUser(user.getCompanyMail(), user.getPassword(), grantedAuthorities, user);
     }
 }
-//
-//    @Override
-//    public UserDetails loadUserByUsername(String companyMail) throws UsernameNotFoundException {
-//        User user = userService.findByCompanyMail(companyMail);
-//        if (user == null) {throw new UsernameNotFoundException(companyMail); }
-//        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-//        user.getRoles().forEach(r ->
-//                grantedAuthorities.add(new SimpleGrantedAuthority(r.getName())));
-//        return (UserDetails) new CurrentUser(user.getCompanyMail(),user.getPassword(),
-//                grantedAuthorities, user);
-//
-//
-//    }
+
 
 

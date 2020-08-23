@@ -1,7 +1,7 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.File;
-import com.legion.standprojectapp.service.FileServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.FileServiceImpl;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;

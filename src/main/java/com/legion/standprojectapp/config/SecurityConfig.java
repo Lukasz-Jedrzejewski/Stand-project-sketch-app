@@ -1,6 +1,6 @@
 package com.legion.standprojectapp.config;
 
-import com.legion.standprojectapp.service.SpringDataUserDetailsService;
+import com.legion.standprojectapp.service.serviceImpl.SpringDataUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

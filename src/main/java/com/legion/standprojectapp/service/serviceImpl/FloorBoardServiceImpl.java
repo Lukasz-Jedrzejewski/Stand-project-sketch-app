@@ -1,7 +1,7 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.FloorBoard;
-import com.legion.standprojectapp.interfaces.FloorBoardService;
+import com.legion.standprojectapp.service.FloorBoardService;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import org.springframework.stereotype.Service;
 

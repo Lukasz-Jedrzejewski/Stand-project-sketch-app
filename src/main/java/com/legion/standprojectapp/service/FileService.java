@@ -1,4 +1,4 @@
-package com.legion.standprojectapp.interfaces;
+package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.File;
 import com.legion.standprojectapp.entity.Project;

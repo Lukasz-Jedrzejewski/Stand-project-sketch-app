@@ -1,10 +1,10 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.entity.User;
-import com.legion.standprojectapp.interfaces.ProjectService;
+import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

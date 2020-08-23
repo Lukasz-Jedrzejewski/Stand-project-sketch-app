@@ -1,7 +1,7 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.Branch;
-import com.legion.standprojectapp.service.BranchServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.BranchServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

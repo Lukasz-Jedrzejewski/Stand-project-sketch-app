@@ -2,6 +2,7 @@ package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.repository.BranchRepository;
+import com.legion.standprojectapp.service.serviceImpl.BranchServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

@@ -4,7 +4,7 @@ import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.repository.BranchRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
-import com.legion.standprojectapp.service.ProjectServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

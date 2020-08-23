@@ -1,7 +1,7 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Role;
-import com.legion.standprojectapp.interfaces.RoleService;
+import com.legion.standprojectapp.service.RoleService;
 import com.legion.standprojectapp.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

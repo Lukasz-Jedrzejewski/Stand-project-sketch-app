@@ -1,8 +1,8 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.entity.User;
-import com.legion.standprojectapp.interfaces.UserService;
+import com.legion.standprojectapp.service.UserService;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.repository.RoleRepository;
 import com.legion.standprojectapp.repository.UserRepository;
@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 

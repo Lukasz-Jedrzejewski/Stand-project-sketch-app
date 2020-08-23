@@ -2,6 +2,7 @@ package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.FloorBoard;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
+import com.legion.standprojectapp.service.serviceImpl.FloorBoardServiceImpl;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;

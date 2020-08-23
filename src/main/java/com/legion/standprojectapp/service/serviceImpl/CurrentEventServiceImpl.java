@@ -1,7 +1,7 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.CurrentEvent;
-import com.legion.standprojectapp.interfaces.CurrentEventService;
+import com.legion.standprojectapp.service.CurrentEventService;
 import com.legion.standprojectapp.repository.CurrentEventRepository;
 import org.springframework.stereotype.Service;
 

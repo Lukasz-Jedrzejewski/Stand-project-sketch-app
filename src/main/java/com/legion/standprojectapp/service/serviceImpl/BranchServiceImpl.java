@@ -1,11 +1,10 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Branch;
-import com.legion.standprojectapp.interfaces.BranchService;
+import com.legion.standprojectapp.service.BranchService;
 import com.legion.standprojectapp.repository.BranchRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.PreRemove;
 import java.util.List;
 
 @Service

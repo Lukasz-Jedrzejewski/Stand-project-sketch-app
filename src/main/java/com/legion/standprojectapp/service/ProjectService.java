@@ -1,4 +1,4 @@
-package com.legion.standprojectapp.interfaces;
+package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.entity.CurrentEvent;

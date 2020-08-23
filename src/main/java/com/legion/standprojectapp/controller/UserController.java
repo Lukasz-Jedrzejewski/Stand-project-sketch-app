@@ -2,9 +2,9 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
-import com.legion.standprojectapp.service.FileServiceImpl;
-import com.legion.standprojectapp.service.ProjectServiceImpl;
-import com.legion.standprojectapp.service.UserServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.FileServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.ProjectServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.UserServiceImpl;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
