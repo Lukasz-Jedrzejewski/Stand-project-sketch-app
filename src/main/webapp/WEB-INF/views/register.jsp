@@ -8,28 +8,28 @@
 </head>
 <body>
 <button type="button" name="back" onclick="history.back()">back</button>
-<form:form name="form" modelAttribute="user" method="post" action="/user/register">
+<form:form modelAttribute="user" method="post" action="/user/register">
     <div>
-        <label>
-            Nazwa firmy<form:input path="companyName"/>
+        <label id="nameLabel">
+            Nazwa firmy<form:input path="companyName" id="companyName"/>
         </label>
         <form:errors path="companyName"/>
     </div>
     <div>
-        <label>
-            Mail firmy<form:input path="companyMail"/>
+        <label id="mailLabel">
+            Mail firmy<form:input path="companyMail" id="companyMail"/>
         </label>
         <form:errors path="companyMail"/>
     </div>
     <div>
-        <label>
+        <label id="passLabel">
             Hasło<form:password path="password" id="pass"
                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
         </label>
         <form:errors path="password"/>
     </div>
     <div>
-        <label id="confirm">
+        <label id="confirmLabel">
             Powtórz hasło<input type="password" name="confirmPassword" id="confirmation"
                                 pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
         </label>

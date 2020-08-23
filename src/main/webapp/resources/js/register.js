@@ -3,17 +3,41 @@ document.addEventListener("DOMContentLoaded", function () {
      * message for empty "confirmPassword" input and alert for different passwords
      */
 
-    var confirm = document.querySelector("#confirm");
+    var nameL = document.querySelector("#nameLabel");
+    var mailL = document.querySelector("#mailLabel");
+    var passL = document.querySelector("#passLabel");
+    var confirmL = document.querySelector("#confirmLabel");
+    var name = document.querySelector("#companyName").value;
+    var mail = document.querySelector("#companyMail").value;
     var pass = document.querySelector("#pass").value;
     var passConfirm = document.querySelector("#confirmation").value;
+    if (name === "") {
+        message(nameL);
+    } else {
+        blur();
+    }
+    if (mail === "") {
+        message(mailL);
+    }
+    if (pass === "") {
+        message(passL);
+    }
     if (passConfirm === "") {
-        var span = document.createElement("span");
-        let newChild = span;
-        newChild.innerText = "Pole wymagane";
-        confirm.appendChild(newChild);
+        message(confirmL);
         if (passConfirm !== pass) {
-            alert("Hasła muszą być takie same");
+            passAlert();
         }
+    }
+
+    function message(label) {
+        let newChild = document.createElement("span");
+        newChild.innerText = "Pole wymagane";
+        return label.appendChild(newChild);
+    }
+
+
+    function passAlert() {
+        alert("Hasła muszą być takie same");
     }
 
 
