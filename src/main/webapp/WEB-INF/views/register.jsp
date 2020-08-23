@@ -4,6 +4,7 @@
 <html>
 <head>
     <title>Register</title>
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
 <button type="button" name="back" onclick="history.back()">back</button>
@@ -22,14 +23,24 @@
     </div>
     <div>
         <label>
-            Hasło<form:password path="password" id="pass"/>
+            Hasło<form:password path="password" id="pass"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
         </label>
         <form:errors path="password"/>
     </div>
     <div>
         <label id="confirm">
-            Powtórz hasło<input type="password" name="confirmPassword" id="confirmation"/>
+            Powtórz hasło<input type="password" name="confirmPassword" id="confirmation"
+                                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"/>
         </label>
+    </div>
+    <div id="message">
+        <h3>Hasło musi składać się z:</h3>
+        <p id="letter" class="invalid"><b>małych liter</b></p>
+        <p id="capital" class="invalid"><b>dużych liter</b></p>
+        <p id="number" class="invalid"><b>cyfr</b></p>
+        <p id="length" class="invalid">Minimum <b>8 znaków</b></p>
+        <p id="mark" class="invalid"><b>znaków specjalnych @$!%*?&</b></p>
     </div>
     <input id="b1" type="submit" value="Zarejestruj"/>
 </form:form>
