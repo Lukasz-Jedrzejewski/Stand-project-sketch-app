@@ -2,6 +2,7 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
+import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.FileServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.ProjectServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.UserServiceImpl;
@@ -34,16 +35,22 @@ public class UserController {
     @GetMapping("/register")
     public String login(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("passwordModel", new PasswordModel());
         return "register";
     }
 
     @PostMapping("/register")
-    public String addUser(@Validated(Default.class) @ModelAttribute User user, BindingResult bindingResult) {
+    public String addUser(@Validated(Default.class) @ModelAttribute("user") User user,
+                          @ModelAttribute("passwordModel") PasswordModel passwordModel,
+                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-
-        userServiceImpl.save(user);
+        if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
+            userServiceImpl.save(user);
+        } else {
+            return "register";
+        }
         return "redirect:/user/about";
 
     }

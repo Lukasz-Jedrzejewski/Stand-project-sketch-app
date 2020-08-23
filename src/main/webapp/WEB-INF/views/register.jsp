@@ -25,6 +25,11 @@
         </label>
         <form:errors path="password"/>
     </div>
+    <div>
+        <label>
+            Powtórz hasło<input type="password" name="confirmPassword"/>
+        </label>
+    </div>
     <input id="b1" type="submit" value="Zarejestruj"/>
 </form:form>
 </body>

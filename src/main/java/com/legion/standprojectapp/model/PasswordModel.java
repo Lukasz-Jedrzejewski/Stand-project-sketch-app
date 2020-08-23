@@ -2,18 +2,9 @@ package com.legion.standprojectapp.model;
 
 public class PasswordModel {
 
-    private String password;
     private String confirmPassword;
 
     public PasswordModel() {
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getConfirmPassword() {
