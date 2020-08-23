@@ -41,16 +41,16 @@ public class UserController {
 
     @PostMapping("/register")
     public String addUser(@Validated(Default.class) @ModelAttribute("user") User user,
-                          @ModelAttribute("passwordModel") PasswordModel passwordModel,
-                          BindingResult bindingResult) {
+                          BindingResult bindingResult,
+                          @ModelAttribute("passwordModel") PasswordModel passwordModel) {
         if (bindingResult.hasErrors()) {
             return "register";
         }
-        if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
-            userServiceImpl.save(user);
-        } else {
-            return "register";
-        }
+            if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
+                userServiceImpl.save(user);
+            } else {
+                return "register";
+            }
         return "redirect:/user/about";
 
     }
