@@ -3,38 +3,46 @@ document.addEventListener("DOMContentLoaded", function () {
      * message for empty "confirmPassword" input and alert for different passwords
      */
 
-    var nameL = document.querySelector("#nameLabel");
-    var mailL = document.querySelector("#mailLabel");
-    var passL = document.querySelector("#passLabel");
-    var confirmL = document.querySelector("#confirmLabel");
-    var name = document.querySelector("#companyName").value;
-    var mail = document.querySelector("#companyMail").value;
-    var pass = document.querySelector("#pass").value;
-    var passConfirm = document.querySelector("#confirmation").value;
-    if (name === "") {
-        message(nameL);
-    } else {
-        blur();
-    }
-    if (mail === "") {
-        message(mailL);
-    }
-    if (pass === "") {
-        message(passL);
-    }
-    if (passConfirm === "") {
-        message(confirmL);
-        if (passConfirm !== pass) {
-            passAlert();
+    var name = document.querySelector("#companyName");
+    var mail = document.querySelector("#companyMail");
+    var myInput = document.querySelector("#pass");
+    var passConfirm = document.querySelector("#confirmation");
+
+    var sub = document.querySelector("#sub");
+    console.log(sub);
+
+    var span = document.querySelector("#spanMsg");
+    span.style.display = "none";
+
+    function focus(input) {
+        input.onfocus = function () {
+            input.parentElement.append(span);
+            span.style.display = "inline"
         }
     }
 
-    function message(label) {
-        let newChild = document.createElement("span");
-        newChild.innerText = "Pole wymagane";
-        return label.appendChild(newChild);
+    function blur(input) {
+        input.onblur = function () {
+            span.style.display = "none";
+        }
     }
 
+    focus(name);
+    focus(mail);
+    focus(passConfirm);
+    blur(name);
+    blur(mail);
+    blur(passConfirm);
+    submit();
+
+
+    function submit() {
+        sub.addEventListener("click", function () {
+            if (passConfirm !== myInput) {
+                passAlert();
+            };
+        });
+    };
 
     function passAlert() {
         alert("Hasła muszą być takie same");
@@ -45,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function () {
      * validation password and message box
      */
 
-    var myInput = document.getElementById("pass");
     var letter = document.getElementById("letter");
     var capital = document.getElementById("capital");
     var number = document.getElementById("number");
@@ -55,11 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // When the user clicks on the password field, show the message box
     myInput.onfocus = function () {
+        myInput.parentElement.append(span);
+        span.style.display = "inline"
         msg.style.display = "block";
     }
 
 // When the user clicks outside of the password field, hide the message box
     myInput.onblur = function () {
+        span.style.display = "none";
         msg.style.display = "none";
     }
 
