@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     function submit() {
         sub.addEventListener("click", function () {
-            if (passConfirm !== myInput) {
+            if (passConfirm.value !== myInput.value) {
                 passAlert();
             };
         });
