@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     /**
-     * message for empty "confirmPassword" input and alert for different passwords
+     * message for empty inputs and alert for different passwords
      */
 
     var name = document.querySelector("#companyName");
@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var passConfirm = document.querySelector("#confirmation");
 
     var sub = document.querySelector("#sub");
-    console.log(sub);
 
     var span = document.querySelector("#spanMsg");
     span.style.display = "none";
@@ -36,6 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
     submit();
 
 
+    /**
+     * different passwords alert
+     */
     function submit() {
         sub.addEventListener("click", function () {
             if (passConfirm !== myInput) {
