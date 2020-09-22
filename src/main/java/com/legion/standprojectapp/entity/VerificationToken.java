@@ -9,7 +9,7 @@ import java.util.UUID;
 @Entity
 public class VerificationToken {
 
-    private static final int EXPIRATION = 60 * 24;
+    private static final int EXPIRATION = 3;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -2,8 +2,7 @@ package com.legion.standprojectapp.service;
 
 import com.legion.standprojectapp.entity.VerificationToken;
 
-public interface VerificarionTokenService {
+public interface VerificationTokenService {
     VerificationToken findToken(String token);
     void save(VerificationToken verificationToken);
-    void deleteByUserId(long id);
 }

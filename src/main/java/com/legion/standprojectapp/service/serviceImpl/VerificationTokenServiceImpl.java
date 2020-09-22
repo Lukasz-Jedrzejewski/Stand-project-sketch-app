@@ -2,11 +2,11 @@ package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.repository.VerificationTokenRepository;
-import com.legion.standprojectapp.service.VerificarionTokenService;
+import com.legion.standprojectapp.service.VerificationTokenService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VerificationTokenServiceImpl implements VerificarionTokenService {
+public class VerificationTokenServiceImpl implements VerificationTokenService {
 
     private final VerificationTokenRepository verificationTokenRepository;
 
@@ -22,10 +22,5 @@ public class VerificationTokenServiceImpl implements VerificarionTokenService {
     @Override
     public void save(VerificationToken verificationToken) {
         verificationTokenRepository.save(verificationToken);
-    }
-
-    @Override
-    public void deleteByUserId(long id) {
-        verificationTokenRepository.deleteByUserId(id);
     }
 }
