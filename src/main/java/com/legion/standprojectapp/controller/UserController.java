@@ -1,9 +1,7 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
-import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.CurrentUser;
-import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.*;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,10 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import javax.validation.groups.Default;
 
 @Controller
 @RequestMapping("/user")
@@ -25,42 +21,11 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     private ProjectServiceImpl projectService;
     private FileServiceImpl fileService;
-    private VerificationTokenServiceImpl verificationTokenService;
-    private MailServiceImpl mailService;
 
-    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService) {
+    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService) {
         this.userServiceImpl = userServiceImpl;
         this.projectService = projectService;
         this.fileService = fileService;
-        this.verificationTokenService = verificationTokenService;
-        this.mailService = mailService;
-    }
-
-    @GetMapping("/register")
-    public String login(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("passwordModel", new PasswordModel());
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String addUser(@Validated(Default.class) @ModelAttribute("user") User user,
-                          BindingResult bindingResult,
-                          @ModelAttribute("passwordModel") PasswordModel passwordModel) throws MessagingException {
-        if (bindingResult.hasErrors()) {
-            return "register";
-        }
-            if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
-                user.setEnabled(false);
-                userServiceImpl.save(user);
-                VerificationToken verificationToken = new VerificationToken(user);
-                verificationTokenService.save(verificationToken);
-                mailService.sendVerificationToken(user.getCompanyMail(), verificationToken.getToken());
-            } else {
-                return "register";
-            }
-        return "register-verify";
-
     }
 
     @GetMapping("/about")

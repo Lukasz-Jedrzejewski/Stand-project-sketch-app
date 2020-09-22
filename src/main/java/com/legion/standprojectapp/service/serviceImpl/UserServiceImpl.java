@@ -47,6 +47,15 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
     }
 
+    @Override
+    public void editUser(User user) {
+        User userDb = userRepository.getOne(user.getId());
+        user.setEnabled(userDb.isEnabled());
+        user.setRoles(userDb.getRoles());
+        user.setPassword(userDb.getPassword());
+        userRepository.save(user);
+    }
+
 
     @Override
     public User findByCompanyMail(String companyMail) {

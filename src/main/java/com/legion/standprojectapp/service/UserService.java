@@ -10,4 +10,5 @@ public interface UserService {
     boolean checkRole(long id);
     boolean existByMail(String companyMail);
     void changePassword(CurrentUser currentUser, User user);
+    void editUser(User user);
 }

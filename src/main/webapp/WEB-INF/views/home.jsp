@@ -7,7 +7,7 @@
 <body>
 <header>
     <a href="/user/about">logowanie</a>
-    <a href="/user/register">Rejestracja</a>
+    <a href="/register">Rejestracja</a>
 
 </header>
 </body>
