@@ -1,11 +1,10 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
+import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.model.PasswordModel;
-import com.legion.standprojectapp.service.serviceImpl.FileServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.ProjectServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.UserServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.*;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import javax.validation.groups.Default;
@@ -25,11 +25,15 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     private ProjectServiceImpl projectService;
     private FileServiceImpl fileService;
+    private VerificationTokenServiceImpl verificationTokenService;
+    private MailServiceImpl mailService;
 
-    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService) {
+    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService) {
         this.userServiceImpl = userServiceImpl;
         this.projectService = projectService;
         this.fileService = fileService;
+        this.verificationTokenService = verificationTokenService;
+        this.mailService = mailService;
     }
 
     @GetMapping("/register")
@@ -42,16 +46,20 @@ public class UserController {
     @PostMapping("/register")
     public String addUser(@Validated(Default.class) @ModelAttribute("user") User user,
                           BindingResult bindingResult,
-                          @ModelAttribute("passwordModel") PasswordModel passwordModel) {
+                          @ModelAttribute("passwordModel") PasswordModel passwordModel) throws MessagingException {
         if (bindingResult.hasErrors()) {
             return "register";
         }
             if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
+                user.setEnabled(false);
                 userServiceImpl.save(user);
+                VerificationToken verificationToken = new VerificationToken(user);
+                verificationTokenService.save(verificationToken);
+                mailService.sendVerificationToken(user.getCompanyMail(), verificationToken.getToken());
             } else {
                 return "register";
             }
-        return "redirect:/user/about";
+        return "register-verify";
 
     }
 

@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
         } else {
             userRole = roleRepository.findByName("ROLE_USER");
         }
-        user.setEnabled(true);
         user.setPassword(passwordEncoder.encode((user.getPassword())));
         user.setRoles(new HashSet<>(Arrays.asList(userRole)));
         this.userRepository.save(user);
