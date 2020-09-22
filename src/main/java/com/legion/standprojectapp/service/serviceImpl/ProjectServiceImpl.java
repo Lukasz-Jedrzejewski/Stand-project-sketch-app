@@ -22,9 +22,6 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
     private UserRepository userRepository;
 
-    @Autowired
-    private JavaMailSender javaMailSender;
-
     public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository) {
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
@@ -38,22 +35,6 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Optional<Project> findProjectById(long id){
         return this.projectRepository.findById(id);
-    }
-
-    @Override
-    public void sendMail(Project project, CurrentEvent currentEvent, Branch branch) throws MessagingException {
-        MimeMessage msg = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
-        List<User> admins = userRepository.findByAdmin();
-        String mailAddress = "";
-        for (User user : admins) {
-            mailAddress = user.getCompanyMail();
-        }
-        helper.setTo(mailAddress);
-        helper.setSubject("New sketch");
-        helper.setText("<h1>You have new project data!</h1>"+project.toHtml()+ " "
-                + currentEvent.toHtml() + " " + branch.toHtml(),true);
-        javaMailSender.send(msg);
     }
 
     @Override

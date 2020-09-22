@@ -4,6 +4,7 @@ import com.legion.standprojectapp.entity.*;
 import com.legion.standprojectapp.repository.BranchRepository;
 import com.legion.standprojectapp.repository.FloorBoarRepository;
 import com.legion.standprojectapp.repository.TypeOfBuildingRepository;
+import com.legion.standprojectapp.service.serviceImpl.MailServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.ProjectServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,13 +24,15 @@ public class ProjectController {
     private TypeOfBuildingRepository typeOfBuildingRepository;
     private FloorBoarRepository floorBoarRepository;
     private BranchRepository branchRepository;
+    private MailServiceImpl mailService;
 
     public ProjectController(ProjectServiceImpl projectServiceImpl, TypeOfBuildingRepository typeOfBuildingRepository,
-                             FloorBoarRepository floorBoarRepository, BranchRepository branchRepository) {
+                             FloorBoarRepository floorBoarRepository, BranchRepository branchRepository, MailServiceImpl mailService) {
         this.projectServiceImpl = projectServiceImpl;
         this.typeOfBuildingRepository = typeOfBuildingRepository;
         this.floorBoarRepository = floorBoarRepository;
         this.branchRepository = branchRepository;
+        this.mailService = mailService;
     }
 
     @ModelAttribute("typesOfBuilding")
@@ -72,7 +75,7 @@ public class ProjectController {
 
         projectServiceImpl.save(project);
 
-        projectServiceImpl.sendMail(project, currentEvent, branch);
+        mailService.sendMailWithProjectDetails(project, currentEvent, branch);
 
         return "redirect:/user/about";
     }
