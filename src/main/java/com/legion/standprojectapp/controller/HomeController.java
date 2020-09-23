@@ -1,10 +1,12 @@
 package com.legion.standprojectapp.controller;
 
+import com.legion.standprojectapp.entity.PasswordResetToken;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.EmailModel;
 import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.MailServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.PasswordResetTokenServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.UserServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.VerificationTokenServiceImpl;
 import org.springframework.stereotype.Controller;
@@ -22,11 +24,13 @@ public class HomeController {
     private final UserServiceImpl userService;
     private final VerificationTokenServiceImpl verificationTokenService;
     private final MailServiceImpl mailService;
+    private final PasswordResetTokenServiceImpl passwordResetTokenService;
 
-    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService) {
+    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService) {
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
         this.mailService = mailService;
+        this.passwordResetTokenService = passwordResetTokenService;
     }
 
     @GetMapping("/")
@@ -77,5 +81,14 @@ public class HomeController {
     public String resetPassword(Model model){
         model.addAttribute("emailModel", new EmailModel());
         return "reset-password";
+    }
+
+    @PostMapping("/reset-password")
+    public String postResetPassword(@ModelAttribute EmailModel emailModel) throws MessagingException {
+        String email = emailModel.getEmail();
+        PasswordResetToken passwordResetToken = new PasswordResetToken(userService.findByCompanyMail(email));
+        passwordResetTokenService.save(passwordResetToken);
+        mailService.sendPasswordResetToken(email, passwordResetToken.getToken());
+        return "reset-password-info";
     }
 }
