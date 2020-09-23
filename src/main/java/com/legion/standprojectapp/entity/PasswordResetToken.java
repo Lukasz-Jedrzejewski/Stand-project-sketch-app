@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-public class VerificationToken {
+public class PasswordResetToken {
 
     private static final int EXPIRATION = 60 * 24;
     @Id
@@ -26,9 +26,9 @@ public class VerificationToken {
         return new Date(calendar.getTime().getTime());
     }
 
-    public VerificationToken(){}
+    public PasswordResetToken(){}
 
-    public VerificationToken(User user){
+    public PasswordResetToken(User user){
         this.user = user;
         expiryDate = calculateExpiryDate(EXPIRATION);
         token = UUID.randomUUID().toString();
