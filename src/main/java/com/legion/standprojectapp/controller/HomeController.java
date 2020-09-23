@@ -2,6 +2,7 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.entity.VerificationToken;
+import com.legion.standprojectapp.model.EmailModel;
 import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.MailServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.UserServiceImpl;
@@ -70,5 +71,11 @@ public class HomeController {
         } else {
             return "/register-failed";
         }
+    }
+
+    @GetMapping("/reset-password")
+    public String resetPassword(Model model){
+        model.addAttribute("emailModel", new EmailModel());
+        return "reset-password";
     }
 }
