@@ -92,8 +92,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void resetPassword(String email, String password) {
-        User userFromDB = userRepository.findByCompanyMail(email);
+    public void resetPassword(long id, String password) {
+        User userFromDB = userRepository.getOne(id);
         userFromDB.setPassword(passwordEncoder.encode(password));
         userRepository.save(userFromDB);
     }

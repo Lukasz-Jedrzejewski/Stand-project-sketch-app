@@ -112,7 +112,7 @@ public class HomeController {
             return "set-password";
         }
         if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
-            userService.resetPassword(user.getCompanyMail(), passwordModel.getConfirmPassword());
+            userService.resetPassword(user.getId(), passwordModel.getConfirmPassword());
         }
         return "reset-password-success";
     }

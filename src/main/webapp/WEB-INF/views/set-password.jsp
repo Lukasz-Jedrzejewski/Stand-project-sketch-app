@@ -1,18 +1,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Ronin
-  Date: 23.09.2020
-  Time: 09:50
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Set-password</title>
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<form:form modelAttribute="user" method="post" action="/register">
+<form:form modelAttribute="user" method="post" action="/set-password">
+    <form:hidden path="id"/>
+    <form:hidden path="companyName"/>
+    <form:hidden path="companyMail"/>
     <div>
         <label>
             Hasło<form:password path="password" id="pass"
@@ -37,7 +35,7 @@
     </div>
     <span id="spanMsg">Pole wymagane</span>
 
-    <button type="submit" value="submit" id="sub">Zarejestruj</button>
+    <button type="submit" value="submit" id="sub">Wyślij</button>
 </form:form>
 <script src="<c:url value="/resources/js/register.js"/>"></script>
 </body>
