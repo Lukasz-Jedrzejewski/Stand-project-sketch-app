@@ -11,4 +11,5 @@ public interface UserService {
     boolean existByMail(String companyMail);
     void changePassword(CurrentUser currentUser, User user);
     void editUser(User user);
+    void resetPassword(String email, String password);
 }

@@ -99,11 +99,21 @@ public class HomeController {
             User user = userService.findByCompanyMail(token.getUser().getCompanyMail());
             model.addAttribute("user", user);
             model.addAttribute("passwordModel", new PasswordModel());
-            return "/set-password";
+            return "set-password";
         } else {
-            return "/set-password-failed";
+            return "set-password-failed";
         }
     }
 
-
+    @PostMapping("/set-password")
+    public String setPassword(@Validated(Default.class) @ModelAttribute("user") User user, BindingResult bindingResult,
+                              @ModelAttribute("passwordModel") PasswordModel passwordModel) {
+        if (bindingResult.hasErrors()) {
+            return "set-password";
+        }
+        if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
+            userService.resetPassword(user.getCompanyMail(), passwordModel.getConfirmPassword());
+        }
+        return "reset-password-success";
+    }
 }

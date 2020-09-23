@@ -90,4 +90,11 @@ public class UserServiceImpl implements UserService {
         user.setRoles(userDb.getRoles());
         userRepository.save(user);
     }
+
+    @Override
+    public void resetPassword(String email, String password) {
+        User userFromDB = userRepository.findByCompanyMail(email);
+        userFromDB.setPassword(passwordEncoder.encode(password));
+        userRepository.save(userFromDB);
+    }
 }
