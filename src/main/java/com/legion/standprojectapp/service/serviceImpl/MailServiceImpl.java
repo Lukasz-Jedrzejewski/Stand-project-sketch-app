@@ -51,4 +51,15 @@ public class MailServiceImpl implements MailService {
                 +"http://localhost:8080/confirm-register?token="+token);
         javaMailSender.send(msg);
     }
+
+    @Override
+    public void sendPasswordResetToken(String recipient, String token) throws MessagingException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(recipient);
+        helper.setSubject("Resetowanie hasła");
+        helper.setText("Abt zresetować hasło, kliknij w poniższy link: "
+                +"http://localhost:8080/reset-confirmation?token="+token);
+        javaMailSender.send(msg);
+    }
 }
