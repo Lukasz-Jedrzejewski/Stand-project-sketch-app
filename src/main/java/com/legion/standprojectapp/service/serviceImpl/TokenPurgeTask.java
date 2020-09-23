@@ -1,5 +1,6 @@
 package com.legion.standprojectapp.service.serviceImpl;
 
+import com.legion.standprojectapp.repository.PasswordResetTokenRepository;
 import com.legion.standprojectapp.repository.VerificationTokenRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -12,16 +13,19 @@ import java.util.Date;
 @Transactional
 public class TokenPurgeTask {
 
-    private final VerificationTokenRepository tokenRepository;
+    private final VerificationTokenRepository verificationTokenRepository;
+    private final PasswordResetTokenRepository passwordResetTokenRepository;
 
-    public TokenPurgeTask(VerificationTokenRepository tokenRepository) {
-        this.tokenRepository = tokenRepository;
+    public TokenPurgeTask(VerificationTokenRepository verificationTokenRepository, PasswordResetTokenRepository passwordResetTokenRepository) {
+        this.verificationTokenRepository = verificationTokenRepository;
+        this.passwordResetTokenRepository = passwordResetTokenRepository;
     }
 
     @Scheduled(cron = "* * 11 * * *")
     public void purgeExpired() {
         Date now = Date.from(Instant.now());
 
-        tokenRepository.deleteAllExpiredSince(now);
+        verificationTokenRepository.deleteAllExpiredSince(now);
+        passwordResetTokenRepository.deleteAllExpiredSince(now);
     }
 }
