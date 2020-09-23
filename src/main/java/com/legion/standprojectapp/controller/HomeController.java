@@ -91,4 +91,19 @@ public class HomeController {
         mailService.sendPasswordResetToken(email, passwordResetToken.getToken());
         return "reset-password-info";
     }
+
+    @RequestMapping(value = "/reset-confirmation", method = {RequestMethod.GET, RequestMethod.POST})
+    public String confirmPasswordReset(@RequestParam("token") String passwordResetToken, Model model) {
+        PasswordResetToken token = passwordResetTokenService.findToken(passwordResetToken);
+        if (token != null) {
+            User user = userService.findByCompanyMail(token.getUser().getCompanyMail());
+            model.addAttribute("user", user);
+            model.addAttribute("passwordModel", new PasswordModel());
+            return "/set-password";
+        } else {
+            return "/set-password-failed";
+        }
+    }
+
+
 }
