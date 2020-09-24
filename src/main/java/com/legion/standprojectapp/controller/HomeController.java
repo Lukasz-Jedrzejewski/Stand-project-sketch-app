@@ -116,24 +116,4 @@ public class HomeController {
         }
         return "reset-password-success";
     }
-
-    @GetMapping("/about-company")
-    public String aboutCompanyAction () {
-        return "about-us";
-    }
-
-    @GetMapping("/designers")
-    public String designersPageAction () {
-        return "designersListHomeView";
-    }
-
-    @GetMapping("our-offer")
-    public String companyOfferAction () {
-        return "offer";
-    }
-
-    @GetMapping("realisations")
-    public String realisationsListAction () {
-        return "realisations";
-    }
 }
