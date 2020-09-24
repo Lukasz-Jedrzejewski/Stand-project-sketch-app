@@ -118,7 +118,12 @@ public class HomeController {
     }
 
     @GetMapping("/about-company")
-    public String aboutCompanyaction () {
+    public String aboutCompanyAction () {
         return "about-us";
+    }
+
+    @GetMapping("/designers")
+    public String designersPageAction () {
+        return "designersListHomeView";
     }
 }
