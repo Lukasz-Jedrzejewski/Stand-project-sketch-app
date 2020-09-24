@@ -116,4 +116,9 @@ public class HomeController {
         }
         return "reset-password-success";
     }
+
+    @GetMapping("/about-company")
+    public String aboutCompanyaction () {
+        return "about-us";
+    }
 }
