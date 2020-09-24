@@ -131,4 +131,9 @@ public class HomeController {
     public String companyOfferAction () {
         return "offer";
     }
+
+    @GetMapping("realisations")
+    public String realisationsListAction () {
+        return "realisations";
+    }
 }
