@@ -5,11 +5,13 @@
     <title>Zarządzanie informacjami o firmie</title>
 </head>
 <body>
+<%@include file="headerAdmin.jsp"%>
 <c:forEach items="${companyInfo}" var="info">
     <div>
+        treść
         ${info.description}
-        <a href="/admin/add-company-info/${info.id}"/>
-        <a href="/admin/edit-company-info/${info.id}"/>
+        <a href="/admin/add-company-info/${info.id}">dodaj</a>
+        <a href="/admin/edit-company-info/${info.id}">edytuj</a>
     </div>
 </c:forEach>
 </body>
