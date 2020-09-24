@@ -246,4 +246,8 @@ public class AdminController {
         return "redirect:/admin/showFiles";
     }
 
+    @GetMapping("/menage")
+    public String menageContentAction() {
+        return "menageContent";
+    }
 }

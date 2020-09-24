@@ -18,5 +18,8 @@
     <form action="/admin/adminPanel">
         <input type="submit" value="panel"/>
     </form>
+    <form action="/admin/menage">
+        <input type="submit" value="zarządzaj treścią"/>
+    </form>
     <button type="button" name="back" onclick="history.back()">back</button>
 </header>
