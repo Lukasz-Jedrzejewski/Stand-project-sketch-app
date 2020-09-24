@@ -126,4 +126,9 @@ public class HomeController {
     public String designersPageAction () {
         return "designersListHomeView";
     }
+
+    @GetMapping("our-offer")
+    public String companyOfferAction () {
+        return "offer";
+    }
 }
