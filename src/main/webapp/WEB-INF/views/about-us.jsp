@@ -5,8 +5,11 @@
     <title>About company</title>
 </head>
 <body>
-<c:forEach items="${companyInfo}" var="info">
-    ${info.description}
-</c:forEach>
+<%@include file="navigation-bar.jsp"%>
+<div>
+    <c:forEach items="${companyInfo}" var="info">
+        ${info.description}
+    </c:forEach>
+</div>
 </body>
 </html>
