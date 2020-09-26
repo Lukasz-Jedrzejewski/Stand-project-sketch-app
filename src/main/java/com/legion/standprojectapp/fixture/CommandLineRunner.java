@@ -20,5 +20,6 @@ public class CommandLineRunner implements org.springframework.boot.CommandLineRu
         initData.initEvents();
         initData.initFloorBoard();
         initData.initBuildingTypes();
+        initData.initCompanyInfo();
     }
 }

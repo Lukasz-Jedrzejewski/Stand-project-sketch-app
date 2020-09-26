@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CompanyInfoService {
     List<CompanyInfo> findAll();
+    void save (CompanyInfo companyInfo);
 }

@@ -10,7 +10,6 @@
     <div>
         treść
         ${info.description}
-        <a href="/admin/add-company-info/${info.id}">dodaj</a>
         <a href="/admin/edit-company-info/${info.id}">edytuj</a>
     </div>
 </c:forEach>

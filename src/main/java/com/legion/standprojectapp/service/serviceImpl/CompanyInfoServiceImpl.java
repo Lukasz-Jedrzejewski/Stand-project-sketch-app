@@ -20,4 +20,12 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     public List<CompanyInfo> findAll() {
         return companyInfoRepository.findAll();
     }
+
+    @Override
+    public void save(CompanyInfo companyInfo) {
+        List<CompanyInfo> list = companyInfoRepository.findAll();
+        if (list.size() < 1) {
+            companyInfoRepository.save(companyInfo);
+        }
+    }
 }

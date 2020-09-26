@@ -11,13 +11,17 @@ public class InitData {
     private CurrentEventServiceImpl currentEventService;
     private FloorBoardServiceImpl floorBoardService;
     private TypeOfBuildingServiceImpl typeOfBuildingService;
+    private CompanyInfoServiceImpl companyInfoService;
 
-    public InitData(RoleServiceImpl roleService, BranchServiceImpl branchService, CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService, TypeOfBuildingServiceImpl typeOfBuildingService) {
+    public InitData(RoleServiceImpl roleService, BranchServiceImpl branchService,
+                    CurrentEventServiceImpl currentEventService, FloorBoardServiceImpl floorBoardService,
+                    TypeOfBuildingServiceImpl typeOfBuildingService, CompanyInfoServiceImpl companyInfoService) {
         this.roleService = roleService;
         this.branchService = branchService;
         this.currentEventService = currentEventService;
         this.floorBoardService = floorBoardService;
         this.typeOfBuildingService = typeOfBuildingService;
+        this.companyInfoService = companyInfoService;
     }
 
     public void initRoles() {
@@ -87,5 +91,11 @@ public class InitData {
         TypeOfBuilding type3 = new TypeOfBuilding();
         type3.setName("system");
         typeOfBuildingService.save(type3);
+    }
+
+    public void initCompanyInfo() {
+        CompanyInfo companyInfo = new CompanyInfo();
+        companyInfo.setDescription("This company is the best!");
+        companyInfoService.save(companyInfo);
     }
 }
