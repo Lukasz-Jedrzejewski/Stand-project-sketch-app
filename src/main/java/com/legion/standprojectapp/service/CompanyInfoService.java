@@ -8,4 +8,5 @@ public interface CompanyInfoService {
     List<CompanyInfo> findAll();
     void save (CompanyInfo companyInfo);
     CompanyInfo getOne(long id);
+    CompanyInfo edit (CompanyInfo companyInfo);
 }

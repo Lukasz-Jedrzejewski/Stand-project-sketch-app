@@ -1,12 +1,10 @@
 package com.legion.standprojectapp.controller;
 
+import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.service.serviceImpl.CompanyInfoServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,7 +28,11 @@ public class CompanyContentController {
         return "companyInfoForm";
     }
 
-
+    @PostMapping("/edit-company-info")
+    public String editCompanyInfoPostAction(@ModelAttribute CompanyInfo companyInfo){
+        companyInfoService.edit(companyInfo);
+        return "redirect:/admin/about-company";
+    }
 
 
 }

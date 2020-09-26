@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@include file="navigation-bar.jsp"%>
-<form:form action="/edit-company-info" method="post" modelAttribute="companyInfo">
+<form:form action="/admin/edit-company-info" method="post" modelAttribute="companyInfo">
     <div>
         <form:hidden path="id"/>
         <label>
