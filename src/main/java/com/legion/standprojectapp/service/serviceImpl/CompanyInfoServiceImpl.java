@@ -28,4 +28,9 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
             companyInfoRepository.save(companyInfo);
         }
     }
+
+    @Override
+    public CompanyInfo getOne(long id) {
+        return companyInfoRepository.getOne(id);
+    }
 }
