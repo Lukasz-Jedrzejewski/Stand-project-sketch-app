@@ -11,6 +11,9 @@ public class Designer {
     private String name;
     private String surname;
     private String description;
+    @OneToOne
+    @JoinColumn(name = "photography_id")
+    private Photography photography;
 
     public Designer() {
     }
@@ -45,5 +48,13 @@ public class Designer {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Photography getPhotography() {
+        return photography;
+    }
+
+    public void setPhotography(Photography photography) {
+        this.photography = photography;
     }
 }

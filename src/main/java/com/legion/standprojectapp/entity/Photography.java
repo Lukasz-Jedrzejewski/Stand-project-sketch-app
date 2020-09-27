@@ -14,7 +14,7 @@ import java.util.Arrays;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
-public class File {
+public class Photography {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,18 +22,17 @@ public class File {
     private String fileType;
     @Lob
     private byte[] data;
-    @ManyToOne
-    @JoinColumn(name = "project_id")
-    private Project project;
+    @OneToOne(mappedBy = "photography")
+    private Designer designer;
 
-    public File() {
+    public Photography() {
     }
 
-    public File(String fileName, String fileType, byte[] data, Project project) {
+    public Photography(String fileName, String fileType, byte[] data, Project project) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;
-        this.project = project;
+        this.designer = designer;
     }
 
     @Override
@@ -43,7 +42,7 @@ public class File {
                 ", fileName='" + fileName + '\'' +
                 ", fileType='" + fileType + '\'' +
                 ", data=" + Arrays.toString(data) +
-                ", project=" + project +
+                ", designer=" + designer +
                 '}';
     }
 }
