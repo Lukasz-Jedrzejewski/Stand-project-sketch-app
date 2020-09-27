@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Arrays;
 
 @Entity
-@Table(name = "files")
+@Table(name = "photography")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -22,13 +22,21 @@ public class Photography {
     private String fileType;
     @Lob
     private byte[] data;
-    @OneToOne(mappedBy = "photography")
+    @ManyToOne
     private Designer designer;
 
     public Photography() {
     }
 
-    public Photography(String fileName, String fileType, byte[] data, Project project) {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Photography(String fileName, String fileType, byte[] data, Designer designer) {
         this.fileName = fileName;
         this.fileType = fileType;
         this.data = data;

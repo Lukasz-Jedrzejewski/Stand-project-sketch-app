@@ -1,6 +1,7 @@
 package com.legion.standprojectapp.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "designer")
@@ -11,9 +12,8 @@ public class Designer {
     private String name;
     private String surname;
     private String description;
-    @OneToOne
-    @JoinColumn(name = "photography_id")
-    private Photography photography;
+    @OneToMany(mappedBy = "designer")
+    private List<Photography> photos;
 
     public Designer() {
     }
@@ -50,11 +50,21 @@ public class Designer {
         this.description = description;
     }
 
-    public Photography getPhotography() {
-        return photography;
+    public List<Photography> getPhotos() {
+        return photos;
     }
 
-    public void setPhotography(Photography photography) {
-        this.photography = photography;
+    public void setPhotos(List<Photography> photos) {
+        this.photos = photos;
+    }
+
+    @Override
+    public String toString() {
+        return "Designer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

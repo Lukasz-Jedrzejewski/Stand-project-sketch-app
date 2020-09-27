@@ -1,24 +1,26 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.Designer;
-import com.legion.standprojectapp.entity.File;
+import com.legion.standprojectapp.entity.Photography;
 import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.FileServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.PhotographyServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/admin")
 public class DesignersContentController {
 
     private final DesignerServiceImpl designerService;
-    private final FileServiceImpl fileService;
+    private final PhotographyServiceImpl photographyService;
 
-    public DesignersContentController(DesignerServiceImpl designerService, FileServiceImpl fileService) {
+    public DesignersContentController(DesignerServiceImpl designerService, PhotographyServiceImpl photographyService) {
         this.designerService = designerService;
-        this.fileService = fileService;
+        this.photographyService = photographyService;
     }
 
     @GetMapping("/designers")
@@ -34,14 +36,19 @@ public class DesignersContentController {
     }
 
     @GetMapping("/edit-designer/{id}")
-    public String editDesignerGetAction(Model model, @PathVariable long id) {
-        model.addAttribute("designer", designerService.getOne(id));
+    public String editDesignerGetAction(Model model, @PathVariable long id, HttpSession session) {
+        model.addAttribute("files", new Photography());
+        session.setAttribute("des", designerService.getOne(id));
         return "designerForm";
     }
 
     @PostMapping("/edit-designer")
-    public String editDesignerPostAction(@ModelAttribute ("designer")Designer designer) {
-        designerService.save(designer);
+    public String editDesignerPostAction(@ModelAttribute ("photography") MultipartFile[] files,
+                                         HttpSession session) {
+        Designer designer1 = (Designer) session.getAttribute("des");
+        for (MultipartFile file1 : files) {
+            photographyService.save(file1, designer1);
+        }
         return "redirect:/admin/designers";
     }
 }

@@ -13,7 +13,7 @@
         <li>Nazwisko</li>
         <span>${designer.surname}</span>
         <li>Zdjęcie</li>
-        <span>${designer.photography}</span>
+        <span>${designer.photos}</span>
         <li>Opis</li>
         <span>${designer.description}</span>
         <li>Akcje</li>
