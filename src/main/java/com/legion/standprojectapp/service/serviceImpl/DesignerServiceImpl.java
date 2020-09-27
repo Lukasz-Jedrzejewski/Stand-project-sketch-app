@@ -25,4 +25,9 @@ public class DesignerServiceImpl implements DesignerService {
     public Designer getOne(long id) {
         return designerRepository.getOne(id);
     }
+
+    @Override
+    public void save(Designer designer) {
+        designerRepository.save(designer);
+    }
 }

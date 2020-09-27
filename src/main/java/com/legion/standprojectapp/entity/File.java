@@ -36,6 +36,12 @@ public class File {
         this.project = project;
     }
 
+    public File(String fileName, String fileType, byte[] data) {
+        this.fileName = fileName;
+        this.fileType = fileType;
+        this.data = data;
+    }
+
 //    public Project getProject() {
 //        return project;
 //    }

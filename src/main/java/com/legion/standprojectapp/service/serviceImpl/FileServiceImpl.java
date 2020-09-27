@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class FileServiceImpl implements FileService {
-    private FileRepository fileRepository;
+    private final FileRepository fileRepository;
 
     public FileServiceImpl(FileRepository fileRepository) {
         this.fileRepository = fileRepository;

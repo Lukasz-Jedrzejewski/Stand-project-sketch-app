@@ -11,8 +11,6 @@ public class Designer {
     private String name;
     private String surname;
     private String description;
-    @OneToOne
-    private File photography;
 
     public Designer() {
     }
@@ -47,13 +45,5 @@ public class Designer {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public File getPhotography() {
-        return photography;
-    }
-
-    public void setPhotography(File photography) {
-        this.photography = photography;
     }
 }

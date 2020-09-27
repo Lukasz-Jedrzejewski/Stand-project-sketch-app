@@ -10,16 +10,19 @@
     <div>
         <table>
             <tr>
-        <th>Imię</th>
-        <th>Nazwisko</th>
-        <th>akcje</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+                <th>akcje</th>
             </tr>
             <tr>
-            <td>${info.name}</td>
-            <td>${info.surname}</td>
-            <td><a href="/admin/designer-details/${info.id}">więcej</a></td>
+                <td>${info.name}</td>
+                <td>${info.surname}</td>
+                <td><a href="/admin/designer-details/${info.id}">więcej</a></td>
             </tr>
         </table>
+        <form action="/admin/add-designer">
+            <input type="submit" value="dodaj projektanta">
+        </form>
     </div>
 </c:forEach>
 </body>

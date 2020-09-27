@@ -7,4 +7,5 @@ import java.util.List;
 public interface DesignerService {
     List<Designer> findAll();
     Designer getOne(long id);
+    void save(Designer designer);
 }
