@@ -20,4 +20,9 @@ public class DesignerServiceImpl implements DesignerService {
     public List<Designer> findAll() {
         return designerRepository.findAll();
     }
+
+    @Override
+    public Designer getOne(long id) {
+        return designerRepository.getOne(id);
+    }
 }

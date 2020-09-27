@@ -4,6 +4,7 @@ import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -20,5 +21,11 @@ public class DesignersContentController {
     public String getDesignersListAction(Model model) {
         model.addAttribute("designers", designerService.findAll());
         return "designersListForAdmin";
+    }
+
+    @GetMapping("/designer-details/{id}")
+    public String getDesignerDetailsAction(Model model, @PathVariable long id) {
+        model.addAttribute("desogner", designerService.getOne(id));
+        return "designerDetailsForAdmin";
     }
 }
