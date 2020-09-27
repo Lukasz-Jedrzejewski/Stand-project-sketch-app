@@ -25,7 +25,7 @@ public class DesignersContentController {
 
     @GetMapping("/designer-details/{id}")
     public String getDesignerDetailsAction(Model model, @PathVariable long id) {
-        model.addAttribute("desogner", designerService.getOne(id));
+        model.addAttribute("designer", designerService.getOne(id));
         return "designerDetailsForAdmin";
     }
 }
