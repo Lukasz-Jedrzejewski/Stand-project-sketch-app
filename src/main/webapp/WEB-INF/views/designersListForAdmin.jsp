@@ -5,15 +5,21 @@
     <title>Lista projektantów w panelu administratora</title>
 </head>
 <body>
-<%@include file="navigation-bar.jsp"%>
+<%@include file="navigation-bar.jsp" %>
 <c:forEach items="${designers}" var="info">
     <div>
-        treść
-            ${info.name}
-            ${info.surname}
-            ${info.description}
-            ${info.photography}
-        <a href="/admin/edit-designer-info/${info.id}">edytuj</a>
+        <table>
+            <tr>
+        <th>Imię</th>
+        <th>Nazwisko</th>
+        <th>akcje</th>
+            </tr>
+            <tr>
+            <td>${info.name}</td>
+            <td>${info.surname}</td>
+            <td><a href="/admin/designer-details/${info.id}">więcej</a></td>
+            </tr>
+        </table>
     </div>
 </c:forEach>
 </body>
