@@ -35,14 +35,14 @@ public class DesignersContentController {
         return "designerDetailsForAdmin";
     }
 
-    @GetMapping("/edit-designer/{id}")
+    @GetMapping("/add-designer-photo/{id}")
     public String editDesignerGetAction(Model model, @PathVariable long id, HttpSession session) {
         model.addAttribute("files", new Photography());
         session.setAttribute("des", designerService.getOne(id));
         return "designerForm";
     }
 
-    @PostMapping("/edit-designer")
+    @PostMapping("/add-designer-photo")
     public String editDesignerPostAction(@ModelAttribute ("photography") MultipartFile[] files,
                                          HttpSession session) {
         Designer designer1 = (Designer) session.getAttribute("des");

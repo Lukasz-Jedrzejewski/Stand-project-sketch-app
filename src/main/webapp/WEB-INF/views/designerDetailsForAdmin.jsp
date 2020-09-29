@@ -5,22 +5,23 @@
     <title>Szczegóły projektanta dla panelu administratora</title>
 </head>
 <body>
-<%@include file="headerAdmin.jsp"%>
-<%@include file="navigation-bar.jsp"%>
-    <ul>
-        <li>Imię</li>
-        <span>${designer.name}</span>
-        <li>Nazwisko</li>
-        <span>${designer.surname}</span>
-        <li>Zdjęcie</li>
-        <span>${designer.photos}</span>
-        <li>Opis</li>
-        <span>${designer.description}</span>
-        <li>Akcje</li>
-        <span>
-            <a href="/admin/edit-designer/${designer.id}">edytuj</a>
-            <a href="/admin/delete-designer/${designer.id}">usuń</a>
-        </span>
-    </ul>
+<%@include file="headerAdmin.jsp" %>
+<%@include file="navigation-bar.jsp" %>
+<ul>
+    <li>Imię</li>
+    ${designer.name}
+    <li>Nazwisko</li>
+    ${designer.surname}
+    <li>Zdjęcie</li>
+    ${designer.photos}
+    <br>
+    <a href="/admin/add-designer-photo/${designer.id}">dodaj zdjęcie</a>
+    <a href="/admin/delete-designer-photo/${designer.id}">usuń zdjęcie</a>
+    <li>Opis</li>
+    ${designer.description}
+    <li>Akcje</li>
+    <a href="/admin/edit-designer-info/${designer.id}">edytuj</a>
+    <a href="/admin/delete-designer/${designer.id}">usuń</a>
+</ul>
 </body>
 </html>
