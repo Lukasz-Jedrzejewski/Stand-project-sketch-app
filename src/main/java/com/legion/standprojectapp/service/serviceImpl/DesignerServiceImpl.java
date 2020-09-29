@@ -30,4 +30,13 @@ public class DesignerServiceImpl implements DesignerService {
     public void save(Designer designer) {
         designerRepository.save(designer);
     }
+
+    @Override
+    public void edit(Designer designer) {
+        Designer designerFromDB = designerRepository.getOne(designer.getId());
+        designerFromDB.setName(designer.getName());
+        designerFromDB.setSurname(designer.getSurname());
+        designerFromDB.setDescription(designer.getDescription());
+        designerRepository.save(designerFromDB);
+    }
 }

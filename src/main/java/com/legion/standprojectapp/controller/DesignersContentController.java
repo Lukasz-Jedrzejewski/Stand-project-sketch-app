@@ -52,4 +52,15 @@ public class DesignersContentController {
         return "redirect:/admin/designers";
     }
 
+    @GetMapping("/edit-designer-info/{id}")
+    public String editDesignerInfoGetAction(Model model, @PathVariable long id) {
+        model.addAttribute("designer", designerService.getOne(id));
+        return "designerForm";
+    }
+
+    @PostMapping("/edit-designer-info")
+    public String editDesignerInfoPostAction(@ModelAttribute Designer designer) {
+        designerService.edit(designer);
+        return "redirect:/admin/designers";
+    }
 }
