@@ -6,4 +6,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface PhotographyService {
     Photography save(MultipartFile file, Designer designer);
+    void delete(long id);
 }

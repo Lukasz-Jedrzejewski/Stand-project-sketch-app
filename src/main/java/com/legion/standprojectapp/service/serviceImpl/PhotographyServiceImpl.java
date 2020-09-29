@@ -27,4 +27,9 @@ public class PhotographyServiceImpl implements PhotographyService {
         }
         return null;
     }
+
+    @Override
+    public void delete(long id) {
+        photographyRepository.deleteByDesignerId(id);
+    }
 }

@@ -7,7 +7,7 @@
 <body>
 <%@include file="headerAdmin.jsp" %>
 <%@include file="navigation-bar.jsp" %>
-    <form:form modelAttribute="files" method="post" action="/admin/edit-designer" enctype="multipart/form-data">
+    <form:form modelAttribute="files" method="post" action="/admin/add-designer-photo" enctype="multipart/form-data">
         <input type="file" name="files" multiple required/>
         <button type="submit">Zapisz</button>
     </form:form>

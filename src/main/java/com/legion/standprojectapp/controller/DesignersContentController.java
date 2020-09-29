@@ -63,4 +63,10 @@ public class DesignersContentController {
         designerService.edit(designer);
         return "redirect:/admin/designers";
     }
+
+    @GetMapping("/delete-designer-photo/{id}")
+    public String deleteDesignerPhotoAction(@PathVariable long id) {
+        photographyService.delete(id);
+        return "redirect:/admin/designers";
+    }
 }
