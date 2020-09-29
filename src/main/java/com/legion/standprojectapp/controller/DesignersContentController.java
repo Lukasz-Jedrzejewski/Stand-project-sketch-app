@@ -36,14 +36,14 @@ public class DesignersContentController {
     }
 
     @GetMapping("/add-designer-photo/{id}")
-    public String editDesignerGetAction(Model model, @PathVariable long id, HttpSession session) {
+    public String addDesignerPhotoGetAction(Model model, @PathVariable long id, HttpSession session) {
         model.addAttribute("files", new Photography());
         session.setAttribute("des", designerService.getOne(id));
-        return "designerForm";
+        return "designerPhotoForm";
     }
 
     @PostMapping("/add-designer-photo")
-    public String editDesignerPostAction(@ModelAttribute ("photography") MultipartFile[] files,
+    public String addDesignerPhotoPostAction(@ModelAttribute ("photography") MultipartFile[] files,
                                          HttpSession session) {
         Designer designer1 = (Designer) session.getAttribute("des");
         for (MultipartFile file1 : files) {
@@ -51,4 +51,5 @@ public class DesignersContentController {
         }
         return "redirect:/admin/designers";
     }
+
 }
