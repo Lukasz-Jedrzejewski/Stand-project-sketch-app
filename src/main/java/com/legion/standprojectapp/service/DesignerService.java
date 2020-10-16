@@ -9,4 +9,5 @@ public interface DesignerService {
     Designer getOne(long id);
     void save(Designer designer);
     void edit(Designer designer);
+    void deleteDesigner(long id);
 }

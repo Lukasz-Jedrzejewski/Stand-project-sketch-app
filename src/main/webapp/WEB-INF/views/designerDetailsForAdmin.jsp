@@ -20,7 +20,7 @@
     <li>Opis</li>
     ${designer.description}
     <li>Akcje</li>
-    <a href="/admin/edit-designer-info/${designer.id}">edytuj</a>
+    <a href="/admin/designer-info/${designer.id}">edytuj</a>
     <a href="/admin/delete-designer/${designer.id}">usuń</a>
 </ul>
 </body>

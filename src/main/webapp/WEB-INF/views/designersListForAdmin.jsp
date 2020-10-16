@@ -5,7 +5,8 @@
     <title>Lista projektantów w panelu administratora</title>
 </head>
 <body>
-<%@include file="navigation-bar.jsp" %>
+<%@include file="headerAdmin.jsp" %>
+<h1>bla bla bla</h1>
 <c:forEach items="${designers}" var="info">
     <div>
         <table>
@@ -20,10 +21,10 @@
                 <td><a href="/admin/designer-details/${info.id}">więcej</a></td>
             </tr>
         </table>
-        <form action="/admin/add-designer">
-            <input type="submit" value="dodaj projektanta">
-        </form>
     </div>
 </c:forEach>
+        <form action="/admin/designer-info">
+            <input type="submit" value="dodaj projektanta">
+        </form>
 </body>
 </html>

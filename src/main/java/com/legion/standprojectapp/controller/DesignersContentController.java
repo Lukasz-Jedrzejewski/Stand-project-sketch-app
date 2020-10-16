@@ -52,21 +52,33 @@ public class DesignersContentController {
         return "redirect:/admin/designers";
     }
 
-    @GetMapping("/edit-designer-info/{id}")
+    @GetMapping("/designer-info")
+    public String addDesignerInfoGetAction(Model model){
+        model.addAttribute("designer", new Designer());
+        return "designerForm";
+    }
+
+    @GetMapping("/designer-info/{id}")
     public String editDesignerInfoGetAction(Model model, @PathVariable long id) {
         model.addAttribute("designer", designerService.getOne(id));
         return "designerForm";
     }
 
-    @PostMapping("/edit-designer-info")
-    public String editDesignerInfoPostAction(@ModelAttribute Designer designer) {
-        designerService.edit(designer);
+    @PostMapping("/designer-info")
+    public String saveDesignerInfoPostAction(@ModelAttribute Designer designer) {
+        designerService.save(designer);
         return "redirect:/admin/designers";
     }
 
     @GetMapping("/delete-designer-photo/{id}")
     public String deleteDesignerPhotoAction(@PathVariable long id) {
         photographyService.delete(id);
+        return "redirect:/admin/designers";
+    }
+
+    @GetMapping("/delete-designer/{id}")
+    public String deleteDesignerAction(@PathVariable Long id) {
+        designerService.deleteDesigner(id);
         return "redirect:/admin/designers";
     }
 }

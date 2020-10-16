@@ -39,4 +39,9 @@ public class DesignerServiceImpl implements DesignerService {
         designerFromDB.setDescription(designer.getDescription());
         designerRepository.save(designerFromDB);
     }
+
+    @Override
+    public void deleteDesigner(long id) {
+        designerRepository.delete(designerRepository.getOne(id));
+    }
 }

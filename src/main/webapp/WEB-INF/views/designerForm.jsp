@@ -7,7 +7,7 @@
 <body>
 <%@include file="headerAdmin.jsp" %>
 <%@include file="navigation-bar.jsp" %>
-<form:form action="/admin/edit-designer-info" method="post" modelAttribute="designer">
+<form:form action="/admin/designer-info" method="post" modelAttribute="designer">
     <form:hidden path="id"/>
     <ul>
         <label>Imię</label>
