@@ -25,6 +25,16 @@
     </div>
     <div>
         <label>
+             <form:input path="buildingNumber" placeholder="numer budynku"/>
+        </label>
+    </div>
+    <div>
+        <label>
+             <form:input path="apartmentNumber" placeholder="numer lokalu"/>
+        </label>
+    </div>
+    <div>
+        <label>
              <form:input path="zipCode" placeholder="kod pocztowy"/>
         </label>
     </div>

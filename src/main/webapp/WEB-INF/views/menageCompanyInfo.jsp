@@ -19,6 +19,12 @@
                 ${info.street}
             </li>
             <li>
+                ${info.buildingNumber}
+            </li>
+            <li>
+                ${info.apartmentNumber}
+            </li>
+            <li>
                 ${info.zipCode}
             </li>
             <li>
