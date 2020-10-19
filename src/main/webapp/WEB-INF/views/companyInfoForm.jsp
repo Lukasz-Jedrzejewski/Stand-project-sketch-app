@@ -7,8 +7,28 @@
 <body>
 <%@include file="navigation-bar.jsp"%>
 <form:form action="/admin/edit-company-info" method="post" modelAttribute="companyInfo">
+    <form:hidden path="id"/>
     <div>
-        <form:hidden path="id"/>
+        <label>
+            <form:input path="country" placeholder="kraj"/>
+        </label>
+    </div>
+    <div>
+        <label>
+             <form:input path="city" placeholder="miasto"/>
+        </label>
+    </div>
+    <div>
+        <label>
+             <form:input path="street" placeholder="ulica"/>
+        </label>
+    </div>
+    <div>
+        <label>
+             <form:input path="zipCode" placeholder="kod pocztowy"/>
+        </label>
+    </div>
+    <div>
         <label>
             <form:textarea path="description" rows="30" cssStyle="width: 1000px"/>
         </label>

@@ -8,9 +8,26 @@
 <%@include file="headerAdmin.jsp"%>
 <c:forEach items="${companyInfo}" var="info">
     <div>
-        treść
-        ${info.description}
-        <a href="/admin/edit-company-info/${info.id}">edytuj</a>
+        <ul>
+            <li>
+                ${info.country}
+            </li>
+            <li>
+                ${info.city}
+            </li>
+            <li>
+                ${info.street}
+            </li>
+            <li>
+                ${info.zipCode}
+            </li>
+            <li>
+                ${info.description}
+            </li>
+            <li>
+                <a href="/admin/edit-company-info/${info.id}">edytuj</a>
+            </li>
+        </ul>
     </div>
 </c:forEach>
 </body>

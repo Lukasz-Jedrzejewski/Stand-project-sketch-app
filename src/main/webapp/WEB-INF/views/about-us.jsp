@@ -8,7 +8,23 @@
 <%@include file="navigation-bar.jsp"%>
 <div>
     <c:forEach items="${companyInfo}" var="info">
-        ${info.description}
+        <ul>
+            <li>
+                ${info.country}
+            </li>
+            <li>
+                ${info.city}
+            </li>
+            <li>
+                ${info.street}
+            </li>
+            <li>
+                ${info.zipCode}
+            </li>
+            <li>
+                ${info.description}
+            </li>
+        </ul>
     </c:forEach>
 </div>
 </body>

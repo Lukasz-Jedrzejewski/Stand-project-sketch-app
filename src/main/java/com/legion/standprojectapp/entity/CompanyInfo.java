@@ -10,6 +10,10 @@ public class CompanyInfo {
     private Long id;
     @Column(columnDefinition = "TEXT")
     private String description;
+    private String Country;
+    private String City;
+    private String street;
+    private String zipCode;
 
     public CompanyInfo() {
     }
@@ -28,5 +32,37 @@ public class CompanyInfo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String country) {
+        Country = country;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public void setCity(String city) {
+        City = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
     }
 }
