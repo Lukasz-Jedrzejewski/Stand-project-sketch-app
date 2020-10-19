@@ -16,7 +16,7 @@
     ${designer.surname}
     <li>Zdjęcie</li>
     <div class="designer-photo">
-        <img src="<c:url value="/resources/images/Dime.jpg" />" alt="image" />
+        <img src="<c:url value="/resources/images/${photography.fileName}" />" alt="image" />
     </div>
     <br>
     <a href="/admin/add-designer-photo/${designer.id}">dodaj zdjęcie</a>

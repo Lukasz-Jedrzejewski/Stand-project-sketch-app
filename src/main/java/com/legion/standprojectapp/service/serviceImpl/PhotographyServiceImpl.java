@@ -35,7 +35,11 @@ public class PhotographyServiceImpl implements PhotographyService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id, String filename) throws IOException {
+        Path path = Paths.get(filename);
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
         photographyRepository.deleteByDesignerId(id);
     }
 

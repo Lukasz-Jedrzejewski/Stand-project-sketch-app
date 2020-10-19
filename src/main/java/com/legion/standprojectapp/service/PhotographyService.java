@@ -8,6 +8,6 @@ import java.io.IOException;
 
 public interface PhotographyService {
     void save(MultipartFile photography, String filename, Designer designer) throws IOException;
-    void delete(long id);
+    void delete(long id, String filename) throws IOException;
     Photography getByDesignerId(long id);
 }

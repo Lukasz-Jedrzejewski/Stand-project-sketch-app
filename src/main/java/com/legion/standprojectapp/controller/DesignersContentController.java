@@ -37,6 +37,7 @@ public class DesignersContentController {
     @GetMapping("/designer-details/{id}")
     public String getDesignerDetailsAction(Model model, @PathVariable long id) {
         model.addAttribute("designer", designerService.getOne(id));
+        model.addAttribute("photography", photographyService.getByDesignerId(id));
         return "designerDetailsForAdmin";
     }
 
@@ -86,8 +87,9 @@ public class DesignersContentController {
     }
 
     @GetMapping("/delete-designer-photo/{id}")
-    public String deleteDesignerPhotoAction(@PathVariable long id) {
-        photographyService.delete(id);
+    public String deleteDesignerPhotoAction(@PathVariable long id, String filename) throws IOException {
+        String fileName = photographyService.getByDesignerId(id).getFileName();
+        photographyService.delete(id, path+fileName);
         return "redirect:/admin/designers";
     }
 }
