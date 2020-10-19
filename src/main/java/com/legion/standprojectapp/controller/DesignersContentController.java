@@ -81,7 +81,10 @@ public class DesignersContentController {
                                              HttpSession session) throws IOException {
         Designer designer1 = (Designer) session.getAttribute("des");
         for (MultipartFile file1 : files) {
-            photographyService.save(file1, path + file1.getOriginalFilename(), designer1);
+            boolean existingPhoto = photographyService.existsByDesignerId(designer1.getId());
+            if (!existingPhoto) {
+                photographyService.save(file1, path + file1.getOriginalFilename(), designer1);
+            }
         }
         return "redirect:/admin/designers";
     }

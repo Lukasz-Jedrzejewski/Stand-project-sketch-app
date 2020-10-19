@@ -10,4 +10,5 @@ public interface PhotographyService {
     void save(MultipartFile photography, String filename, Designer designer) throws IOException;
     void delete(long id, String filename) throws IOException;
     Photography getByDesignerId(long id);
+    boolean existsByDesignerId(long id);
 }

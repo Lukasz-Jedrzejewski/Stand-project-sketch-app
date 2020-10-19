@@ -12,4 +12,6 @@ public interface PhotographyRepository extends JpaRepository<Photography, Intege
     void deleteByDesignerId(long id);
 
     Photography findByDesignerId(long id);
+
+    boolean existsPhotographyByDesignerId(long id);
 }

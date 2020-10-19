@@ -47,4 +47,9 @@ public class PhotographyServiceImpl implements PhotographyService {
     public Photography getByDesignerId(long id) {
         return photographyRepository.findByDesignerId(id);
     }
+
+    @Override
+    public boolean existsByDesignerId(long id) {
+        return photographyRepository.existsPhotographyByDesignerId(id);
+    }
 }
