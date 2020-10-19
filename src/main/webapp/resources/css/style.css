@@ -37,6 +37,14 @@
 .designer-photo img{
     width: auto;
     height: 250px;
+}
 
+.designer-photo-home {
+    width: 600px;
+}
+
+.designer-photo-home img {
+    width: auto;
+    height: 500px;
 }
 

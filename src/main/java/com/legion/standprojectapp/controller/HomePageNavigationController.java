@@ -2,7 +2,9 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.service.serviceImpl.CompanyInfoServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.PhotographyServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
@@ -12,9 +14,11 @@ import java.util.List;
 public class HomePageNavigationController {
 
     private final CompanyInfoServiceImpl companyInfoService;
+    private final PhotographyServiceImpl photographyService;
 
-    public HomePageNavigationController(CompanyInfoServiceImpl companyInfoService) {
+    public HomePageNavigationController(CompanyInfoServiceImpl companyInfoService, PhotographyServiceImpl photographyService) {
         this.companyInfoService = companyInfoService;
+        this.photographyService = photographyService;
     }
 
     @GetMapping("/about-company")
@@ -23,7 +27,8 @@ public class HomePageNavigationController {
     }
 
     @GetMapping("/designers")
-    public String designersPageAction () {
+    public String designersPageAction (Model model) {
+        model.addAttribute("photos", photographyService.findAll());
         return "designersListHomeView";
     }
 
