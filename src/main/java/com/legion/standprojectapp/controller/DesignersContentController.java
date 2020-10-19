@@ -30,7 +30,7 @@ public class DesignersContentController {
 
     @GetMapping("/designers")
     public String getDesignersListAction(Model model) {
-        model.addAttribute("designers", designerService.findAll());
+        model.addAttribute("designers", photographyService.findAll());
         return "designersListForAdmin";
     }
 

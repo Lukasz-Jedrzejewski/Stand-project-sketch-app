@@ -3,28 +3,20 @@
 <html>
 <head>
     <title>Lista projektantów w panelu administratora</title>
+    <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
 <%@include file="headerAdmin.jsp" %>
-<h1>bla bla bla</h1>
 <c:forEach items="${designers}" var="info">
-    <div>
-        <table>
-            <tr>
-                <th>Imię</th>
-                <th>Nazwisko</th>
-                <th>akcje</th>
-            </tr>
-            <tr>
-                <td>${info.name}</td>
-                <td>${info.surname}</td>
-                <td><a href="/admin/designer-details/${info.id}">więcej</a></td>
-            </tr>
-        </table>
+    <div class="designer-photo" style="float: left">
+    <a href="/admin/designer-details/${info.designer.id}" title="${info.designer.name} ${info.designer.surname}"/>
+    <img src="<c:url value="/resources/images/${info.fileName}" />" alt="image" />
     </div>
 </c:forEach>
+        <div style="clear: both">
         <form action="/admin/designer-info">
             <input type="submit" value="dodaj projektanta">
         </form>
+        </div>
 </body>
 </html>
