@@ -12,8 +12,8 @@ public class Designer {
     private String name;
     private String surname;
     private String description;
-    @OneToMany(mappedBy = "designer")
-    private List<Photography> photos;
+    @OneToOne(mappedBy = "designer")
+    private Photography photo;
 
     public Designer() {
     }
@@ -50,12 +50,12 @@ public class Designer {
         this.description = description;
     }
 
-    public List<Photography> getPhotos() {
-        return photos;
+    public Photography getPhoto() {
+        return photo;
     }
 
-    public void setPhotos(List<Photography> photos) {
-        this.photos = photos;
+    public void setPhoto(Photography photo) {
+        this.photo = photo;
     }
 
     @Override

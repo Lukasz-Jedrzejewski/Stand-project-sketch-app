@@ -10,4 +10,8 @@ import javax.transaction.Transactional;
 public interface PhotographyRepository extends JpaRepository<Photography, Integer> {
     @Transactional
     void deleteByDesignerId(long id);
+
+    Photography findByDesignerId(long id);
+
+    boolean existsPhotographyByDesignerId(long id);
 }

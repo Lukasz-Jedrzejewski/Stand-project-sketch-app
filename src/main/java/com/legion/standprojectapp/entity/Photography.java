@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Arrays;
 
 @Entity
 @Table(name = "photography")
@@ -19,10 +18,7 @@ public class Photography {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String fileName;
-    private String fileType;
-    @Lob
-    private byte[] data;
-    @ManyToOne
+    @OneToOne
     private Designer designer;
 
     public Photography() {
@@ -36,21 +32,19 @@ public class Photography {
         this.id = id;
     }
 
-    public Photography(String fileName, String fileType, byte[] data, Designer designer) {
-        this.fileName = fileName;
-        this.fileType = fileType;
-        this.data = data;
-        this.designer = designer;
+    public String getFileName() {
+        return fileName;
     }
 
-    @Override
-    public String toString() {
-        return "File{" +
-                "id=" + id +
-                ", fileName='" + fileName + '\'' +
-                ", fileType='" + fileType + '\'' +
-                ", data=" + Arrays.toString(data) +
-                ", designer=" + designer +
-                '}';
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public Designer getDesigner() {
+        return designer;
+    }
+
+    public void setDesigner(Designer designer) {
+        this.designer = designer;
     }
 }

@@ -7,6 +7,12 @@ import com.legion.standprojectapp.service.PhotographyService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
 @Service
 public class PhotographyServiceImpl implements PhotographyService {
 
@@ -17,19 +23,39 @@ public class PhotographyServiceImpl implements PhotographyService {
     }
 
     @Override
-    public Photography save(MultipartFile photography, Designer designer) {
-        String fileName = photography.getOriginalFilename();
-        try {
-            Photography newFile = new Photography(fileName, photography.getContentType(), photography.getBytes(), designer);
-            return photographyRepository.save(newFile);
-        } catch (Exception e) {
-            e.printStackTrace();
+    public void save(MultipartFile photography, String fileName, Designer designer) throws IOException {
+        Path path = Paths.get(fileName);
+        if (!Files.exists(path)) {
+            Files.createFile(path);
+            Files.write(path, photography.getBytes());
+            Photography photo = new Photography();
+            photo.setFileName(photography.getOriginalFilename());
+            photo.setDesigner(designer);
+            photographyRepository.save(photo);
         }
-        return null;
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(long id, String filename) throws IOException {
+        Path path = Paths.get(filename);
+        if (Files.exists(path)) {
+            Files.delete(path);
+        }
         photographyRepository.deleteByDesignerId(id);
+    }
+
+    @Override
+    public Photography getByDesignerId(long id) {
+        return photographyRepository.findByDesignerId(id);
+    }
+
+    @Override
+    public boolean existsByDesignerId(long id) {
+        return photographyRepository.existsPhotographyByDesignerId(id);
+    }
+
+    @Override
+    public List<Photography> findAll() {
+        return photographyRepository.findAll();
     }
 }
