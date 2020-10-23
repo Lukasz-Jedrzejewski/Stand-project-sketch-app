@@ -8,9 +8,6 @@ import com.legion.standprojectapp.service.serviceImpl.PhotographyServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -56,9 +53,4 @@ public class HomePageNavigationController {
     public String realisationsListAction () {
         return "realisations";
     }
-
-//    @ModelAttribute("companyInfo")
-//    public List<CompanyInfo> loadCompanyInfo() {
-//        return companyInfoService.findAll();
-//    }
 }

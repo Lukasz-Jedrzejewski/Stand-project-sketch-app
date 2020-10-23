@@ -1,19 +1,10 @@
 package com.legion.standprojectapp.service.serviceImpl;
 
-import com.legion.standprojectapp.entity.Branch;
-import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.entity.Project;
-import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import com.legion.standprojectapp.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.util.List;
 import java.util.Optional;
 
