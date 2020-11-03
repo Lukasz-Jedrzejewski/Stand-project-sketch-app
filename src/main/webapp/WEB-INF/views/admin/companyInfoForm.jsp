@@ -5,7 +5,7 @@
     <title>Company info form</title>
 </head>
 <body>
-<%@include file="navigation-bar.jsp"%>
+<%@include file="../home/navigation-bar.jsp"%>
 <form:form action="/admin/edit-company-info" method="post" modelAttribute="companyInfo">
     <form:hidden path="id"/>
     <div>

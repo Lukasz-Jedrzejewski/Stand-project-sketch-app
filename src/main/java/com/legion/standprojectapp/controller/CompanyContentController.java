@@ -19,13 +19,13 @@ public class CompanyContentController {
     @GetMapping("/about-company")
     public String menageAboutCompanyGetAction(Model model) {
         model.addAttribute("companyInfo", companyInfoService.findAll());
-        return "menageCompanyInfo";
+        return "/admin/menageCompanyInfo";
     }
 
     @GetMapping("/edit-company-info/{id}")
     public String editCompanyIfoGetAction(Model model, @PathVariable long id) {
         model.addAttribute("companyInfo", companyInfoService.getOne(id));
-        return "companyInfoForm";
+        return "/admin/companyInfoForm";
     }
 
     @PostMapping("/edit-company-info")

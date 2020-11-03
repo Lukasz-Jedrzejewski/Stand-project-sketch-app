@@ -31,26 +31,26 @@ public class DesignersContentController {
     @GetMapping("/designers")
     public String getDesignersListAction(Model model) {
         model.addAttribute("designers", photographyService.findAll());
-        return "designersListForAdmin";
+        return "/admin/designersListForAdmin";
     }
 
     @GetMapping("/designer-details/{id}")
     public String getDesignerDetailsAction(Model model, @PathVariable long id) {
         model.addAttribute("designer", designerService.getOne(id));
         model.addAttribute("photography", photographyService.getByDesignerId(id));
-        return "designerDetailsForAdmin";
+        return "/admin/designerDetailsForAdmin";
     }
 
     @GetMapping("/designer-info")
     public String addDesignerInfoGetAction(Model model){
         model.addAttribute("designer", new Designer());
-        return "designerForm";
+        return "/admin/designerForm";
     }
 
     @GetMapping("/designer-info/{id}")
     public String editDesignerInfoGetAction(Model model, @PathVariable long id) {
         model.addAttribute("designer", designerService.getOne(id));
-        return "designerForm";
+        return "/admin/designerForm";
     }
 
     @PostMapping("/designer-info")
@@ -73,7 +73,7 @@ public class DesignersContentController {
     public String addDesignerPhotoGetAction(Model model, @PathVariable long id, HttpSession session) {
         model.addAttribute("files", new Photography());
         session.setAttribute("des", designerService.getOne(id));
-        return "designerPhotoForm";
+        return "/admin/designerPhotoForm";
     }
 
     @PostMapping("/add-designer-photo")

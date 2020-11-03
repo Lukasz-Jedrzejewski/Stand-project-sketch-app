@@ -35,22 +35,22 @@ public class HomePageNavigationController {
         JOpenCageLatLng coordinates = jOpenCageService.getCoordinates(street, city);
         model.addAttribute("companyInfo", companyInfoService.findAll());
         model.addAttribute("coordinates", coordinates);
-        return "about-us";
+        return "/home/about-us";
     }
 
     @GetMapping("/designers")
     public String designersPageAction (Model model) {
         model.addAttribute("photos", photographyService.findAll());
-        return "designersListHomeView";
+        return "/home/designersListHomeView";
     }
 
     @GetMapping("our-offer")
     public String companyOfferAction () {
-        return "offer";
+        return "/home/offer";
     }
 
     @GetMapping("realisations")
     public String realisationsListAction () {
-        return "realisations";
+        return "/home/realisations";
     }
 }

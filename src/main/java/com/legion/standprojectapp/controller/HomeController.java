@@ -35,14 +35,14 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "home";
+        return "/home/home";
     }
 
     @GetMapping("/register")
     public String login(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("passwordModel", new PasswordModel());
-        return "register";
+        return "/home/register";
     }
 
     @PostMapping("/register")
@@ -50,7 +50,7 @@ public class HomeController {
                           BindingResult bindingResult,
                           @ModelAttribute("passwordModel") PasswordModel passwordModel) throws MessagingException {
         if (bindingResult.hasErrors()) {
-            return "register";
+            return "/home/register";
         }
         if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
             user.setEnabled(false);
@@ -59,9 +59,9 @@ public class HomeController {
             verificationTokenService.save(verificationToken);
             mailService.sendVerificationToken(user.getCompanyMail(), verificationToken.getToken());
         } else {
-            return "register";
+            return "/home/register";
         }
-        return "register-verify";
+        return "/home/register-verify";
     }
 
     @RequestMapping(value = "/confirm-register", method = {RequestMethod.GET, RequestMethod.POST})
@@ -71,16 +71,16 @@ public class HomeController {
             User user = userService.findByCompanyMail(token.getUser().getCompanyMail());
             user.setEnabled(true);
             userService.editUser(user);
-            return "/register-successfully";
+            return "/home/register-successfully";
         } else {
-            return "/register-failed";
+            return "/home/register-failed";
         }
     }
 
     @GetMapping("/reset-password")
     public String resetPassword(Model model){
         model.addAttribute("emailModel", new EmailModel());
-        return "reset-password";
+        return "/home/reset-password";
     }
 
     @PostMapping("/reset-password")
@@ -89,7 +89,7 @@ public class HomeController {
         PasswordResetToken passwordResetToken = new PasswordResetToken(userService.findByCompanyMail(email));
         passwordResetTokenService.save(passwordResetToken);
         mailService.sendPasswordResetToken(email, passwordResetToken.getToken());
-        return "reset-password-info";
+        return "/home/reset-password-info";
     }
 
     @RequestMapping(value = "/reset-confirmation", method = {RequestMethod.GET, RequestMethod.POST})
@@ -99,9 +99,9 @@ public class HomeController {
             User user = userService.findByCompanyMail(token.getUser().getCompanyMail());
             model.addAttribute("user", user);
             model.addAttribute("passwordModel", new PasswordModel());
-            return "set-password";
+            return "/home/set-password";
         } else {
-            return "set-password-failed";
+            return "/home/set-password-failed";
         }
     }
 
@@ -109,11 +109,11 @@ public class HomeController {
     public String setPassword(@Validated(Default.class) @ModelAttribute("user") User user, BindingResult bindingResult,
                               @ModelAttribute("passwordModel") PasswordModel passwordModel) {
         if (bindingResult.hasErrors()) {
-            return "set-password";
+            return "/home/set-password";
         }
         if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
             userService.resetPassword(user.getId(), passwordModel.getConfirmPassword());
         }
-        return "reset-password-success";
+        return "/home/reset-password-success";
     }
 }

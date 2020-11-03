@@ -48,14 +48,14 @@ public class ProjectController {
     @GetMapping("/add")
     public String addProjectData(Model model) {
         model.addAttribute("project", new Project());
-        return "addProjectData";
+        return "/user/addProjectData";
     }
 
     @GetMapping("/add/{id}")
     public String addProjectData(Model model, @PathVariable long id) {
         Optional<Project> byId = projectServiceImpl.findProjectById(id);
         model.addAttribute("project", byId);
-        return "addProjectData";
+        return "/user/addProjectData";
     }
 
 
@@ -70,7 +70,7 @@ public class ProjectController {
         project.setCompanyName(user.getCompanyName());
         project.setCompanyMail(user.getCompanyMail());
         if (bindingResult.hasErrors()) {
-            return "addProjectData";
+            return "/user/addProjectData";
         }
 
         projectServiceImpl.save(project);

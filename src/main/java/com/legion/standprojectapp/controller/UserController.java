@@ -34,7 +34,7 @@ public class UserController {
         model.addAttribute("user", user);
         session.setAttribute("user", user);
         if (!userServiceImpl.checkRole(user.getId()))
-            return "userPanel";
+            return "/user/userPanel";
         else
             return "redirect:/admin/adminPanel";
     }
@@ -42,13 +42,13 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable long id, Model model) {
         model.addAttribute("user", userServiceImpl.findById(id));
-        return "editUserForm";
+        return "/user/editUserForm";
     }
 
     @PostMapping("/edit")
     public String editUser(@Validated(UserEditValidationGroup.class) @ModelAttribute User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "editUserForm";
+            return "/user/editUserForm";
         }
         userServiceImpl.save(user);
         return "redirect:/user/about";
@@ -59,31 +59,31 @@ public class UserController {
         User user = (User) session.getAttribute("user");
         String companyMail = user.getCompanyMail();
         model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
-        return "yourProjectList";
+        return "/user/yourProjectList";
     }
 
     @GetMapping("/showDetails/{id}")
     public String sketchDetails(Model model, @PathVariable long id) {
         model.addAttribute("sketch", projectService.readSingleProject(id));
-        return "yourSketchDetails";
+        return "/user/yourSketchDetails";
     }
 
     @GetMapping("/showFiles/{id}")
     public String showById(Model model, @PathVariable long id) {
         model.addAttribute("files", fileService.readAllByProjectId(id));
-        return "yourFilesList";
+        return "/user/yourFilesList";
     }
 
     @GetMapping("/changePass")
     public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("userPass", currentUser.getUser());
-        return "changePass";
+        return "/user/changePass";
     }
 
     @PostMapping("/changePass")
     public String changePassword(@Valid @AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute User userPass, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "changePass";
+            return "/user/changePass";
         }
         userServiceImpl.changePassword(currentUser, userPass);
         return "redirect:/user/about";

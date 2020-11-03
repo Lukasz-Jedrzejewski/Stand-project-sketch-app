@@ -30,7 +30,7 @@ public class CurrentEventController {
     @GetMapping("/get")
     public String getEvent(Model model) {
         model.addAttribute("currentEvent", new CurrentEvent());
-        return "event";
+        return "/user/event";
     }
 
     @GetMapping("/project/prepare/{id}")
@@ -43,7 +43,7 @@ public class CurrentEventController {
     public String saveEvent (@Valid @ModelAttribute CurrentEvent currentEvent, BindingResult bindingResult, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
-            return "event";
+            return "/user/event";
         }
 
         session.setAttribute("currentEvent", currentEvent);

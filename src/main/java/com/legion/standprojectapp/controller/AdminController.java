@@ -39,13 +39,13 @@ public class AdminController {
     public String getAdminPanel(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         User user = currentUser.getUser();
         model.addAttribute("user", user);
-        return "adminPanel";
+        return "/admin/adminPanel";
     }
 
     @GetMapping("/branches")
     public String branchList(Model model) {
         model.addAttribute("branchList", branchService.findAll());
-        return "branchList";
+        return "/admin/branchList";
     }
 
     @GetMapping("/deleteBranch/{id}")
@@ -58,19 +58,19 @@ public class AdminController {
     @GetMapping("/addBranch")
     public String addBranch(Model model) {
         model.addAttribute("branch", new Branch());
-        return "adminBranchForm";
+        return "/admin/adminBranchForm";
     }
 
     @GetMapping("/addBranch/{id}")
     public String editBranch(Model model, @PathVariable long id) {
         model.addAttribute("branch", branchService.getOne(id));
-        return "adminBranchForm";
+        return "/admin/adminBranchForm";
     }
 
     @PostMapping("/addBranch")
     public String branchPost(@Valid @ModelAttribute Branch branch, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "adminBranchForm";
+            return "/admin/adminBranchForm";
         } else {
             branchService.save(branch);
         }
@@ -80,7 +80,7 @@ public class AdminController {
     @GetMapping("/events")
     public String eventList(Model model) {
         model.addAttribute("eventList", currentEventService.findAll());
-        return "eventList";
+        return "/admin/eventList";
     }
 
     @GetMapping("/deleteEvent/{id}")
@@ -92,19 +92,19 @@ public class AdminController {
     @GetMapping("/addEvent")
     public String addEvent(Model model) {
         model.addAttribute("currentEvent", new CurrentEvent());
-        return "adminEventForm";
+        return "/admin/adminEventForm";
     }
 
     @GetMapping("/addEvent/{id}")
     public String editEvent(Model model, @PathVariable long id) {
         model.addAttribute("currentEvent", currentEventService.getOne(id));
-        return "adminEventForm";
+        return "/admin/adminEventForm";
     }
 
     @PostMapping("/addEvent")
     public String eventPost(@Valid @ModelAttribute CurrentEvent currentEvent, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "adminEventForm";
+            return "/admin/adminEventForm";
         } else {
             currentEventService.save(currentEvent);
         }
@@ -114,7 +114,7 @@ public class AdminController {
     @GetMapping("/floorBoards")
     public String floorBoardList(Model model) {
         model.addAttribute("floorBoardList", floorBoardService.findAll());
-        return "floorBoardList";
+        return "/admin/floorBoardList";
     }
 
     @GetMapping("/deleteFloorBoard/{id}")
@@ -127,19 +127,19 @@ public class AdminController {
     @GetMapping("/addFloorBoard")
     public String addFloorBoard(Model model) {
         model.addAttribute("floorBoard", new FloorBoard());
-        return "adminFloorBoardForm";
+        return "/admin/adminFloorBoardForm";
     }
 
     @GetMapping("/addFloorBoard/{id}")
     public String editFloorBoard(Model model, @PathVariable long id) {
         model.addAttribute("floorBoard", floorBoardService.getOne(id));
-        return "adminFloorBoardForm";
+        return "/admin/adminFloorBoardForm";
     }
 
     @PostMapping("/addFloorBoard")
     public String floorBoardPost(@Valid @ModelAttribute FloorBoard floorBoard, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "adminFloorBoardForm";
+            return "/admin/adminFloorBoardForm";
         } else {
             floorBoardService.save(floorBoard);
         }
@@ -149,7 +149,7 @@ public class AdminController {
     @GetMapping("/buildingTypes")
     public String typeOfBuildingList(Model model) {
         model.addAttribute("typeOfBuildingList", typeOfBuildingService.findAll());
-        return "typeOfBuildingList";
+        return "/admin/typeOfBuildingList";
     }
 
     @GetMapping("/deleteTypeOfBuilding/{id}")
@@ -162,19 +162,19 @@ public class AdminController {
     @GetMapping("/addTypeOfBuilding")
     public String addTypeOfBuilding(Model model) {
         model.addAttribute("typeOfBuilding", new TypeOfBuilding());
-        return "adminTypeOfBuildingForm";
+        return "/admin/adminTypeOfBuildingForm";
     }
 
     @GetMapping("/addTypeOfBuilding/{id}")
     public String editTypeOfBuilding(Model model, @PathVariable long id) {
         model.addAttribute("typeOfBuilding", typeOfBuildingService.getOne(id));
-        return "adminTypeOfBuildingForm";
+        return "/admin/adminTypeOfBuildingForm";
     }
 
     @PostMapping("/addTypeOfBuilding")
     public String typeOfBuildingPost(@Valid @ModelAttribute TypeOfBuilding typeOfBuilding, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "adminTypeOfBuildingForm";
+            return "/admin/adminTypeOfBuildingForm";
         } else {
             typeOfBuildingService.save(typeOfBuilding);
         }
@@ -184,18 +184,18 @@ public class AdminController {
     @GetMapping("/sketches")
     public String sketchList(Model model) {
         model.addAttribute("sketches", projectService.findAllProjects());
-        return "sketchList";
+        return "/admin/sketchList";
     }
 
     @GetMapping("/showDetails/{id}")
     public String sketchDetails(Model model, @PathVariable long id) {
         model.addAttribute("sketch", projectService.readSingleProject(id));
-        return "sketchDetails";
+        return "/admin/sketchDetails";
     }
 
     @GetMapping("/getUserMail")
     public String getUserMail() {
-        return "searchByMail";
+        return "/admin/searchByMail";
     }
 
     @GetMapping("/userProjects/")
@@ -203,28 +203,28 @@ public class AdminController {
         boolean exist = userService.existByMail(companyMail);
         model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
         if (exist) {
-            return "userProjectList";
+            return "/admin/userProjectList";
         } else {
-            return "userNotExist";
+            return "/admin/userNotExist";
         }
     }
 
     @GetMapping("/sorted")
     public String getSorted(Model model) {
         model.addAttribute("sorted", projectService.findSorted());
-        return "sortedList";
+        return "/admin/sortedList";
     }
 
     @GetMapping("/showFiles")
     public String show(Model model) {
         model.addAttribute("files", fileService.readFiles());
-        return "filesList";
+        return "/admin/filesList";
     }
 
     @GetMapping("/showFiles/{id}")
     public String showById(Model model, @PathVariable long id) {
         model.addAttribute("files", fileService.readAllByProjectId(id));
-        return "filesList";
+        return "/admin/filesList";
     }
 
     @GetMapping("/addProposition/{id}")
@@ -233,7 +233,7 @@ public class AdminController {
         Project project = projectService.readSingleProject(id);
         session.setAttribute("pr", project);
         model.addAttribute("files", file);
-        return "fileForm";
+        return "/admin/fileForm";
     }
 
     @PostMapping("/addProposition")
@@ -248,6 +248,6 @@ public class AdminController {
 
     @GetMapping("/menage")
     public String menageContentAction() {
-        return "menageContent";
+        return "/admin/menageContent";
     }
 }

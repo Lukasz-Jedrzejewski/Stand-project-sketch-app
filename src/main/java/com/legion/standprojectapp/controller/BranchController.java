@@ -28,7 +28,7 @@ public class BranchController {
     @GetMapping("/get")
     public String getBranch(Model model) {
         model.addAttribute("branch", new Branch());
-        return "branch";
+        return "/user/branch";
     }
 
     @GetMapping("/project/prepareBranch/{id}")
@@ -41,7 +41,7 @@ public class BranchController {
     public String saveBranch (@Valid @ModelAttribute Branch branch, BindingResult bindingResult, HttpSession session) {
 
         if (bindingResult.hasErrors()) {
-            return "branch";
+            return "/user/branch";
         }
 
         session.setAttribute("branch", branch);
