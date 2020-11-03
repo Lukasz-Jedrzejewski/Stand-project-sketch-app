@@ -5,12 +5,17 @@
 </head>
 <body>
 <header>
-    <%@include file="navigation-bar.jsp"%>
-    <ul>
-        <li><a href="/user/about">logowanie</a></li>
-        <li><a href="/register">Rejestracja</a></li>
-    </ul>
-
+    <div id="head">
+        <div id="logo"></div>
+        <div id="actions">
+        <ul>
+            <li><a href="/user/about">logowanie</a></li>
+            <li><a href="/register">Rejestracja</a></li>
+        </ul>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
 </header>
+<%@include file="navigation-bar.jsp"%>
 </body>
 </html>
