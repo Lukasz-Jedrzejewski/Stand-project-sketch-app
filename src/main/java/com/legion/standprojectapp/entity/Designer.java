@@ -10,6 +10,7 @@ public class Designer {
     private Long id;
     private String name;
     private String surname;
+    @Column(columnDefinition = "TEXT")
     private String description;
     @OneToOne(mappedBy = "designer")
     private Photography photo;

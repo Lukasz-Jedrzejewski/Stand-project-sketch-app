@@ -4,7 +4,15 @@
 }
 
 body {
-    background-color: #a6b6c6;
+    background-color: #123123;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style-type: none;
 }
 
 #message {
@@ -52,26 +60,16 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: black;
+    background-color: #654654;
     margin: 5px;
     color: white;
     text-decoration: none;
-    margin-left: auto;
-    margin-right: auto;
 }
+
 
 .designer-list img {
     max-width: 200px;
     max-height: 200px;
-}
-
-.designer-photo-home {
-    width: 600px;
-}
-
-.designer-photo-home img {
-    width: auto;
-    height: 500px;
 }
 
 #mapid {
@@ -95,7 +93,6 @@ body {
 }
 
 #nav li {
-    list-style-type: none;
     padding: 10px;
 }
 
@@ -105,8 +102,9 @@ body {
     text-decoration: none;
 }
 
-#nav a:hover, #actions a:hover {
+#nav li:hover, #actions li:hover {
     background-color: green;
+    border-color: white;
 }
 
 #logo {
@@ -130,8 +128,24 @@ body {
 }
 
 #actions li {
-    padding-right: 10px;
+    padding: 10px;
     list-style-type: none;
+    border: solid;
+    border-radius: 20px;
+}
+
+#designer-content-home {
+    display: flex;
+    justify-content: center;
+}
+
+#designer-info {
+    width: 1000px;
+    background-color: #666666;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    font-size: 16px;
 }
 
 
