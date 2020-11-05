@@ -6,7 +6,9 @@
 <body>
 <header>
     <div id="head">
-        <div id="logo"></div>
+        <div id="logo">
+            <img src="/resources/images/Dime.jpg"/>
+        </div>
         <div id="actions">
         <ul>
             <li><a href="/user/about">logowanie</a></li>

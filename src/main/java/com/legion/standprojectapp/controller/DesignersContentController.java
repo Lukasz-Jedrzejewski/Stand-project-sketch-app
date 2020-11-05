@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,7 +31,7 @@ public class DesignersContentController {
 
     @GetMapping("/designers")
     public String getDesignersListAction(Model model) {
-        model.addAttribute("designers", photographyService.findAll());
+        model.addAttribute("designers", designerService.findAll());
         return "/admin/designersListForAdmin";
     }
 

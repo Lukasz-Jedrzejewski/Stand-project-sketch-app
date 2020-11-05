@@ -15,7 +15,7 @@
     <li>Nazwisko</li>
     ${designer.surname}
     <li>Zdjęcie</li>
-    <div class="designer-photo">
+    <div class="designer-list">
         <img src="<c:url value="/resources/images/${photography.fileName}" />" alt="image" />
     </div>
     <br>

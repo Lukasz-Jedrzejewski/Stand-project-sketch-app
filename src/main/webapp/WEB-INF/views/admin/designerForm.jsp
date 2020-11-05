@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@include file="headerAdmin.jsp" %>
-<%@include file="navigation-bar.jsp" %>
+<%@include file="../home/navigation-bar.jsp" %>
 <form:form action="/admin/designer-info" method="post" modelAttribute="designer">
     <form:hidden path="id"/>
     <ul>
