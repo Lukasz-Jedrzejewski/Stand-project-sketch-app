@@ -16,6 +16,7 @@ public class CompanyInfo {
     private String buildingNumber;
     private String apartmentNumber;
     private String zipCode;
+    private String logoName;
 
     public CompanyInfo() {
     }
@@ -82,5 +83,13 @@ public class CompanyInfo {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public String getLogoName() {
+        return logoName;
+    }
+
+    public void setLogoName(String logoName) {
+        this.logoName = logoName;
     }
 }

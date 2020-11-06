@@ -5,6 +5,9 @@ import com.legion.standprojectapp.service.serviceImpl.CompanyInfoServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/admin")
@@ -20,6 +23,17 @@ public class CompanyContentController {
     public String menageAboutCompanyGetAction(Model model) {
         model.addAttribute("companyInfo", companyInfoService.findAll());
         return "/admin/menageCompanyInfo";
+    }
+
+    @GetMapping("/add-logo/{id}")
+    public String addLogoGetAction(Model model, @PathVariable long id) {
+        model.addAttribute("companyInfo", companyInfoService.getOne(id));
+        return "/admin/logoForm";
+    }
+
+    @PostMapping("/add-logo")
+    public String addLogoPostAction()  {
+        return "redirect:/admin/about-company";
     }
 
     @GetMapping("/edit-company-info/{id}")

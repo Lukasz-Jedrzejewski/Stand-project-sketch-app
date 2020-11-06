@@ -4,7 +4,12 @@ import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.repository.CompanyInfoRepository;
 import com.legion.standprojectapp.service.CompanyInfoService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service

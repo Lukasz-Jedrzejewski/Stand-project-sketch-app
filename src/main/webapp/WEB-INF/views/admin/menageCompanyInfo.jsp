@@ -9,6 +9,7 @@
 <c:forEach items="${companyInfo}" var="info">
     <div>
         <ul>
+        <a href="/admin/add-logo/${info.id}">dodaj logo</a>
             <li>
                 ${info.country}
             </li>
