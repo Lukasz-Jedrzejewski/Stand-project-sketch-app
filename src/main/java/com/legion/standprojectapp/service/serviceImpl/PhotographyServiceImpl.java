@@ -16,6 +16,8 @@ import java.util.List;
 @Service
 public class PhotographyServiceImpl implements PhotographyService {
 
+    final String defaultPicture = "pexels-mohamed-abdelgaffar-771742.jpg";
+
     private final PhotographyRepository photographyRepository;
 
     public PhotographyServiceImpl(PhotographyRepository photographyRepository) {
@@ -24,14 +26,14 @@ public class PhotographyServiceImpl implements PhotographyService {
 
     @Override
     public void save(MultipartFile photography, String fileName, Designer designer) throws IOException {
+        Photography photoFromDB = getByDesignerId(designer.getId().intValue());
         Path path = Paths.get(fileName);
         if (!Files.exists(path)) {
             Files.createFile(path);
             Files.write(path, photography.getBytes());
-            Photography photo = new Photography();
-            photo.setFileName(photography.getOriginalFilename());
-            photo.setDesigner(designer);
-            photographyRepository.save(photo);
+            photoFromDB.setFileName(photography.getOriginalFilename());
+            photoFromDB.setDesigner(designer);
+            photographyRepository.save(photoFromDB);
         }
     }
 
@@ -42,6 +44,26 @@ public class PhotographyServiceImpl implements PhotographyService {
             Files.delete(path);
         }
         photographyRepository.deleteByDesignerId(id);
+    }
+
+    @Override
+    public void deletePic(long id, String filename) throws IOException {
+        Path path = Paths.get(filename);
+        System.out.println(filename);
+        System.out.println(defaultPicture);
+        if (!filename.equals("src/main/webapp/resources/images/" + defaultPicture)) {
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        }
+    }
+
+    @Override
+    public void setDefaultPhotography(Designer designer) {
+        Photography photography = new Photography();
+        photography.setFileName(defaultPicture);
+        photography.setDesigner(designer);
+        photographyRepository.save(photography);
     }
 
     @Override

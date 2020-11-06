@@ -57,6 +57,7 @@ public class DesignersContentController {
     @PostMapping("/designer-info")
     public String saveDesignerInfoPostAction(@ModelAttribute Designer designer) {
         designerService.save(designer);
+        photographyService.setDefaultPhotography(designer);
         return "redirect:/admin/designers";
     }
 
@@ -81,19 +82,23 @@ public class DesignersContentController {
     public String addDesignerPhotoPostAction(@ModelAttribute ("photography") MultipartFile[] files,
                                              HttpSession session) throws IOException {
         Designer designer1 = (Designer) session.getAttribute("des");
+        String fileName = photographyService.getByDesignerId(designer1.getId()).getFileName();
+        photographyService.deletePic(designer1.getId(), path+fileName);
         for (MultipartFile file1 : files) {
-            boolean existingPhoto = photographyService.existsByDesignerId(designer1.getId());
-            if (!existingPhoto) {
+//            boolean existingPhoto = photographyService.existsByDesignerId(designer1.getId());
+//            if (!existingPhoto) {
                 photographyService.save(file1, path + file1.getOriginalFilename(), designer1);
-            }
+//            }
         }
         return "redirect:/admin/designers";
     }
 
     @GetMapping("/delete-designer-photo/{id}")
-    public String deleteDesignerPhotoAction(@PathVariable long id, String filename) throws IOException {
+    public String deleteDesignerPhotoAction(@PathVariable long id, HttpSession session) throws IOException {
         String fileName = photographyService.getByDesignerId(id).getFileName();
         photographyService.delete(id, path+fileName);
+        Designer designer1 = (Designer) session.getAttribute("des");
+        photographyService.setDefaultPhotography(designer1);
         return "redirect:/admin/designers";
     }
 }

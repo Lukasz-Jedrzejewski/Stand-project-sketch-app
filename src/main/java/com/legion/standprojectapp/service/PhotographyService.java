@@ -13,4 +13,6 @@ public interface PhotographyService {
     Photography getByDesignerId(long id);
     boolean existsByDesignerId(long id);
     List<Photography> findAll();
+    void setDefaultPhotography(Designer designer);
+    void deletePic(long id, String filename) throws IOException;
 }
