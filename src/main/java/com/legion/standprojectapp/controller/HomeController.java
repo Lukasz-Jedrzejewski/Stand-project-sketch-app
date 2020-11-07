@@ -5,10 +5,7 @@ import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.EmailModel;
 import com.legion.standprojectapp.model.PasswordModel;
-import com.legion.standprojectapp.service.serviceImpl.MailServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.PasswordResetTokenServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.UserServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.VerificationTokenServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,16 +22,19 @@ public class HomeController {
     private final VerificationTokenServiceImpl verificationTokenService;
     private final MailServiceImpl mailService;
     private final PasswordResetTokenServiceImpl passwordResetTokenService;
+    private final CompanyInfoServiceImpl companyInfoService;
 
-    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService) {
+    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService, CompanyInfoServiceImpl companyInfoService) {
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
         this.mailService = mailService;
         this.passwordResetTokenService = passwordResetTokenService;
+        this.companyInfoService = companyInfoService;
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("logo", companyInfoService.getOne(1));
         return "/home/home";
     }
 

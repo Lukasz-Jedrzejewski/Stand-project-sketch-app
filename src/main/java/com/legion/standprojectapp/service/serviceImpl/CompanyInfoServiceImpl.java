@@ -41,7 +41,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
         if (!Files.exists(path)) {
             Files.createFile(path);
             Files.write(path, logo.getBytes());
-            companyFromDB.setLogoName(fileName);
+            companyFromDB.setLogoName(logo.getOriginalFilename());
             companyInfoRepository.save(companyFromDB);
         }
     }

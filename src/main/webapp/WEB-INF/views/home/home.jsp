@@ -7,7 +7,7 @@
 <header>
     <div id="head">
         <div id="logo">
-            <img src="/resources/images/pexels-daniel-nettesheim-1162361.jpg"/>
+            <img src="/resources/images/${logo.logoName}"/>
         </div>
         <div id="actions">
         <ul>
