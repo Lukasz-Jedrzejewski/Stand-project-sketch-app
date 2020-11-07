@@ -49,8 +49,6 @@ public class PhotographyServiceImpl implements PhotographyService {
     @Override
     public void deletePic(long id, String filename) throws IOException {
         Path path = Paths.get(filename);
-        System.out.println(filename);
-        System.out.println(defaultPicture);
         if (!filename.equals("src/main/webapp/resources/images/" + defaultPicture)) {
             if (Files.exists(path)) {
                 Files.delete(path);

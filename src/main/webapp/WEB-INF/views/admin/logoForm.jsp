@@ -7,8 +7,8 @@
 <body>
 <%@include file="headerAdmin.jsp" %>
 <%@include file="../home/navigation-bar.jsp" %>
-    <form:form modelAttribute="files" method="post" action="/admin/add-logo" enctype="multipart/form-data">
-        <input type="file" name="logoName" multiple required/>
+    <form:form modelAttribute="companyInfo" method="post" action="/admin/add-logo" enctype="multipart/form-data">
+        <input type="file" name="file" multiple required/>
         <button type="submit">Zapisz</button>
     </form:form>
 </body>

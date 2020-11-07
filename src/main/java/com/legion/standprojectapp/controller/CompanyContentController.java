@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 
 @Controller
@@ -26,13 +28,18 @@ public class CompanyContentController {
     }
 
     @GetMapping("/add-logo/{id}")
-    public String addLogoGetAction(Model model, @PathVariable long id) {
+    public String addLogoGetAction(Model model, @PathVariable long id, HttpSession session) {
         model.addAttribute("companyInfo", companyInfoService.getOne(id));
+        session.setAttribute("info", companyInfoService.getOne(id));
         return "/admin/logoForm";
     }
 
     @PostMapping("/add-logo")
-    public String addLogoPostAction()  {
+    public String addLogoPostAction(@RequestParam MultipartFile file, @ModelAttribute CompanyInfo companyInfo,
+                                    HttpSession session) throws IOException {
+        CompanyInfo info = (CompanyInfo) session.getAttribute("info");
+        String fileName = file.getOriginalFilename();
+        companyInfoService.addLogo(info, fileName, file);
         return "redirect:/admin/about-company";
     }
 
