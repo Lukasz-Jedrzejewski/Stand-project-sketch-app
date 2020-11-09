@@ -6,10 +6,12 @@
 </head>
 <body>
 <%@include file="headerAdmin.jsp"%>
+<%@include file="../home/navigation-bar.jsp"%>
 <c:forEach items="${companyInfo}" var="info">
     <div>
         <ul>
-        <a href="/admin/add-logo/${info.id}">dodaj logo</a>
+            <li><img src="/resources/images/${info.logoName}"/></li>
+        <a href="/admin/add-logo/${info.id}">zmień logo</a>
             <li>
                 ${info.country}
             </li>
