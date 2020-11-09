@@ -15,6 +15,8 @@ import java.util.List;
 @Service
 public class CompanyInfoServiceImpl implements CompanyInfoService {
 
+    final String defaultLogo = "pexels-daniel-nettesheim-1162361.jpg";
+
     private final CompanyInfoRepository companyInfoRepository;
 
     public CompanyInfoServiceImpl(CompanyInfoRepository companyInfoRepository) {
@@ -44,6 +46,21 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
             companyFromDB.setLogoName(logo.getOriginalFilename());
             companyInfoRepository.save(companyFromDB);
         }
+    }
+
+    @Override
+    public void deleteLogo(String filename) throws IOException {
+        Path path = Paths.get(filename);
+        if (!filename.equals("src/main/webapp/resources/images/" + defaultLogo)) {
+            if (Files.exists(path)) {
+                Files.delete(path);
+            }
+        }
+    }
+
+    @Override
+    public String getLogoNameByCompanyInfoId(long id) {
+        return companyInfoRepository.getLogoName(id);
     }
 
     @Override

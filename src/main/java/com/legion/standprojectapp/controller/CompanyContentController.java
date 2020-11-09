@@ -43,6 +43,8 @@ public class CompanyContentController {
                                     HttpSession session) throws IOException {
         CompanyInfo info = (CompanyInfo) session.getAttribute("info");
         String fileName = file.getOriginalFilename();
+        String logoNameByCompanyInfoId = companyInfoService.getLogoNameByCompanyInfoId(info.getId());
+        companyInfoService.deleteLogo(path+logoNameByCompanyInfoId);
         companyInfoService.addLogo(info, path+fileName, file);
         return "redirect:/admin/about-company";
     }

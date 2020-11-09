@@ -12,4 +12,6 @@ public interface CompanyInfoService {
     CompanyInfo getOne(long id);
     CompanyInfo edit (CompanyInfo companyInfo);
     void addLogo (CompanyInfo companyInfo, String fileName, MultipartFile logo) throws IOException;
+    void deleteLogo (String filename) throws IOException;
+    String getLogoNameByCompanyInfoId (long id);
 }
