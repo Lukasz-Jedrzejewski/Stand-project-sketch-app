@@ -62,7 +62,8 @@ public class DesignersContentController {
     }
 
     @GetMapping("/delete-designer/{id}")
-    public String deleteDesignerAction(@PathVariable Long id) {
+    public String deleteDesignerAction(@PathVariable Long id) throws IOException {
+        photographyService.delete(id, path+photographyService.getByDesignerId(id).getFileName());
         designerService.deleteDesigner(id);
         return "redirect:/admin/designers";
     }
