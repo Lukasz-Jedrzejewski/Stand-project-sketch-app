@@ -8,9 +8,9 @@
 <body>
 <%@include file="headerAdmin.jsp" %>
 <c:forEach items="${designers}" var="info">
-    <a href="/admin/designer-details/${info.id}" >
+    <a href="/admin/designer-details/${info.designer.id}" >
         <div class="designer-list">
-            ${info.name} ${info.surname}
+            <img src="<c:url value="/resources/images/${info.fileName}" />" alt="image" />
         </div>
     </a>
 </c:forEach>
