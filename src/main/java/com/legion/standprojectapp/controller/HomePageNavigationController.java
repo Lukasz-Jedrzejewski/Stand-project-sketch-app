@@ -3,8 +3,8 @@ package com.legion.standprojectapp.controller;
 import com.byteowls.jopencage.model.JOpenCageLatLng;
 import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.service.serviceImpl.CompanyInfoServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.JOpenCageServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.PhotographyServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +14,13 @@ import java.util.List;
 public class HomePageNavigationController {
 
     private final CompanyInfoServiceImpl companyInfoService;
-    private final PhotographyServiceImpl photographyService;
     private final JOpenCageServiceImpl jOpenCageService;
+    private final DesignerServiceImpl designerService;
 
-    public HomePageNavigationController(CompanyInfoServiceImpl companyInfoService, PhotographyServiceImpl photographyService, JOpenCageServiceImpl jOpenCageService) {
+    public HomePageNavigationController(CompanyInfoServiceImpl companyInfoService, JOpenCageServiceImpl jOpenCageService, DesignerServiceImpl designerService) {
         this.companyInfoService = companyInfoService;
-        this.photographyService = photographyService;
         this.jOpenCageService = jOpenCageService;
+        this.designerService = designerService;
     }
 
     @GetMapping("/about-company")
@@ -40,7 +40,7 @@ public class HomePageNavigationController {
 
     @GetMapping("/designers")
     public String designersPageAction (Model model) {
-        model.addAttribute("photos", photographyService.findAll());
+        model.addAttribute("designer", designerService.findAll());
         return "/home/designersListHomeView";
     }
 

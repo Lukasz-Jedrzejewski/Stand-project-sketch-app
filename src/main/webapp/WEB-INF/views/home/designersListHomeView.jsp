@@ -7,16 +7,16 @@
 </head>
 <body>
 <%@include file="navigation-bar.jsp"%>
-<c:forEach items="${photos}" var="photo">
+<c:forEach items="${designer}" var="info">
 <div id="designer-content-home">
     <div class="designer-list">
-    <img src="<c:url value="/resources/images/${photo.fileName}" />" alt="image" />
+    <img src="<c:url value="/resources/images/${info.photoName}" />" alt="image" />
     </div>
     <div id="designer-info">
-        ${photo.designer.name} ${photo.designer.surname}
+        ${info.name} ${info.surname}
         </br>
         </br>
-        <p>${photo.designer.description}</p>
+        <p>${info.description}</p>
     </div>
     </div>
 </c:forEach>

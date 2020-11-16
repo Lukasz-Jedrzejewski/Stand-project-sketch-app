@@ -1,9 +1,7 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.Designer;
-import com.legion.standprojectapp.entity.Photography;
 import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
-import com.legion.standprojectapp.service.serviceImpl.PhotographyServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -22,23 +19,20 @@ public class DesignersContentController {
     private String path;
 
     private final DesignerServiceImpl designerService;
-    private final PhotographyServiceImpl photographyService;
 
-    public DesignersContentController(DesignerServiceImpl designerService, PhotographyServiceImpl photographyService) {
+    public DesignersContentController(DesignerServiceImpl designerService) {
         this.designerService = designerService;
-        this.photographyService = photographyService;
     }
 
     @GetMapping("/designers")
     public String getDesignersListAction(Model model) {
-        model.addAttribute("designers", photographyService.findAll());
+        model.addAttribute("designers", designerService.findAll());
         return "/admin/designersListForAdmin";
     }
 
     @GetMapping("/designer-details/{id}")
     public String getDesignerDetailsAction(Model model, @PathVariable long id) {
         model.addAttribute("designer", designerService.getOne(id));
-        model.addAttribute("photography", photographyService.getByDesignerId(id));
         return "/admin/designerDetailsForAdmin";
     }
 
@@ -57,13 +51,11 @@ public class DesignersContentController {
     @PostMapping("/designer-info")
     public String saveDesignerInfoPostAction(@ModelAttribute Designer designer) {
         designerService.save(designer);
-        photographyService.setDefaultPhotography(designer);
         return "redirect:/admin/designers";
     }
 
     @GetMapping("/delete-designer/{id}")
     public String deleteDesignerAction(@PathVariable Long id) throws IOException {
-        photographyService.delete(id, path+photographyService.getByDesignerId(id).getFileName());
         designerService.deleteDesigner(id);
         return "redirect:/admin/designers";
     }
@@ -73,33 +65,25 @@ public class DesignersContentController {
      */
 
     @GetMapping("/add-designer-photo/{id}")
-    public String addDesignerPhotoGetAction(Model model, @PathVariable long id, HttpSession session) {
-        model.addAttribute("files", new Photography());
+    public String addDesignerPhotoGetAction(@PathVariable long id, HttpSession session) {
         session.setAttribute("des", designerService.getOne(id));
         return "/admin/designerPhotoForm";
     }
 
     @PostMapping("/add-designer-photo")
-    public String addDesignerPhotoPostAction(@ModelAttribute ("photography") MultipartFile[] files,
-                                             HttpSession session) throws IOException {
-        Designer designer1 = (Designer) session.getAttribute("des");
-        String fileName = photographyService.getByDesignerId(designer1.getId()).getFileName();
-        photographyService.deletePic(designer1.getId(), path+fileName);
-        for (MultipartFile file1 : files) {
-//            boolean existingPhoto = photographyService.existsByDesignerId(designer1.getId());
-//            if (!existingPhoto) {
-                photographyService.save(file1, path + file1.getOriginalFilename(), designer1);
-//            }
-        }
+    public String addDesignerPhotoPostAction(@RequestParam MultipartFile file, HttpSession session) throws IOException {
+        Designer current = (Designer) session.getAttribute("des");
+        String fileName = file.getOriginalFilename();
+        String picName = designerService.gePicNameByDesignerId(current.getId());
+        designerService.deletePic(path+picName);
+        designerService.addPic(current, path+fileName, file);
         return "redirect:/admin/designers";
     }
 
     @GetMapping("/delete-designer-photo/{id}")
-    public String deleteDesignerPhotoAction(@PathVariable long id, HttpSession session) throws IOException {
-        String fileName = photographyService.getByDesignerId(id).getFileName();
-        photographyService.delete(id, path+fileName);
-        Designer designer1 = (Designer) session.getAttribute("des");
-        photographyService.setDefaultPhotography(designer1);
+    public String deleteDesignerPhotoAction(@PathVariable long id) throws IOException {
+        String fileName = designerService.gePicNameByDesignerId(id);
+        designerService.clearPic(id, path+fileName);
         return "redirect:/admin/designers";
     }
 }

@@ -17,14 +17,14 @@
         ${designer.surname}
     <li>Zdjęcie</li>
         <div class="designer-list">
-            <img src="<c:url value="/resources/images/${photography.fileName}" />" alt="image" />
+            <img src="<c:url value="/resources/images/${designer.photoName}" />" alt="image" />
         </div>
         <br>
-    <c:if test="${photography.fileName != 'pexels-mohamed-abdelgaffar-771742.jpg'}">
+    <c:if test="${designer.photoName != 'pexels-mohamed-abdelgaffar-771742.jpg'}">
         <a href="/admin/add-designer-photo/${designer.id}">dodaj zdjęcie</a>
         <a href="/admin/delete-designer-photo/${designer.id}">usuń zdjęcie</a>
     </c:if>
-    <c:if test="${photography.fileName == 'pexels-mohamed-abdelgaffar-771742.jpg'}">
+    <c:if test="${designer.photoName == 'pexels-mohamed-abdelgaffar-771742.jpg'}">
         <a href="/admin/add-designer-photo/${designer.id}">dodaj zdjęcie</a>
         </c:if>
     <li>Opis</li>
