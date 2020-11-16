@@ -12,8 +12,7 @@ public class Designer {
     private String surname;
     @Column(columnDefinition = "TEXT")
     private String description;
-    @OneToOne(mappedBy = "designer")
-    private Photography photo;
+    private String photoName;
 
     public Designer() {
     }
@@ -50,12 +49,12 @@ public class Designer {
         this.description = description;
     }
 
-    public Photography getPhoto() {
-        return photo;
+    public String getPhotoName() {
+        return photoName;
     }
 
-    public void setPhoto(Photography photo) {
-        this.photo = photo;
+    public void setPhotoName(String photoName) {
+        this.photoName = photoName;
     }
 
     @Override
@@ -65,6 +64,7 @@ public class Designer {
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", description='" + description + '\'' +
+                ", photoName='" + photoName + '\'' +
                 '}';
     }
 }

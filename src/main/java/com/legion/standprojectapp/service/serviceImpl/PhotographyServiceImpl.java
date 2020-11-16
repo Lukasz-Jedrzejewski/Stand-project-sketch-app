@@ -1,7 +1,6 @@
 package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Designer;
-import com.legion.standprojectapp.entity.Photography;
 import com.legion.standprojectapp.repository.PhotographyRepository;
 import com.legion.standprojectapp.service.PhotographyService;
 import org.springframework.stereotype.Service;

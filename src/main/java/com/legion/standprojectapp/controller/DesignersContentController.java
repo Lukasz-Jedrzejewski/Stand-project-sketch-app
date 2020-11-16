@@ -1,7 +1,6 @@
 package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.Designer;
-import com.legion.standprojectapp.entity.Photography;
 import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.PhotographyServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
