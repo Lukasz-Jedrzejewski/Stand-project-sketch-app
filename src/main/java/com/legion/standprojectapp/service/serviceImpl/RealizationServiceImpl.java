@@ -1,9 +1,8 @@
 package com.legion.standprojectapp.service.serviceImpl;
 
-import com.legion.standprojectapp.entity.CompanyInfo;
-import com.legion.standprojectapp.entity.Realisation;
-import com.legion.standprojectapp.repository.RealisationRepository;
-import com.legion.standprojectapp.service.RealisationService;
+import com.legion.standprojectapp.entity.Realization;
+import com.legion.standprojectapp.repository.RealizationRepository;
+import com.legion.standprojectapp.service.RealizationService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,23 +13,23 @@ import java.nio.file.Paths;
 import java.util.List;
 
 @Service
-public class RealisationServiceImpl implements RealisationService {
+public class RealizationServiceImpl implements RealizationService {
 
-    private final RealisationRepository realisationRepository;
+    private final RealizationRepository realisationRepository;
 
-    public RealisationServiceImpl(RealisationRepository realisationRepository) {
+    public RealizationServiceImpl(RealizationRepository realisationRepository) {
         this.realisationRepository = realisationRepository;
     }
 
     @Override
-    public void savePic(Realisation realisation, MultipartFile file) throws IOException {
-        Path path = Paths.get(file.getOriginalFilename());
+    public void savePic(Realization realization, MultipartFile file, String fileName) throws IOException {
+        Path path = Paths.get(fileName);
         if (!Files.exists(path)) {
             Files.createFile(path);
             Files.write(path, file.getBytes());
-            realisation.setFileName(file.getOriginalFilename());
-            realisation.setImportant(false);
-            realisationRepository.save(realisation);
+            realization.setFileName(file.getOriginalFilename());
+            realization.setImportant(false);
+            realisationRepository.save(realization);
         }
     }
 
@@ -43,24 +42,24 @@ public class RealisationServiceImpl implements RealisationService {
     }
 
     @Override
-    public List<Realisation> findAll() {
+    public List<Realization> findAll() {
         return realisationRepository.findAll();
     }
 
     @Override
-    public Realisation findOne(long id) {
+    public Realization findOne(long id) {
         return realisationRepository.getOne(id);
     }
 
     @Override
     public void setImportant(long id) {
-        Realisation current = findOne(id);
+        Realization current = findOne(id);
         current.setImportant(true);
         realisationRepository.save(current);
     }
 
     @Override
-    public List<Realisation> findAllImportant() {
+    public List<Realization> findAllImportant() {
         return realisationRepository.findAllByImportantTrue();
     }
 }

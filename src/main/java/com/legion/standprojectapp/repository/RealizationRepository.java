@@ -1,13 +1,13 @@
 package com.legion.standprojectapp.repository;
 
-import com.legion.standprojectapp.entity.Realisation;
+import com.legion.standprojectapp.entity.Realization;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface RealisationRepository extends JpaRepository<Realisation, Long> {
+public interface RealizationRepository extends JpaRepository<Realization, Long> {
 
-    List<Realisation> findAllByImportantTrue();
+    List<Realization> findAllByImportantTrue();
 }

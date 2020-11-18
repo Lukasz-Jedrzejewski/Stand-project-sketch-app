@@ -9,7 +9,7 @@
     <li><a href="/admin/about-company"/>O firmie</a></li>
     <li><a href="/admin/designers"/>Projektanci</a></li>
     <li><a href="/admin/our-offer"/>Oferta</a></li>
-    <li><a href="/admin/realisations"/>Realizacje</a></li>
+    <li><a href="/admin/realizations"/>Realizacje</a></li>
 </ul>
 </body>
 </html>
