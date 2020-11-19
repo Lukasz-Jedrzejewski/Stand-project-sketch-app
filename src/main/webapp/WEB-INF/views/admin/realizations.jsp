@@ -7,10 +7,16 @@
 <body>
 <%@include file="headerAdmin.jsp"%>
 <%@include file="../home/navigation-bar.jsp"%>
-    <div id="realisations-admin">
+    <div id="realizations-admin">
         <c:forEach items="${realizations}" var="info">
-            <div id="single-realisation-admin">
-                <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
+            <div id="single-realization-admin">
+                <div id="single-image">
+                    <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
+                </div>
+                <div id="single-action">
+                    <button><a href="/">na główną</a></button>
+                    <button><a href="/">usuń</a></button>
+                </div>
             </div>
         </c:forEach>
     </div>
