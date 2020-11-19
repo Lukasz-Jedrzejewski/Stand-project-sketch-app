@@ -161,12 +161,14 @@ li {
     position: relative;
     height: 48%;
     width: 30%;
-    padding: 2px;
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #123456;
-    margin: 2px;
+    margin-top: 10px;
+    margin-bottom: 0;
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 #single-image {
@@ -198,9 +200,33 @@ li {
     border-radius: 5px;
 }
 
+#single-action button:hover {
+    opacity: 1;
+}
+
 #single-action a {
     color: white;
     font-size: 2vh;
+}
+
+#add-action {
+    margin-top: 6px;
+    padding: 2px;
+    height: 6%;
+    background-color: #654654;
+    text-align: center;
+}
+
+#add-action:hover {
+    background-color: green;
+}
+
+#add-action a {
+    width: 100%;
+    font-size: 5vh;
+    color: white;
+    letter-spacing: 3px;
+    display: block;
 }
 
 

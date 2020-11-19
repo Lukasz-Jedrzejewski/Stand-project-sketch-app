@@ -20,6 +20,8 @@
             </div>
         </c:forEach>
     </div>
+    <div id="add-action">
         <a href="/admin/add-realizations">dodaj zdjęcia</a>
+    </div>
 </body>
 </html>
