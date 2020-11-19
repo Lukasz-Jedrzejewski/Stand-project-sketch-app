@@ -7,11 +7,13 @@
 <body>
 <%@include file="headerAdmin.jsp"%>
 <%@include file="../home/navigation-bar.jsp"%>
-<c:forEach items="${realizations}" var="info">
-    <div>
-        <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
+    <div id="realisations-admin">
+        <c:forEach items="${realizations}" var="info">
+            <div id="single-realisation-admin">
+                <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
+            </div>
+        </c:forEach>
     </div>
-</c:forEach>
-    <a href="/admin/add-realizations">dodaj zdjęcia</a>
+        <a href="/admin/add-realizations">dodaj zdjęcia</a>
 </body>
 </html>
