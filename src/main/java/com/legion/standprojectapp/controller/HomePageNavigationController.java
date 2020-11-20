@@ -5,6 +5,7 @@ import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.service.serviceImpl.CompanyInfoServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
 import com.legion.standprojectapp.service.serviceImpl.JOpenCageServiceImpl;
+import com.legion.standprojectapp.service.serviceImpl.RealizationServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,13 @@ public class HomePageNavigationController {
     private final CompanyInfoServiceImpl companyInfoService;
     private final JOpenCageServiceImpl jOpenCageService;
     private final DesignerServiceImpl designerService;
+    private final RealizationServiceImpl realizationService;
 
-    public HomePageNavigationController(CompanyInfoServiceImpl companyInfoService, JOpenCageServiceImpl jOpenCageService, DesignerServiceImpl designerService) {
+    public HomePageNavigationController(CompanyInfoServiceImpl companyInfoService, JOpenCageServiceImpl jOpenCageService, DesignerServiceImpl designerService, RealizationServiceImpl realizationService) {
         this.companyInfoService = companyInfoService;
         this.jOpenCageService = jOpenCageService;
         this.designerService = designerService;
+        this.realizationService = realizationService;
     }
 
     @GetMapping("/about-company")
@@ -50,7 +53,8 @@ public class HomePageNavigationController {
     }
 
     @GetMapping("realisations")
-    public String realisationsListAction () {
+    public String realisationsListAction (Model model) {
+        model.addAttribute("realizations", realizationService.findAll());
         return "/home/realisations";
     }
 }
