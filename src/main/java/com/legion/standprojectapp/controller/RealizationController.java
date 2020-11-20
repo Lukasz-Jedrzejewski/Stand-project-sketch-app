@@ -44,10 +44,19 @@ public class RealizationController {
 
     @GetMapping("/set-important/{id}")
     public String setImportantValueAction (@PathVariable long id) {
-        System.out.println(realizationService.findOne(id).getId());
-        System.out.println(realizationService.findOne(id).getFileName());
-        System.out.println(realizationService.findOne(id).isImportant());
         realizationService.setImportant(id);
+        return "redirect:/admin/realizations";
+    }
+
+    @GetMapping("/delete-realization/{id}")
+    public String deleteRealizationGetAction (Model model, @PathVariable long id) {
+        model.addAttribute("realization", realizationService.findOne(id));
+        return "/admin/delete-realization-confirm";
+    }
+
+    @PostMapping("/delete-realization")
+    public String deleteRealizationPostAction (@ModelAttribute Realization realization) throws IOException {
+        realizationService.deletePic(realization.getId(), path+realization.getFileName());
         return "redirect:/admin/realizations";
     }
 }

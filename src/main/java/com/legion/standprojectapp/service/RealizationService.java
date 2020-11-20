@@ -9,7 +9,7 @@ import java.util.List;
 public interface RealizationService {
 
     void savePic (Realization realization, MultipartFile file, String fileName) throws IOException;
-    void deletePic (long id) throws IOException;
+    void deletePic (long id, String fileName) throws IOException;
     List<Realization> findAll();
     Realization findOne (long id);
     void setImportant (long id);

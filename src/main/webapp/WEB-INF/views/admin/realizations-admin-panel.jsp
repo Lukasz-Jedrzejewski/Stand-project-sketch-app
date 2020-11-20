@@ -22,7 +22,7 @@
                 </c:if>
                 <div id="single-action">
                     <button><a href="/admin/set-important/${info.id}">na główną</a></button>
-                    <button><a href="/">usuń</a></button>
+                    <button><a href="/admin/delete-realization/${info.id}">usuń</a></button>
                 </div>
             </div>
         </c:forEach>

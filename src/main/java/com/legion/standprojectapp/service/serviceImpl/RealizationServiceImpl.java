@@ -34,11 +34,12 @@ public class RealizationServiceImpl implements RealizationService {
     }
 
     @Override
-    public void deletePic(long id) throws IOException {
-        Path path = Paths.get(findOne(id).getFileName());
+    public void deletePic(long id, String fileName) throws IOException {
+        Path path = Paths.get(fileName);
         if (Files.exists(path)) {
             Files.delete(path);
         }
+        realisationRepository.delete(findOne(id));
     }
 
     @Override
