@@ -53,8 +53,12 @@ public class RealizationServiceImpl implements RealizationService {
 
     @Override
     public void setImportant(long id) {
-        Realization current = findOne(id);
-        current.setImportant(true);
+        Realization current = realisationRepository.getOne(id);
+        if (current.isImportant()) {
+            current.setImportant(false);
+        } else {
+            current.setImportant(true);
+        }
         realisationRepository.save(current);
     }
 

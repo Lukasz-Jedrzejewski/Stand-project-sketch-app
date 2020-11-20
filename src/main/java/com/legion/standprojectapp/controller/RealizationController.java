@@ -26,7 +26,7 @@ public class RealizationController {
     @GetMapping("/realizations")
     public String getAllRealisations(Model model) {
         model.addAttribute("realizations", realizationService.findAll());
-        return "/admin/realizations";
+        return "/admin/realizations-admin-panel";
     }
 
     @GetMapping("/add-realizations")
@@ -39,6 +39,15 @@ public class RealizationController {
     public String addRealisationsPostAction(@RequestParam MultipartFile file,
                                             @ModelAttribute Realization realization) throws IOException {
         realizationService.savePic(realization, file, path+file.getOriginalFilename());
+        return "redirect:/admin/realizations";
+    }
+
+    @GetMapping("/set-important/{id}")
+    public String setImportantValueAction (@PathVariable long id) {
+        System.out.println(realizationService.findOne(id).getId());
+        System.out.println(realizationService.findOne(id).getFileName());
+        System.out.println(realizationService.findOne(id).isImportant());
+        realizationService.setImportant(id);
         return "redirect:/admin/realizations";
     }
 }

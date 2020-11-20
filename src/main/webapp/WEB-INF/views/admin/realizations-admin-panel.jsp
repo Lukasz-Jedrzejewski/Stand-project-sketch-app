@@ -10,11 +10,18 @@
     <div id="realizations-admin">
         <c:forEach items="${realizations}" var="info">
             <div id="single-realization-admin">
-                <div id="single-image">
-                    <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
-                </div>
+                <c:if test="${info.important == false}">
+                    <div id="single-image" style="border-color: red;">
+                        <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
+                    </div>
+                </c:if>
+                <c:if test="${info.important == true}">
+                    <div id="single-image" style="border-color: green;">
+                        <img src="<c:url value="/resources/images/realizations/${info.fileName}" />" alt="image" />
+                    </div>
+                </c:if>
                 <div id="single-action">
-                    <button><a href="/">na główną</a></button>
+                    <button><a href="/admin/set-important/${info.id}">na główną</a></button>
                     <button><a href="/">usuń</a></button>
                 </div>
             </div>
