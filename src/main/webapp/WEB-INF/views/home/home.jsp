@@ -30,7 +30,25 @@
             <p><strong>Napisz do nas, oddzwonimy!</strong><p>
         </div>
         <div id="contact-form">
-
+            <form>
+                <div class="form-field">
+                    <label>Imię i nazwisko/Nazwa firmy</label>
+                    <input type="text"/>
+                <div>
+                <div class="form-field">
+                    <label>Email</label>
+                    <input type="text"/>
+                <div>
+                <div class="form-field">
+                    <label>Numer telefonu</label>
+                    <input type="text"/>
+                <div>
+                <div class="form-field">
+                    <label>O co chcesz zapytać?</label>
+                    <textarea></textarea>
+                <div>
+                <button id="contact-submit" type="submit">wyślij</button>
+            </form>
         </div>
     </div>
 </body>
