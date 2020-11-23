@@ -13,19 +13,23 @@
             <img src="/resources/images/${logo.logoName}"/>
         </div>
         <div id="actions">
-        <c:if test="${user.companyMail != null}">
-        <sec:authorize access="isAuthenticated()">
-            Zalogowany:
-            </br>
-            ${user.companyMail}
-        </sec:authorize>
-        </c:if>
-        <c:if test="${user.companyMail == null}">
-        <ul>
-            <li><a href="/user/about">logowanie</a></li>
-            <li><a href="/register">Rejestracja</a></li>
-        </ul>
-        </c:if>
+            <c:if test="${user.companyMail != null}">
+            <div id="authentication">
+                <sec:authorize access="isAuthenticated()">
+                    <p>Zalogowany jako:</p>
+                    <p>${user.companyMail}</p>
+                    <button id="contact-submit"><a href="/user/about">Panel</a></button>
+                </sec:authorize>
+            </div>
+            </c:if>
+            <c:if test="${user.companyMail == null}">
+                <div id="authentication">
+                <ul>
+                    <li><a href="/user/about">logowanie</a></li>
+                    <li><a href="/register">Rejestracja</a></li>
+                </ul>
+                </div>
+            </c:if>
         </div>
         <div style="clear: both;"></div>
     </div>

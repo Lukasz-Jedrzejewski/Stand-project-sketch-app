@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #999999;
+    background-color: gray;
 }
 
 a {
@@ -101,6 +101,7 @@ li {
     color: white;
     font-size: 25px;
     text-decoration: none;
+    display: block;
 }
 
 #nav li:hover, #actions li:hover {
@@ -126,6 +127,8 @@ li {
 
 #actions {
     float: right;
+    width: 300px;
+    height: 100px;
 }
 
 #actions li {
@@ -133,6 +136,18 @@ li {
     list-style-type: none;
     border: solid;
     border-radius: 20px;
+}
+
+#authentication {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 #designer-content-home {
@@ -284,13 +299,14 @@ li {
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 15px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .form-field {
     width: 100%;
-    margin: 10px auto;
 }
 
 .form-field label {
