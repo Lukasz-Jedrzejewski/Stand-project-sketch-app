@@ -26,7 +26,7 @@
     </c:if>
     <c:if test="${designer.photoName == 'pexels-mohamed-abdelgaffar-771742.jpg'}">
         <a href="/admin/add-designer-photo/${designer.id}">dodaj zdjęcie</a>
-        </c:if>
+    </c:if>
     <li>Opis</li>
         ${designer.description}
     <li>Akcje</li>

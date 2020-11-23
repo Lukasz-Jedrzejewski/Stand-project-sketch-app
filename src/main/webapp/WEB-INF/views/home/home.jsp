@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Homepage</title>
@@ -12,10 +13,19 @@
             <img src="/resources/images/${logo.logoName}"/>
         </div>
         <div id="actions">
+        <c:if test="${user.companyMail != null}">
+        <sec:authorize access="isAuthenticated()">
+            Zalogowany:
+            </br>
+            ${user.companyMail}
+        </sec:authorize>
+        </c:if>
+        <c:if test="${user.companyMail == null}">
         <ul>
             <li><a href="/user/about">logowanie</a></li>
             <li><a href="/register">Rejestracja</a></li>
         </ul>
+        </c:if>
         </div>
         <div style="clear: both;"></div>
     </div>

@@ -4,9 +4,11 @@ import com.legion.standprojectapp.entity.PasswordResetToken;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.ContactMessage;
+import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.model.EmailModel;
 import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.*;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,9 +36,17 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("logo", companyInfoService.getOne(1));
         model.addAttribute("contactMessage", new ContactMessage());
+        try {
+            User user = currentUser.getUser();
+            if(user != null) {
+                model.addAttribute("user", user);
+            }
+        } catch (NullPointerException e) {
+            System.out.println("Logged user = " + e.getMessage());
+        }
         return "/home/home";
     }
 
