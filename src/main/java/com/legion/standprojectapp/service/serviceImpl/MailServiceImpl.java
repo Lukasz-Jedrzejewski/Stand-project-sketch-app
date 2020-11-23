@@ -62,4 +62,14 @@ public class MailServiceImpl implements MailService {
                 +"http://localhost:8080/reset-confirmation?token="+token);
         javaMailSender.send(msg);
     }
+
+    @Override
+    public void sendContactMessage(String recipient, String topic, String content) throws MessagingException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(recipient);
+        helper.setSubject(topic);
+        helper.setText(content, true);
+        javaMailSender.send(msg);
+    }
 }

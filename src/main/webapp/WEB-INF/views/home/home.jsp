@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Homepage</title>
@@ -30,25 +31,25 @@
             <p><strong>Napisz do nas, oddzwonimy!</strong><p>
         </div>
         <div id="contact-form">
-            <form>
+            <form:form action="/send-contact-message" method="post" modelAttribute="message">
                 <div class="form-field">
                     <label>Imię i nazwisko/Nazwa firmy</label>
-                    <input type="text"/>
+                    <input type="text" name="name"/>
                 <div>
                 <div class="form-field">
                     <label>Email</label>
-                    <input type="text"/>
+                    <input type="text" name="email"/>
                 <div>
                 <div class="form-field">
                     <label>Numer telefonu</label>
-                    <input type="text"/>
+                    <input type="text" name="phoneNumber"/>
                 <div>
                 <div class="form-field">
                     <label>O co chcesz zapytać?</label>
-                    <textarea></textarea>
+                    <textarea name="message"></textarea>
                 <div>
-                <button id="contact-submit" type="submit">wyślij</button>
-            </form>
+                <button id="contact-submit" type="submit">Wyślij</button>
+            </form:form>
         </div>
     </div>
 </body>

@@ -97,4 +97,9 @@ public class UserServiceImpl implements UserService {
         userFromDB.setPassword(passwordEncoder.encode(password));
         userRepository.save(userFromDB);
     }
+
+    @Override
+    public User findAdmin() {
+        return userRepository.findByAdminTrue();
+    }
 }

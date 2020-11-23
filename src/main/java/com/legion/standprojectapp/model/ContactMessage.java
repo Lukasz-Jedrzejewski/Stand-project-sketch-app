@@ -12,4 +12,12 @@ public class ContactMessage {
     private String email;
     private String phoneNumber;
     private String message;
+
+    public String toHtml() {
+        return "<div><ul><li>Od: " + name + "</li>" +
+                "<li>Email: " + email + "</li>" +
+                "<li>Telefon: " + phoneNumber + "</li>" +
+                "<li>Treść wiadomości: " + message + "</li>" +
+                "</ul></div>";
+    }
 }

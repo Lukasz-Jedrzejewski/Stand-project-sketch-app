@@ -3,6 +3,7 @@ package com.legion.standprojectapp.controller;
 import com.legion.standprojectapp.entity.PasswordResetToken;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.entity.VerificationToken;
+import com.legion.standprojectapp.model.ContactMessage;
 import com.legion.standprojectapp.model.EmailModel;
 import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.*;
@@ -35,6 +36,7 @@ public class HomeController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("logo", companyInfoService.getOne(1));
+        model.addAttribute("contactMessage", new ContactMessage());
         return "/home/home";
     }
 
@@ -115,5 +117,12 @@ public class HomeController {
             userService.resetPassword(user.getId(), passwordModel.getConfirmPassword());
         }
         return "/home/reset-password-success";
+    }
+
+    @PostMapping("/send-contact-message")
+    public String sendContactMessageAction (@ModelAttribute ContactMessage contactMessage) throws MessagingException {
+        String adminEmail = userService.findAdmin().getCompanyMail();
+        mailService.sendContactMessage(adminEmail, "Proszę o kontakt", contactMessage.toHtml());
+        return "redirect:/";
     }
 }

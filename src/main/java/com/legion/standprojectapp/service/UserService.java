@@ -12,4 +12,5 @@ public interface UserService {
     void changePassword(CurrentUser currentUser, User user);
     void editUser(User user);
     void resetPassword(long id, String password);
+    User findAdmin();
 }

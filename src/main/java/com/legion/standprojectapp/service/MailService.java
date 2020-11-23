@@ -10,4 +10,5 @@ public interface MailService {
     void sendMailWithProjectDetails(Project project, CurrentEvent currentEvent, Branch branch) throws MessagingException;
     void sendVerificationToken(String recipient, String token) throws MessagingException;
     void sendPasswordResetToken(String recipient, String token) throws MessagingException;
+    void sendContactMessage(String recipient, String topic, String content) throws MessagingException;
 }
