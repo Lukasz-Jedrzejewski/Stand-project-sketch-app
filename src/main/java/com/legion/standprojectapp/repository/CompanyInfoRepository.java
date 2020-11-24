@@ -8,7 +8,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CompanyInfoRepository extends JpaRepository<CompanyInfo, Long> {
-
-    @Query(value = "select logoName from CompanyInfo c where c.id = :id")
-    String getLogoName (@Param("id") long id);
 }

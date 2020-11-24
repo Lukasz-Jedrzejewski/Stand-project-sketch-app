@@ -2,6 +2,7 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.service.serviceImpl.CompanyInfoServiceImpl;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
 
 @Controller
@@ -42,8 +44,7 @@ public class CompanyContentController {
                                     HttpSession session) throws IOException {
         CompanyInfo info = (CompanyInfo) session.getAttribute("info");
         String fileName = file.getOriginalFilename();
-        String logoNameByCompanyInfoId = companyInfoService.getLogoNameByCompanyInfoId(info.getId());
-        companyInfoService.deleteLogo(path+logoNameByCompanyInfoId);
+        FileUtils.cleanDirectory(new File("src/main/webapp/resources/images/logo/"));
         companyInfoService.addLogo(info, path+fileName, file);
         return "redirect:/admin/about-company";
     }

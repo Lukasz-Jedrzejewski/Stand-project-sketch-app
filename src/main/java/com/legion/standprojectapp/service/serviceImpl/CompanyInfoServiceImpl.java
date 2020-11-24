@@ -39,31 +39,13 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
 
     @Override
     public void addLogo(CompanyInfo companyInfo, String fileName, MultipartFile logo) throws IOException {
-        CompanyInfo companyFromDB = companyInfoRepository.getOne(companyInfo.getId());
-        if (Objects.equals(logo.getContentType(), "image/jpeg") ||Objects.equals(logo.getContentType(), "image/jpeg") ) {
-            Path path = Paths.get("src/main/webapp/resources/images/company-logo." + logo.getContentType().split("/")[1]);
+        if (Objects.equals(logo.getContentType(), "image/jpeg") || Objects.equals(logo.getContentType(), "image/jpeg")) {
+            Path path = Paths.get("src/main/webapp/resources/images/logo/company-logo." + logo.getContentType().split("/")[1]);
             if (!Files.exists(path)) {
                 Files.createFile(path);
                 Files.write(path, logo.getBytes());
-                companyFromDB.setLogoName("company-logo." + logo.getContentType().split("/")[1]);
-                companyInfoRepository.save(companyFromDB);
             }
         }
-    }
-
-    @Override
-    public void deleteLogo(String filename) throws IOException {
-        Path path = Paths.get(filename);
-        if (!filename.equals("src/main/webapp/resources/images/" + defaultLogo)) {
-            if (Files.exists(path)) {
-                Files.delete(path);
-            }
-        }
-    }
-
-    @Override
-    public String getLogoNameByCompanyInfoId(long id) {
-        return companyInfoRepository.getLogoName(id);
     }
 
     @Override
