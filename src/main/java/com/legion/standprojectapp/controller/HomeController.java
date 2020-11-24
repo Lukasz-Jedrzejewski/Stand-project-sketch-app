@@ -37,7 +37,6 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("logo", companyInfoService.getOne(1));
         model.addAttribute("contactMessage", new ContactMessage());
         try {
             User user = currentUser.getUser();
@@ -54,7 +53,6 @@ public class HomeController {
     public String login(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("passwordModel", new PasswordModel());
-        model.addAttribute("logo", companyInfoService.getOne(1));
         return "/home/register";
     }
 

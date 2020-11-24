@@ -17,9 +17,6 @@ import java.io.IOException;
 @RequestMapping("/admin")
 public class CompanyContentController {
 
-    @Value("${images.path}")
-    private String path;
-
     private final CompanyInfoServiceImpl companyInfoService;
 
     public CompanyContentController(CompanyInfoServiceImpl companyInfoService) {
@@ -43,14 +40,13 @@ public class CompanyContentController {
     public String addLogoPostAction(@RequestParam MultipartFile file, @ModelAttribute CompanyInfo companyInfo,
                                     HttpSession session) throws IOException {
         CompanyInfo info = (CompanyInfo) session.getAttribute("info");
-        String fileName = file.getOriginalFilename();
         FileUtils.cleanDirectory(new File("src/main/webapp/resources/images/logo/"));
-        companyInfoService.addLogo(info, path+fileName, file);
+        companyInfoService.addLogo(info, file);
         return "redirect:/admin/about-company";
     }
 
     @GetMapping("/edit-company-info/{id}")
-    public String editCompanyIfoGetAction(Model model, @PathVariable long id) {
+    public String editCompanyInfoGetAction(Model model, @PathVariable long id) {
         model.addAttribute("companyInfo", companyInfoService.getOne(id));
         return "/admin/companyInfoForm";
     }

@@ -38,27 +38,23 @@ public class HomePageNavigationController {
         JOpenCageLatLng coordinates = jOpenCageService.getCoordinates(street, city);
         model.addAttribute("companyInfo", companyInfoService.findAll());
         model.addAttribute("coordinates", coordinates);
-        model.addAttribute("logo", companyInfoService.getOne(1));
         return "/home/about-us";
     }
 
     @GetMapping("/designers")
     public String designersPageAction (Model model) {
         model.addAttribute("designer", designerService.findAll());
-        model.addAttribute("logo", companyInfoService.getOne(1));
         return "/home/designersListHomeView";
     }
 
     @GetMapping("our-offer")
-    public String companyOfferAction (Model model) {
-        model.addAttribute("logo", companyInfoService.getOne(1));
+    public String companyOfferAction () {
         return "/home/offer";
     }
 
     @GetMapping("realisations")
     public String realisationsListAction (Model model) {
         model.addAttribute("realizations", realizationService.findAll());
-        model.addAttribute("logo", companyInfoService.getOne(1));
         return "/home/realisations";
     }
 }
