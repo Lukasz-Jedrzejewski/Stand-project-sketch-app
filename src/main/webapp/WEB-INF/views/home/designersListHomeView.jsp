@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<%@include file="navigation-bar.jsp"%>
+<%@include file="header.jsp"%>
 <c:forEach items="${designer}" var="info">
 <div id="designer-content-home">
     <div class="designer-list">

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
+<%@include file="header.jsp"%>
 <form:form modelAttribute="user" method="post" action="/set-password">
     <form:hidden path="id"/>
     <form:hidden path="companyName"/>

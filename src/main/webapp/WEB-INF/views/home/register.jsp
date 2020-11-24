@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
+<%@include file="header.jsp"%>
 <button type="button" name="back" onclick="history.back()">back</button>
 <form:form modelAttribute="user" method="post" action="/register">
     <div>

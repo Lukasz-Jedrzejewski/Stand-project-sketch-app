@@ -7,34 +7,7 @@
     <title>Homepage</title>
 </head>
 <body>
-<header>
-    <div id="head">
-        <div id="logo">
-            <img src="/resources/images/${logo.logoName}"/>
-        </div>
-        <div id="actions">
-            <c:if test="${user.companyMail != null}">
-            <div id="authentication">
-                <sec:authorize access="isAuthenticated()">
-                    <p>Zalogowany jako:</p>
-                    <p>${user.companyMail}</p>
-                    <button id="contact-submit"><a href="/user/about">Panel</a></button>
-                </sec:authorize>
-            </div>
-            </c:if>
-            <c:if test="${user.companyMail == null}">
-                <div id="authentication">
-                <ul>
-                    <li><a href="/user/about">logowanie</a></li>
-                    <li><a href="/register">Rejestracja</a></li>
-                </ul>
-                </div>
-            </c:if>
-        </div>
-        <div style="clear: both;"></div>
-    </div>
-</header>
-<%@include file="navigation-bar.jsp"%>
+<%@include file="header.jsp"%>
     <!--
     other sections here!
     -->

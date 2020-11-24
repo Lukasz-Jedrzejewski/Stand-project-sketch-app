@@ -54,6 +54,7 @@ public class HomeController {
     public String login(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("passwordModel", new PasswordModel());
+        model.addAttribute("logo", companyInfoService.getOne(1));
         return "/home/register";
     }
 

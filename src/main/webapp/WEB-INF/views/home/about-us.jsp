@@ -13,7 +13,7 @@
             crossorigin=""></script>
 </head>
 <body>
-<%@include file="navigation-bar.jsp"%>
+<%@include file="header.jsp"%>
 <div>
     <c:forEach items="${companyInfo}" var="info">
         <ul>

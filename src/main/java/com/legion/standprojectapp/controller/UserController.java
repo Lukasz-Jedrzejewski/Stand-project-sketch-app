@@ -21,11 +21,13 @@ public class UserController {
     private UserServiceImpl userServiceImpl;
     private ProjectServiceImpl projectService;
     private FileServiceImpl fileService;
+    private CompanyInfoServiceImpl companyInfoService;
 
-    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService) {
+    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, CompanyInfoServiceImpl companyInfoService) {
         this.userServiceImpl = userServiceImpl;
         this.projectService = projectService;
         this.fileService = fileService;
+        this.companyInfoService = companyInfoService;
     }
 
     @GetMapping("/about")
@@ -33,6 +35,7 @@ public class UserController {
         User user = currentUser.getUser();
         model.addAttribute("user", user);
         session.setAttribute("user", user);
+        model.addAttribute("logo", companyInfoService.getOne(1));
         if (!userServiceImpl.checkRole(user.getId()))
             return "/user/userPanel";
         else
