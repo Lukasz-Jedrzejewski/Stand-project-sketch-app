@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CompanyInfoServiceImpl implements CompanyInfoService {
@@ -39,12 +40,14 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     @Override
     public void addLogo(CompanyInfo companyInfo, String fileName, MultipartFile logo) throws IOException {
         CompanyInfo companyFromDB = companyInfoRepository.getOne(companyInfo.getId());
-        Path path = Paths.get(fileName);
-        if (!Files.exists(path)) {
-            Files.createFile(path);
-            Files.write(path, logo.getBytes());
-            companyFromDB.setLogoName(logo.getOriginalFilename());
-            companyInfoRepository.save(companyFromDB);
+        if (Objects.equals(logo.getContentType(), "image/jpeg") ||Objects.equals(logo.getContentType(), "image/jpeg") ) {
+            Path path = Paths.get("src/main/webapp/resources/images/company-logo." + logo.getContentType().split("/")[1]);
+            if (!Files.exists(path)) {
+                Files.createFile(path);
+                Files.write(path, logo.getBytes());
+                companyFromDB.setLogoName("company-logo." + logo.getContentType().split("/")[1]);
+                companyInfoRepository.save(companyFromDB);
+            }
         }
     }
 

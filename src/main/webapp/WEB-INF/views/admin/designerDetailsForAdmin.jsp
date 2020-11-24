@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@include file="headerAdmin.jsp" %>
-<%@include file="../home/navigation-bar.jsp" %>
+<%@include file="../home/header.jsp" %>
 <ul>
     <li>Imię</li>
         ${designer.name}

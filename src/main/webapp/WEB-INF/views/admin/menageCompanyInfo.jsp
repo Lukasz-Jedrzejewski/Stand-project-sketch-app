@@ -6,7 +6,7 @@
 </head>
 <body>
 <%@include file="headerAdmin.jsp"%>
-<%@include file="../home/navigation-bar.jsp"%>
+<%@include file="../home/header.jsp"%>
 <c:forEach items="${companyInfo}" var="info">
     <div>
         <ul>

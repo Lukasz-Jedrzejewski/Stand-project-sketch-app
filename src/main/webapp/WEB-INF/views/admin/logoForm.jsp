@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -6,7 +7,7 @@
 </head>
 <body>
 <%@include file="headerAdmin.jsp" %>
-<%@include file="../home/navigation-bar.jsp" %>
+<%@include file="../home/header.jsp" %>
     <form:form modelAttribute="companyInfo" method="post" action="/admin/add-logo" enctype="multipart/form-data">
         <input type="file" name="file" multiple required/>
         <button type="submit">Zapisz</button>
