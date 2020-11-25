@@ -11,6 +11,14 @@
     <!--
     other sections here!
     -->
+    <div id="realizations-home">
+        <h2>Wybrane realizacje</h2>
+        <div class="border"></div>
+        <div id="realization-display">
+
+        </div>
+        <button id="contact-submit"><a href="/realisations">więcej realizacji</a></button>
+    </div>
     <div id="contact">
         <div id="contact-note">
             <h1>Chcesz dowiedzieć się więcej?</h1>
