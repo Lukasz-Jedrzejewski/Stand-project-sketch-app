@@ -15,7 +15,11 @@
         <h2>Wybrane realizacje</h2>
         <div class="border"></div>
         <div id="realization-display">
-
+            <c:forEach items="${realizations}" var="single" varStatus="status">
+                <c:if test="${status.index == 0}">
+                    <img src="<c:url value="/resources/images/realizations/${single.fileName}" />"/>
+                </c:if>
+            </c:forEach>
         </div>
         <button id="contact-submit"><a href="/realisations">więcej realizacji</a></button>
     </div>

@@ -26,13 +26,15 @@ public class HomeController {
     private final MailServiceImpl mailService;
     private final PasswordResetTokenServiceImpl passwordResetTokenService;
     private final CompanyInfoServiceImpl companyInfoService;
+    private final RealizationServiceImpl realizationService;
 
-    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService, CompanyInfoServiceImpl companyInfoService) {
+    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService, CompanyInfoServiceImpl companyInfoService, RealizationServiceImpl realizationService) {
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
         this.mailService = mailService;
         this.passwordResetTokenService = passwordResetTokenService;
         this.companyInfoService = companyInfoService;
+        this.realizationService = realizationService;
     }
 
     @GetMapping("/")
@@ -46,6 +48,7 @@ public class HomeController {
         } catch (NullPointerException e) {
             System.out.println("Logged user = " + e.getMessage());
         }
+        model.addAttribute("realizations", realizationService.findAllImportant());
         return "/home/home";
     }
 
