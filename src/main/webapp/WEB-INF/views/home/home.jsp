@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
 <head>
     <title>Homepage</title>
@@ -15,11 +16,27 @@
         <h2>Wybrane realizacje</h2>
         <div class="border"></div>
         <div id="realization-display">
+            <img id="rel" src=""/>
+            <script>
+            var values = new Array();
             <c:forEach items="${realizations}" var="single" varStatus="status">
-                <c:if test="${status.index == 0}">
-                    <img src="<c:url value="/resources/images/realizations/${single.fileName}" />"/>
-                </c:if>
+                values.push("${single.fileName}")
             </c:forEach>
+            var img = document.getElementById('rel');
+            const timer = ms => new Promise(res => setTimeout(res, ms))
+            async function load () {
+                var i = 0;
+                for (var i = i; i < values.length; i++) {
+                img.src = "/resources/images/realizations/"+values[i];
+                await timer(4000);
+                if (i === values.length-1) {
+                    i = 0;
+                }
+                }
+                console.log(i)
+            }
+            load();
+            </script>
         </div>
         <button id="contact-submit"><a href="/realisations">więcej realizacji</a></button>
     </div>
