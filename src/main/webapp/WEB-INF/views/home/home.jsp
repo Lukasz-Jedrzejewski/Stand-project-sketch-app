@@ -12,6 +12,16 @@
     <!--
     other sections here!
     -->
+    <div id="designers-home">
+    <h1>Oddaj swoje sprawy w nasze ręce!</h1>
+        <div class="border"></div>
+        <c:forEach items="${designers}" var="single" varStatus="status">
+            <div id="single-designer">
+                <img src="<c:url value="/resources/images/${single.photoName}" />" alt="image" />
+                <p>${single.name} ${single.surname}</p>
+            </div>
+        </c:forEach>
+    </div>
     <div id="realizations-home">
         <h2>Wybrane realizacje</h2>
         <div class="border"></div>
@@ -19,11 +29,11 @@
             <img id="rel" src=""/>
             <script>
             var values = new Array();
-            <c:forEach items="${realizations}" var="single" varStatus="status">
+            <c:forEach items="${realizations}" var="single">
                 values.push("${single.fileName}")
             </c:forEach>
             var img = document.getElementById('rel');
-            const timer = ms => new Promise(res => setTimeout(res, ms))
+            const timer = ms => new Promise(res => setTimeout(res, ms));
             async function load () {
                 var i = 0;
                 for (var i = i; i < values.length; i++) {
@@ -33,7 +43,6 @@
                     i = 0;
                 }
                 }
-                console.log(i)
             }
             load();
             </script>

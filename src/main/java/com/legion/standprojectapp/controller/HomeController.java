@@ -27,14 +27,17 @@ public class HomeController {
     private final PasswordResetTokenServiceImpl passwordResetTokenService;
     private final CompanyInfoServiceImpl companyInfoService;
     private final RealizationServiceImpl realizationService;
+    private final DesignerServiceImpl designerService;
 
-    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService, CompanyInfoServiceImpl companyInfoService, RealizationServiceImpl realizationService) {
+
+    public HomeController(UserServiceImpl userService, VerificationTokenServiceImpl verificationTokenService, MailServiceImpl mailService, PasswordResetTokenServiceImpl passwordResetTokenService, CompanyInfoServiceImpl companyInfoService, RealizationServiceImpl realizationService, DesignerServiceImpl designerService) {
         this.userService = userService;
         this.verificationTokenService = verificationTokenService;
         this.mailService = mailService;
         this.passwordResetTokenService = passwordResetTokenService;
         this.companyInfoService = companyInfoService;
         this.realizationService = realizationService;
+        this.designerService = designerService;
     }
 
     @GetMapping("/")
@@ -49,6 +52,7 @@ public class HomeController {
             System.out.println("Logged user = " + e.getMessage());
         }
         model.addAttribute("realizations", realizationService.findAllImportant());
+        model.addAttribute("designers", designerService.findAll());
         return "/home/home";
     }
 

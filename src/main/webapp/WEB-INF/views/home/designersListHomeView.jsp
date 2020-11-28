@@ -10,7 +10,7 @@
 <c:forEach items="${designer}" var="info">
 <div id="designer-content-home">
     <div class="designer-list">
-    <img src="<c:url value="/resources/images/${info.photoName}" />" alt="image" />
+        <img src="<c:url value="/resources/images/${info.photoName}" />" alt="image" />
     </div>
     <div id="designer-info">
         ${info.name} ${info.surname}

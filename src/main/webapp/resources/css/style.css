@@ -11,6 +11,7 @@ body {
 a {
     text-decoration: none;
     color: white;
+    display: block;
 }
 
 li {
@@ -351,7 +352,7 @@ li {
 
 #realizations-home {
     margin: auto;
-    width: 70%;
+    width: 100%;
     height: 100%;
     background-color: white;
     display: flex;
@@ -372,5 +373,34 @@ li {
     width: 100%;
     object-fit: cover;
     object-position: top center;
+}
+
+#designers-home {
+    width: 100%;
+    height: 100%;
+    background-color: silver;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+    flex-flow: row wrap;
+}
+
+#single-designer {
+    width: 48%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#single-designer img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px 10px;
+}
+
+#single-designer p {
+    text-align: center;
+    flex-grow: 100;
+    margin: 10px 10px;
 }
 
