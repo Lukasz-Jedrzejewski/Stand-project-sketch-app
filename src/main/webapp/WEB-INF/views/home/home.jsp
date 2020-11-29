@@ -34,15 +34,15 @@
             </c:forEach>
             var img = document.getElementById('rel');
             const timer = ms => new Promise(res => setTimeout(res, ms));
-            async function load () {
+            async function load() {
                 var i = 0;
                 for (var i = i; i < values.length; i++) {
                 img.src = "/resources/images/realizations/"+values[i];
                 await timer(4000);
                 if (i === values.length-1) {
-                    i = 0;
-                }
-                }
+                    i = -1;
+                         }
+                    }
             }
             load();
             </script>
