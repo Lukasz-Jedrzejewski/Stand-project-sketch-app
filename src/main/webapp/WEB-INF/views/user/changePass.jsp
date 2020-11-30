@@ -8,7 +8,13 @@
 </head>
 <body>
 <%@include file="../home/header.jsp"%>
-<form:form modelAttribute="userPass" action="/user/changePass" method="post">
+<form:form modelAttribute="user" action="/user/changePass" method="post">
+    <form:hidden path="id" />
+    <form:hidden path="companyName" />
+    <form:hidden path="companyMail" />
+    <form:hidden path="enabled" />
+    <form:hidden path="admin" />
+    <form:hidden path="roles" />
     <div>
         <label>
             Nowe hasło<form:password path="password" id="pass"

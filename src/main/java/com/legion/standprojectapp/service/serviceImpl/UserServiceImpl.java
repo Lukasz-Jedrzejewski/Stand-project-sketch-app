@@ -78,17 +78,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(CurrentUser currentUser, User user) {
-        User current = currentUser.getUser();
-        User userDb = userRepository.getOne(current.getId());
-        user.setId(currentUser.getUser().getId());
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setCompanyName(currentUser.getUser().getCompanyName());
-        user.setCompanyMail(currentUser.getUser().getCompanyMail());
-        user.setAdmin(false);
-        user.setEnabled(true);
-        user.setRoles(userDb.getRoles());
-        userRepository.save(user);
+    public void changePassword(User user, String password) {
+        User userFromDB = userRepository.findByCompanyMail(user.getCompanyMail());
+        userFromDB.setId(user.getId());
+        userFromDB.setPassword(passwordEncoder.encode(password));
+        userFromDB.setCompanyName(user.getCompanyName());
+        userFromDB.setCompanyMail(user.getCompanyMail());
+        userFromDB.setAdmin(user.isAdmin());
+        userFromDB.setEnabled(user.isEnabled());
+        userFromDB.setRoles(user.getRoles());
+        userRepository.save(userFromDB);
     }
 
     @Override

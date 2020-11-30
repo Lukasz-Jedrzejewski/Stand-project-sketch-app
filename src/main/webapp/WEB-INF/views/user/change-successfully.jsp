@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Reset-password-success</title>
+    <title>Change-successfully</title>
 </head>
 <body>
 <%@include file="../home/header.jsp"%>
-<h2>Resetowanie hasła zakończone powodzeniem!</h2>
+<h1>Zmiana hasła powiodła się!</h1>
 <a href="/user/about">logowanie</a>
 </body>
 </html>

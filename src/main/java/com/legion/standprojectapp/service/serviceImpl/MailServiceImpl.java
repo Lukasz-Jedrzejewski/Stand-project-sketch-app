@@ -72,4 +72,15 @@ public class MailServiceImpl implements MailService {
         helper.setText(content, true);
         javaMailSender.send(msg);
     }
+
+    @Override
+    public void sendPasswordChangeToken(String recipient, String token) throws MessagingException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(recipient);
+        helper.setSubject("Zmiana hasła");
+        helper.setText("Aby zmienić hasło, kliknij w poniższy link: "
+                +"http://localhost:8080/user/change-confirmation?token="+token);
+        javaMailSender.send(msg);
+    }
 }

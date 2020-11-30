@@ -1,6 +1,8 @@
 package com.legion.standprojectapp.controller;
 
+import com.legion.standprojectapp.entity.PasswordChangeToken;
 import com.legion.standprojectapp.entity.User;
+import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.*;
@@ -12,23 +14,28 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+import javax.validation.groups.Default;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-    private UserServiceImpl userServiceImpl;
-    private ProjectServiceImpl projectService;
-    private FileServiceImpl fileService;
-    private CompanyInfoServiceImpl companyInfoService;
+    private final UserServiceImpl userServiceImpl;
+    private final ProjectServiceImpl projectService;
+    private final FileServiceImpl fileService;
+    private final CompanyInfoServiceImpl companyInfoService;
+    private final PasswordChangeTokenServiceImpl passwordChangeTokenService;
+    private final MailServiceImpl mailService;
 
-    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, CompanyInfoServiceImpl companyInfoService) {
+    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, CompanyInfoServiceImpl companyInfoService, PasswordChangeTokenServiceImpl passwordChangeTokenService, MailServiceImpl mailService) {
         this.userServiceImpl = userServiceImpl;
         this.projectService = projectService;
         this.fileService = fileService;
         this.companyInfoService = companyInfoService;
+        this.passwordChangeTokenService = passwordChangeTokenService;
+        this.mailService = mailService;
     }
 
     @GetMapping("/about")
@@ -36,7 +43,6 @@ public class UserController {
         User user = currentUser.getUser();
         model.addAttribute("user", user);
         session.setAttribute("user", user);
-        model.addAttribute("logo", companyInfoService.getOne(1));
         if (!userServiceImpl.checkRole(user.getId()))
             return "/user/userPanel";
         else
@@ -78,21 +84,42 @@ public class UserController {
         return "/user/yourFilesList";
     }
 
-    @GetMapping("/changePass")
-    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
-        model.addAttribute("userPass", currentUser.getUser());
+    @GetMapping("/changePass/{id}")
+    public String changePassword(Model model, @PathVariable long id) {
+        model.addAttribute("user", userServiceImpl.findById(id));
         model.addAttribute("passwordModel", new PasswordModel());
         return "/user/changePass";
     }
 
     @PostMapping("/changePass")
-    public String changePassword(@Valid @AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute User userPass, BindingResult bindingResult) {
+    public String changePassword(@Validated(Default.class) @ModelAttribute("user") User user, BindingResult bindingResult,
+                                 @ModelAttribute("passwordModel") PasswordModel passwordModel,
+                                 HttpSession session) throws MessagingException {
         if (bindingResult.hasErrors()) {
             return "/user/changePass";
         }
-        userServiceImpl.changePassword(currentUser, userPass);
-        return "redirect:/user/about";
+        if (user.getPassword().equals(passwordModel.getConfirmPassword())) {
+            PasswordChangeToken passwordChangeToken = new PasswordChangeToken(user);
+            passwordChangeTokenService.save(passwordChangeToken);
+            session.setAttribute("pass", passwordModel.getConfirmPassword());
+            mailService.sendPasswordChangeToken(user.getCompanyMail(), passwordChangeToken.getToken());
+            return "/user/change-verify";
+        } else {
+            return "/user/changePass";
+        }
     }
 
+    @RequestMapping(value = "/change-confirmation", method = {RequestMethod.GET, RequestMethod.POST})
+    public String confirmRegister(@RequestParam("token") String passwordChangeToken, HttpSession session) {
+        PasswordChangeToken token = passwordChangeTokenService.findToken(passwordChangeToken);
+        if (token != null) {
+            User user = userServiceImpl.findByCompanyMail(token.getUser().getCompanyMail());
+            String pass = (String) session.getAttribute("pass");
+            userServiceImpl.changePassword(user, pass);
+            return "/user/change-successfully";
+        } else {
+            return "/user/change-failed";
+        }
+    }
 
 }
