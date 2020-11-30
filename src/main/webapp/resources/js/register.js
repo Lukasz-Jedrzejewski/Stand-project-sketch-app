@@ -25,12 +25,15 @@ document.addEventListener("DOMContentLoaded", function () {
             span.style.display = "none";
         }
     }
-
-    focus(name);
-    focus(mail);
+    if (typeof(name) != 'undefined' && name != null) {
+        focus(name);
+        blur(name);
+    }
+    if (typeof(mail) != 'undefined' && mail != null) {
+        focus(mail);
+        blur(mail);
+    }
     focus(passConfirm);
-    blur(name);
-    blur(mail);
     blur(passConfirm);
     submit();
 

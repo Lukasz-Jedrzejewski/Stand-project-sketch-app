@@ -2,6 +2,7 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
+import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.*;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -80,6 +81,7 @@ public class UserController {
     @GetMapping("/changePass")
     public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model) {
         model.addAttribute("userPass", currentUser.getUser());
+        model.addAttribute("passwordModel", new PasswordModel());
         return "/user/changePass";
     }
 
