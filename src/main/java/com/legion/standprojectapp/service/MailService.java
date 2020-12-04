@@ -12,4 +12,5 @@ public interface MailService {
     void sendPasswordResetToken(String recipient, String token) throws MessagingException;
     void sendContactMessage(String recipient, String topic, String content) throws MessagingException;
     void sendPasswordChangeToken(String recipient, String token) throws MessagingException;
+    void sendEmailChangeToken(String recipient, String token) throws MessagingException;
 }

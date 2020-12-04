@@ -1,9 +1,10 @@
 package com.legion.standprojectapp.controller;
 
+import com.legion.standprojectapp.entity.EmailChangeToken;
 import com.legion.standprojectapp.entity.PasswordChangeToken;
 import com.legion.standprojectapp.entity.User;
-import com.legion.standprojectapp.entity.VerificationToken;
 import com.legion.standprojectapp.model.CurrentUser;
+import com.legion.standprojectapp.model.EmailModel;
 import com.legion.standprojectapp.model.PasswordModel;
 import com.legion.standprojectapp.service.serviceImpl.*;
 import com.legion.standprojectapp.validation.groups.UserEditValidationGroup;
@@ -28,14 +29,16 @@ public class UserController {
     private final CompanyInfoServiceImpl companyInfoService;
     private final PasswordChangeTokenServiceImpl passwordChangeTokenService;
     private final MailServiceImpl mailService;
+    private final EmailChangeTokenServiceImpl emailChangeTokenService;
 
-    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, CompanyInfoServiceImpl companyInfoService, PasswordChangeTokenServiceImpl passwordChangeTokenService, MailServiceImpl mailService) {
+    public UserController(UserServiceImpl userServiceImpl, ProjectServiceImpl projectService, FileServiceImpl fileService, CompanyInfoServiceImpl companyInfoService, PasswordChangeTokenServiceImpl passwordChangeTokenService, MailServiceImpl mailService, EmailChangeTokenServiceImpl emailChangeTokenService) {
         this.userServiceImpl = userServiceImpl;
         this.projectService = projectService;
         this.fileService = fileService;
         this.companyInfoService = companyInfoService;
         this.passwordChangeTokenService = passwordChangeTokenService;
         this.mailService = mailService;
+        this.emailChangeTokenService = emailChangeTokenService;
     }
 
     @GetMapping("/about")
@@ -52,16 +55,37 @@ public class UserController {
     @GetMapping("/edit/{id}")
     public String editUser(@PathVariable long id, Model model) {
         model.addAttribute("user", userServiceImpl.findById(id));
+        model.addAttribute("email", new EmailModel());
         return "/user/editUserForm";
     }
 
     @PostMapping("/edit")
-    public String editUser(@Validated(UserEditValidationGroup.class) @ModelAttribute User user, BindingResult bindingResult) {
+    public String editUser(@Validated(UserEditValidationGroup.class) @ModelAttribute User user,
+                           BindingResult bindingResult,
+                           @ModelAttribute("email") EmailModel emailModel,
+                           HttpSession session) throws MessagingException {
         if (bindingResult.hasErrors()) {
             return "/user/editUserForm";
         }
-        userServiceImpl.save(user);
-        return "redirect:/user/about";
+        session.setAttribute("user", user);
+        session.setAttribute("newEmail", emailModel.getEmail());
+        EmailChangeToken emailChangeToken = new EmailChangeToken(user);
+        emailChangeTokenService.save(emailChangeToken);
+        mailService.sendEmailChangeToken(user.getCompanyMail(), emailChangeToken.getToken());
+        return "/user/edit-verify";
+    }
+
+    @RequestMapping(value = "/edit-confirmation", method = {RequestMethod.GET, RequestMethod.POST})
+    public String confirmEditData(@RequestParam("token") String emailChangeToken, HttpSession session) {
+        EmailChangeToken token = emailChangeTokenService.findToken(emailChangeToken);
+        if (token != null) {
+            User userToEdit = (User) session.getAttribute("user");
+            String newEmail = (String) session.getAttribute("newEmail");
+            userServiceImpl.editUser(userToEdit, newEmail);
+            return "/user/edit-successfully";
+        } else {
+            return "/user/edit-failed";
+        }
     }
 
     @GetMapping("/mySketches")

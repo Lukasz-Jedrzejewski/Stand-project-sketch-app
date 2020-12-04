@@ -83,4 +83,15 @@ public class MailServiceImpl implements MailService {
                 +"http://localhost:8080/user/change-confirmation?token="+token);
         javaMailSender.send(msg);
     }
+
+    @Override
+    public void sendEmailChangeToken(String recipient, String token) throws MessagingException {
+        MimeMessage msg = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(msg, true);
+        helper.setTo(recipient);
+        helper.setSubject("Zmiana emaila");
+        helper.setText("Aby zmienić dane, kliknij w poniższy link: "
+                +"http://localhost:8080/user/edit-confirmation?token="+token);
+        javaMailSender.send(msg);
+    }
 }

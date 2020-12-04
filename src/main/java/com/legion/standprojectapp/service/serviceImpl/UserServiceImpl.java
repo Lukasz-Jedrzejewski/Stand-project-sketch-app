@@ -56,6 +56,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public void editUser(User user, String email) {
+        User userFromDB = findById(user.getId());
+        userFromDB.setCompanyMail(email);
+        userFromDB.setCompanyName(user.getCompanyName());
+        userRepository.save(userFromDB);
+    }
+
 
     @Override
     public User findByCompanyMail(String companyMail) {
