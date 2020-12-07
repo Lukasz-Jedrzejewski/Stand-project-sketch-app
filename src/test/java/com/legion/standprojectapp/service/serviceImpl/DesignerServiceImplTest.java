@@ -71,11 +71,55 @@ class DesignerServiceImplTest {
     }
 
     @Test
+    @DisplayName("test save")
+    @Transactional
     void save() {
+        Designer designer = new Designer();
+        designerService.save(designer);
+        assertNotNull(designerService.getOne(designer.getId()));
+        assertEquals(1, designerService.findAll().size(), "One element should be saved id database");
     }
 
     @Test
+    @DisplayName("test edit")
+    @Transactional
     void edit() {
+        Designer designer = new Designer();
+        designerRepository.save(designer);
+        assertAll(
+                () -> {
+                    designer.setName("Joe");
+                    designerService.edit(designer);
+                    assertEquals(designer.getName(), designerService.getOne(designer.getId()).getName(),
+                            "Names should be the same");
+                },
+                () -> {
+                    designer.setName("Joe");
+                    designer.setSurname("Amstrong");
+                    designer.setDescription("Musician");
+                    designer.setPhotoName("Green day");
+                    designerService.edit(designer);
+                    assertEquals(designer.getName(), designerService.getOne(designer.getId()).getName(),
+                            "Names should be the same");
+                    assertEquals(designer.getSurname(), designerService.getOne(designer.getId()).getSurname(),
+                            "Surnames should be the same");
+                    assertEquals(designer.getDescription(), designerService.getOne(designer.getId()).getDescription(),
+                            "Descriptions should be the same");
+                    assertEquals(designer.getPhotoName(), designerService.getOne(designer.getId()).getPhotoName(),
+                            "Photo names should be the same");
+                },
+                () -> {
+                    designerService.edit(designer);
+                    assertEquals(designer.getName(), designerService.getOne(designer.getId()).getName(),
+                            "Names should be the same");
+                    assertEquals(designer.getSurname(), designerService.getOne(designer.getId()).getSurname(),
+                            "Surnames should be the same");
+                    assertEquals(designer.getDescription(), designerService.getOne(designer.getId()).getDescription(),
+                            "Descriptions should be the same");
+                    assertEquals(designer.getPhotoName(), designerService.getOne(designer.getId()).getPhotoName(),
+                            "Photo names should be the same");
+                }
+        );
     }
 
     @Test
