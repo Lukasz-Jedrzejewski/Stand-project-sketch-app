@@ -3,6 +3,7 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.StandProjectAppApplication;
 import com.legion.standprojectapp.entity.Designer;
 import com.legion.standprojectapp.repository.DesignerRepository;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,11 @@ class DesignerServiceImplTest {
 
     @Autowired
     private DesignerRepository designerRepository;
+
+    @AfterEach
+    void clear() {
+        designerRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("test findAll")
@@ -75,7 +81,9 @@ class DesignerServiceImplTest {
     @Transactional
     void save() {
         Designer designer = new Designer();
+        System.out.println(designerService.findAll().size());
         designerService.save(designer);
+        System.out.println(designerService.findAll().size());
         assertNotNull(designerService.getOne(designer.getId()));
         assertEquals(1, designerService.findAll().size(), "One element should be saved id database");
     }

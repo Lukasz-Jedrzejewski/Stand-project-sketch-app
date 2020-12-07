@@ -1,4 +1,4 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.CurrentEvent;
 import com.legion.standprojectapp.repository.CurrentEventRepository;
