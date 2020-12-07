@@ -3,9 +3,11 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.repository.CompanyInfoRepository;
 import com.legion.standprojectapp.service.CompanyInfoService;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,12 +43,12 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     public void addLogo(MultipartFile logo) throws IOException {
         if (Objects.equals(logo.getContentType(), "image/jpg")
                 || Objects.equals(logo.getContentType(), "image/jpeg")) {
-            Path path = Paths.get("src/main/webapp/resources/images/logo/company-logo."
-                    + logo.getContentType().split("/")[1]);
-            if (!Files.exists(path)) {
-                Files.createFile(path);
-                Files.write(path, logo.getBytes());
+            Path path = Paths.get("src/main/webapp/resources/images/logo/company-logo.jpg");
+            if (Files.exists(path)) {
+                FileUtils.cleanDirectory(new File("src/main/webapp/resources/images/logo/"));
             }
+            Files.createFile(path);
+            Files.write(path, logo.getBytes());
         }
     }
 

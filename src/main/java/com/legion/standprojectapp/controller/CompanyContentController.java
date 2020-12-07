@@ -36,7 +36,6 @@ public class CompanyContentController {
 
     @PostMapping("/add-logo")
     public String addLogoPostAction(@RequestParam MultipartFile file) throws IOException {
-        FileUtils.cleanDirectory(new File("src/main/webapp/resources/images/logo/"));
         companyInfoService.addLogo(file);
         return "redirect:/admin/about-company";
     }

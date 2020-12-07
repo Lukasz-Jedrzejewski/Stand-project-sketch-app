@@ -3,13 +3,23 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.StandProjectAppApplication;
 import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.repository.CompanyInfoRepository;
+import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.activation.MimetypesFileTypeMap;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,7 +68,44 @@ class CompanyInfoServiceImplTest {
     }
 
     @Test
-    void addLogo() {
+    @DisplayName("test addLogo")
+    void addLogo() throws IOException {
+        Path path = Paths.get("src/main/webapp/resources/images/logo/company-logo.jpg");
+        MockMultipartFile txtFile =
+                new MockMultipartFile("data", "filename.txt", "text/plain", "some xml".getBytes());
+        MockMultipartFile dataFile =
+                new MockMultipartFile("data", "other-file-name.data", "text/plain", "some other type".getBytes());
+        MockMultipartFile jpgFile =
+                new MockMultipartFile("image", "1", "image/jpg", "someValue".getBytes());
+        MockMultipartFile jpegFile =
+                new MockMultipartFile("image", "2", "image/jpeg", "someValue".getBytes());
+        assertAll(
+                () -> {
+                    assertTrue(Files.exists(path), "The basic logo should exist");
+                },
+                () -> {
+                    companyInfoService.addLogo(txtFile);
+                    assertTrue(Files.exists(path), "The old logo should exist");
+                    assertNotSame(Arrays.toString(Files.readAllBytes(path)), Arrays.toString(txtFile.getBytes()),
+                            "Wrong file type, should not be saved");
+                },
+                () -> {
+                    companyInfoService.addLogo(dataFile);
+                    assertTrue(Files.exists(path), "The old logo should exist");
+                    assertNotSame(Arrays.toString(Files.readAllBytes(path)), Arrays.toString(dataFile.getBytes()),
+                            "Wrong file type, should not be saved");
+                },
+                () -> {
+                    companyInfoService.addLogo(jpgFile);
+                    assertEquals(Arrays.toString(Files.readAllBytes(path)), Arrays.toString(jpgFile.getBytes()),
+                            "Appropriate file type, should be saved");
+                },
+                () -> {
+                    companyInfoService.addLogo(jpegFile);
+                    assertEquals(Arrays.toString(Files.readAllBytes(path)), Arrays.toString(jpegFile.getBytes()),
+                            "Appropriate file type, should be saved");
+                }
+        );
     }
 
     @Test
