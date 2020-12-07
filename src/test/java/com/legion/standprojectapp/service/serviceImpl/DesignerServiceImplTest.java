@@ -123,7 +123,15 @@ class DesignerServiceImplTest {
     }
 
     @Test
+    @DisplayName("test deleteDesigner")
+    @Transactional
     void deleteDesigner() {
+        assertEquals(0, designerService.findAll().size(), "Should be zero");
+        Designer designer = new Designer();
+        designerRepository.save(designer);
+        assertEquals(1, designerService.findAll().size(), "One element should be saved");
+        designerService.deleteDesigner(designer.getId());
+        assertEquals(0, designerService.findAll().size(), "Should be zero");
     }
 
     @Test
@@ -131,7 +139,14 @@ class DesignerServiceImplTest {
     }
 
     @Test
+    @DisplayName("test getPicNameByDesignerId")
+    @Transactional
     void gePicNameByDesignerId() {
+        Designer designer = new Designer();
+        designer.setPhotoName("photo-name-for-test");
+        designerRepository.save(designer);
+        assertEquals(designer.getPhotoName(), designerService.gePicNameByDesignerId(designer.getId()),
+                "Photo names should be the same");
     }
 
     @Test
