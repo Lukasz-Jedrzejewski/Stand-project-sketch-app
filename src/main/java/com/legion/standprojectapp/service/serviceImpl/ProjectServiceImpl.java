@@ -11,11 +11,9 @@ import java.util.Optional;
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
-    private UserRepository userRepository;
 
     public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository) {
         this.projectRepository = projectRepository;
-        this.userRepository = userRepository;
     }
 
     @Override

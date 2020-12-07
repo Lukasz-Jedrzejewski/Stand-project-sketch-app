@@ -9,7 +9,7 @@
 <%@include file="headerAdmin.jsp" %>
 <%@include file="../home/header.jsp" %>
     <h1>Wgraj plik z rozszerzeniem <strong>.jpg</strong></h1>
-    <form:form modelAttribute="companyInfo" method="post" action="/admin/add-logo" enctype="multipart/form-data">
+    <form:form method="post" action="/admin/add-logo" enctype="multipart/form-data">
         <input type="file" name="file" multiple required/>
         <button type="submit">Zapisz</button>
     </form:form>

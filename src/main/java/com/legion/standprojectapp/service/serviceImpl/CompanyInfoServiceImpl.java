@@ -38,7 +38,7 @@ public class CompanyInfoServiceImpl implements CompanyInfoService {
     }
 
     @Override
-    public void addLogo(CompanyInfo companyInfo, MultipartFile logo) throws IOException {
+    public void addLogo(MultipartFile logo) throws IOException {
         if (Objects.equals(logo.getContentType(), "image/jpg")
                 || Objects.equals(logo.getContentType(), "image/jpeg")) {
             Path path = Paths.get("src/main/webapp/resources/images/logo/company-logo."
