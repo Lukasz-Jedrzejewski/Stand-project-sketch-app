@@ -3,19 +3,21 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.StandProjectAppApplication;
 import com.legion.standprojectapp.entity.CompanyInfo;
 import com.legion.standprojectapp.repository.CompanyInfoRepository;
-import org.apache.commons.io.FileUtils;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.activation.MimetypesFileTypeMap;
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -25,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StandProjectAppApplication.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CompanyInfoServiceImplTest {
 
     @Autowired
@@ -32,6 +35,14 @@ class CompanyInfoServiceImplTest {
 
     @Autowired
     private CompanyInfoServiceImpl companyInfoService;
+
+    @AfterAll
+    public void restoreDefaultLogo() throws IOException {
+        Path pathDef = Paths.get("src/main/webapp/resources/images/sources/pexels-daniel-nettesheim-1162361.jpg");
+        InputStream stream =  new FileInputStream(pathDef.toFile());
+        MockMultipartFile multipartFileToSend = new MockMultipartFile("file", pathDef.toFile().getName(), MediaType.IMAGE_JPEG_VALUE, stream);
+        companyInfoService.addLogo(multipartFileToSend);
+    }
 
     @Test
     @DisplayName("findAll CompanyInfo method testing")
