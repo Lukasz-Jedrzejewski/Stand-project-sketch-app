@@ -150,8 +150,18 @@ class DesignerServiceImplTest {
     }
 
     @Test
-    void deletePic() {
-
+    @DisplayName("test deletePic")
+    @Transactional
+    void deletePic() throws IOException {
+        Designer designer = new Designer();
+        designerService.save(designer);
+        MockMultipartFile jpgFile =
+                new MockMultipartFile("image", "1", "image/jpg", "someValue".getBytes());
+        designerService.addPic(designerService.getOne(designer.getId()), jpgFile.getOriginalFilename(), jpgFile);
+        Path path = Paths.get("src/main/webapp/resources/images/"+jpgFile.getOriginalFilename());
+        assertTrue(Files.exists(path));
+        designerService.deletePic(designerService.gePicNameByDesignerId(designer.getId()));
+        assertFalse(Files.exists(path));
     }
 
     @Test
@@ -184,6 +194,19 @@ class DesignerServiceImplTest {
     }
 
     @Test
-    void clearPic() {
+    @DisplayName("test clearPic")
+    @Transactional
+    void clearPic() throws IOException {
+        Designer designer = new Designer();
+        designerService.save(designer);
+        MockMultipartFile jpgFile =
+                new MockMultipartFile("image", "1", "image/jpg", "someValue".getBytes());
+        designerService.addPic(designerService.getOne(designer.getId()), jpgFile.getOriginalFilename(), jpgFile);
+        Path path = Paths.get("src/main/webapp/resources/images/"+jpgFile.getOriginalFilename());
+        assertTrue(Files.exists(path));
+        designerService.clearPic(designer.getId(), designerService.getOne(designer.getId()).getPhotoName());
+        assertFalse(Files.exists(path));
+        assertNotEquals(jpgFile.getOriginalFilename(), designerService.getOne(designer.getId()).getPhotoName(),
+                "Should be assigned default photo name for designer");
     }
 }
