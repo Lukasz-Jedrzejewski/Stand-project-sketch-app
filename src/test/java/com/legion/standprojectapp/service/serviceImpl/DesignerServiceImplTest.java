@@ -9,8 +9,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
@@ -144,6 +151,7 @@ class DesignerServiceImplTest {
 
     @Test
     void deletePic() {
+
     }
 
     @Test
@@ -158,7 +166,21 @@ class DesignerServiceImplTest {
     }
 
     @Test
-    void addPic() {
+    @DisplayName("test addPic")
+    @Transactional
+    void addPic() throws IOException {
+        Designer designer = new Designer();
+        designerService.save(designer);
+        MockMultipartFile jpgFile =
+                new MockMultipartFile("image", "1", "image/jpg", "someValue".getBytes());
+        designerService.addPic(designerService.getOne(designer.getId()), jpgFile.getOriginalFilename(), jpgFile);
+        assertEquals(jpgFile.getOriginalFilename(), designerService.getOne(designer.getId()).getPhotoName(),
+                "Photos should be the same");
+        Path path = Paths.get("src/main/webapp/resources/images/"+designerService.getOne(designer.getId()).getPhotoName());
+        assertEquals(Arrays.toString(jpgFile.getBytes()), Arrays.toString(Files.readAllBytes(path)),
+                "Photos should be the same");
+        designerService.deletePic(designerService.getOne(designer.getId()).getPhotoName());
+        designerService.deleteDesigner(designer.getId());
     }
 
     @Test

@@ -3,6 +3,7 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.Designer;
 import com.legion.standprojectapp.repository.DesignerRepository;
 import com.legion.standprojectapp.service.DesignerService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,6 +15,9 @@ import java.util.List;
 
 @Service
 public class DesignerServiceImpl implements DesignerService {
+
+    @Value("${images.path}")
+    private String filePath;
 
     final String defaultPicture = "pexels-mohamed-abdelgaffar-771742.jpg";
 
@@ -57,8 +61,9 @@ public class DesignerServiceImpl implements DesignerService {
 
     @Override
     public void deletePic(String fileName) throws IOException {
-        Path path = Paths.get(fileName);
-        if (!fileName.equals("src/main/webapp/resources/images/" + defaultPicture)) {
+        String fullPath = filePath+fileName;
+        Path path = Paths.get(fullPath);
+        if (!fullPath.equals(filePath + defaultPicture)) {
             if (Files.exists(path)) {
                 Files.delete(path);
             }
@@ -73,7 +78,7 @@ public class DesignerServiceImpl implements DesignerService {
     @Override
     public void addPic(Designer designer, String fileName, MultipartFile picture) throws IOException {
         Designer designerFromDB = designerRepository.getOne(designer.getId());
-        Path path = Paths.get(fileName);
+        Path path = Paths.get(filePath+fileName);
         if (!Files.exists(path)) {
             Files.createFile(path);
             Files.write(path, picture.getBytes());
@@ -84,12 +89,7 @@ public class DesignerServiceImpl implements DesignerService {
 
     @Override
     public void clearPic(long id, String filename) throws IOException {
-        Path path = Paths.get(filename);
-        if (!filename.equals("src/main/webapp/resources/images/" + defaultPicture)) {
-            if (Files.exists(path)) {
-                Files.delete(path);
-            }
-        }
+        deletePic(filename);
         Designer designerFromDB = designerRepository.getOne(id);
         designerFromDB.setPhotoName(defaultPicture);
         designerRepository.save(designerFromDB);

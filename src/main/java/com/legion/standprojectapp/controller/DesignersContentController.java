@@ -2,7 +2,6 @@ package com.legion.standprojectapp.controller;
 
 import com.legion.standprojectapp.entity.Designer;
 import com.legion.standprojectapp.service.serviceImpl.DesignerServiceImpl;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,6 @@ import java.io.IOException;
 @Controller
 @RequestMapping("/admin")
 public class DesignersContentController {
-
-    @Value("${images.path}")
-    private String path;
 
     private final DesignerServiceImpl designerService;
 
@@ -75,15 +71,15 @@ public class DesignersContentController {
         Designer current = (Designer) session.getAttribute("des");
         String fileName = file.getOriginalFilename();
         String picName = designerService.gePicNameByDesignerId(current.getId());
-        designerService.deletePic(path+picName);
-        designerService.addPic(current, path+fileName, file);
+        designerService.deletePic(picName);
+        designerService.addPic(current, fileName, file);
         return "redirect:/admin/designers";
     }
 
     @GetMapping("/delete-designer-photo/{id}")
     public String deleteDesignerPhotoAction(@PathVariable long id) throws IOException {
         String fileName = designerService.gePicNameByDesignerId(id);
-        designerService.clearPic(id, path+fileName);
+        designerService.clearPic(id, fileName);
         return "redirect:/admin/designers";
     }
 }
