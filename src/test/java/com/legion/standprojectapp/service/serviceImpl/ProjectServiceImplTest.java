@@ -19,6 +19,7 @@ import javax.validation.ConstraintViolationException;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
@@ -62,7 +63,19 @@ class ProjectServiceImplTest {
     }
 
     @Test
+    @DisplayName("test findByProjectId")
     void findProjectById() {
+        projectService.save(project1);
+        assertAll(
+                () -> {
+                    assertNotNull(projectService.findProjectById(project1.getId()), "This element should be saved");
+                },
+                () -> {
+                    assertEquals(Optional.of(project1).toString(), projectService.findProjectById(project1.getId()).toString(),
+                            "Objects should be the same");
+                }
+        );
+
     }
 
     @Test
