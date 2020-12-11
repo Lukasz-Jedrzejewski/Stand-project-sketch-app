@@ -4,6 +4,8 @@ import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
+
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +19,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void save(Project project) {
-        this.projectRepository.save(project);
+            this.projectRepository.save(project);
     }
 
     @Override

@@ -15,6 +15,13 @@ public class FloorBoard {
     @OneToMany(mappedBy = "floorBoard", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
+    public FloorBoard() {
+    }
+
+    public FloorBoard(@NotBlank String name) {
+        this.name = name;
+    }
+
     public List<Project> getProjects() {
         return projects;
     }

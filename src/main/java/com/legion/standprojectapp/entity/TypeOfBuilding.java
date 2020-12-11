@@ -15,6 +15,13 @@ public class TypeOfBuilding {
     @OneToMany(mappedBy = "typeOfBuilding", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
+    public TypeOfBuilding() {
+    }
+
+    public TypeOfBuilding(@NotBlank String name) {
+        this.name = name;
+    }
+
     public List<Project> getProjects() {
         return projects;
     }
