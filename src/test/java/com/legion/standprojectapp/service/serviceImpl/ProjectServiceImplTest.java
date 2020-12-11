@@ -6,19 +6,17 @@ import com.legion.standprojectapp.entity.FloorBoard;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.entity.TypeOfBuilding;
 import com.legion.standprojectapp.repository.ProjectRepository;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -38,6 +36,11 @@ class ProjectServiceImplTest {
     Project project1 = new Project("3", "3", typeOfBuilding, false, false,
             "3", false, false, floorBoard, 2, branch, "aaa",
             "aaa@mail.com", LocalDate.now(), null);
+
+    @AfterEach
+    public void clear() {
+        projectRepository.deleteAll();
+    }
 
     @Test
     @DisplayName("test save")
@@ -79,19 +82,77 @@ class ProjectServiceImplTest {
     }
 
     @Test
+    @DisplayName("test changeBranchId")
     void changeBranchId() {
+        projectService.save(project1);
+        Optional<Project> projectById = projectService.findProjectById(project1.getId());
+        assertAll(
+                () -> {
+                    assertEquals(Optional.of(project1.getBranch().getId()), projectById.map(Project::getBranch).map(Branch::getId),
+                            "Branch id should be the same");
+                },
+                () -> {
+                    projectService.changeBranchId(project1.getBranch().getId());
+                    Optional<Project> actual = projectService.findProjectById(project1.getId());
+                    assertEquals(Optional.empty(), actual.map(Project::getBranch).map(Branch::getId),
+                            "Branch id should be null");
+                }
+        );
     }
 
     @Test
+    @DisplayName("test changeFloorBoardId")
     void changeFloorBoardId() {
+        projectService.save(project1);
+        Optional<Project> projectById = projectService.findProjectById(project1.getId());
+        assertAll(
+                () -> {
+                    assertEquals(Optional.of(project1.getFloorBoard().getId()),
+                            projectById.map(Project::getFloorBoard).map(FloorBoard::getId),
+                            "Floorboard id should be the same");
+                },
+                () -> {
+                    projectService.changeFloorBoardId(project1.getFloorBoard().getId());
+                    Optional<Project> actual = projectService.findProjectById(project1.getId());
+                    assertEquals(Optional.empty(), actual.map(Project::getFloorBoard).map(FloorBoard::getId),
+                            "Floorboard id should be null");
+                }
+        );
     }
 
     @Test
+    @DisplayName("test changeTypeOfBuildingId")
     void changeTypeOfBuildingId() {
+        projectService.save(project1);
+        Optional<Project> projectById = projectService.findProjectById(project1.getId());
+        assertAll(
+                () -> {
+                    assertEquals(Optional.of(project1.getTypeOfBuilding().getId()),
+                            projectById.map(Project::getTypeOfBuilding).map(TypeOfBuilding::getId),
+                            "Type of building id should be the same");
+                },
+                () -> {
+                    projectService.changeTypeOfBuildingId(project1.getTypeOfBuilding().getId());
+                    Optional<Project> actual = projectService.findProjectById(project1.getId());
+                    assertEquals(Optional.empty(), actual.map(Project::getTypeOfBuilding).map(TypeOfBuilding::getId),
+                            "Type of building id should be null");
+                }
+        );
     }
 
     @Test
+    @DisplayName("test findAllProjects")
     void findAllProjects() {
+        assertAll(
+                () -> {
+                    assertTrue(projectService.findAllProjects().isEmpty(), "List should be empty");
+                },
+                () -> {
+                    projectService.save(project1);
+                    assertFalse(projectService.findAllProjects().isEmpty(), "One element should be saved");
+                    assertEquals(1, projectService.findAllProjects().size(), "One element should be saved");
+                }
+        );
     }
 
     @Test
