@@ -7,7 +7,7 @@
 </head>
 <body>
 <%@include file="headerAdmin.jsp"%>
-<%@include file="../home/navigation-bar.jsp"%>
+<%@include file="../home/header.jsp"%>
     <div id="realizations-admin">
         <form:form action="/admin/delete-realization" method="post" modelAttribute="realization">
             <form:hidden path="id"/>

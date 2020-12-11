@@ -3,7 +3,6 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
-import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +11,7 @@ import java.util.Optional;
 public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
     }
 

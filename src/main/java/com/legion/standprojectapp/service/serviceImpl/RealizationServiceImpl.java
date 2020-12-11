@@ -3,6 +3,7 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.Realization;
 import com.legion.standprojectapp.repository.RealizationRepository;
 import com.legion.standprojectapp.service.RealizationService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +16,9 @@ import java.util.List;
 @Service
 public class RealizationServiceImpl implements RealizationService {
 
+    @Value("${realizations.path}")
+    private String finalPath;
+
     private final RealizationRepository realisationRepository;
 
     public RealizationServiceImpl(RealizationRepository realisationRepository) {
@@ -23,7 +27,7 @@ public class RealizationServiceImpl implements RealizationService {
 
     @Override
     public void savePic(Realization realization, MultipartFile file, String fileName) throws IOException {
-        Path path = Paths.get(fileName);
+        Path path = Paths.get(finalPath+fileName);
         if (!Files.exists(path)) {
             Files.createFile(path);
             Files.write(path, file.getBytes());
@@ -35,7 +39,7 @@ public class RealizationServiceImpl implements RealizationService {
 
     @Override
     public void deletePic(long id, String fileName) throws IOException {
-        Path path = Paths.get(fileName);
+        Path path = Paths.get(finalPath+fileName);
         if (Files.exists(path)) {
             Files.delete(path);
         }

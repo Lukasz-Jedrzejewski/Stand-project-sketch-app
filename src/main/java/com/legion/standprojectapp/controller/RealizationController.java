@@ -14,9 +14,6 @@ import java.io.IOException;
 @RequestMapping("/admin")
 public class RealizationController {
 
-    @Value("${realizations.path}")
-    private String path;
-
     private final RealizationServiceImpl realizationService;
 
     public RealizationController(RealizationServiceImpl realizationService) {
@@ -38,7 +35,7 @@ public class RealizationController {
     @PostMapping("/add-realizations")
     public String addRealisationsPostAction(@RequestParam MultipartFile file,
                                             @ModelAttribute Realization realization) throws IOException {
-        realizationService.savePic(realization, file, path+file.getOriginalFilename());
+        realizationService.savePic(realization, file, file.getOriginalFilename());
         return "redirect:/admin/realizations";
     }
 
@@ -56,7 +53,7 @@ public class RealizationController {
 
     @PostMapping("/delete-realization")
     public String deleteRealizationPostAction (@ModelAttribute Realization realization) throws IOException {
-        realizationService.deletePic(realization.getId(), path+realization.getFileName());
+        realizationService.deletePic(realization.getId(), realization.getFileName());
         return "redirect:/admin/realizations";
     }
 }

@@ -88,9 +88,7 @@ class DesignerServiceImplTest {
     @Transactional
     void save() {
         Designer designer = new Designer();
-        System.out.println(designerService.findAll().size());
         designerService.save(designer);
-        System.out.println(designerService.findAll().size());
         assertNotNull(designerService.getOne(designer.getId()));
         assertEquals(1, designerService.findAll().size(), "One element should be saved id database");
     }
