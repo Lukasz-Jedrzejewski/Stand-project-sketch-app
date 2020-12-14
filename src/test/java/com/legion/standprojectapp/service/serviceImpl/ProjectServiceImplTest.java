@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.validation.ConstraintViolationException;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -194,6 +195,42 @@ class ProjectServiceImplTest {
     }
 
     @Test
+    @DisplayName("test findSorted")
+    @Transactional
     void findSorted() {
+        Project project2 = new Project("4", "4", typeOfBuilding, false, true,
+                "3", false, false, floorBoard, 2, branch, "bbb",
+                "bbb@mail.com", LocalDate.now(), null);
+        Project project3 = new Project("3", "3", typeOfBuilding, false, true,
+                "3", true, false, floorBoard, 2, branch, "aaa",
+                "aaa@mail.com", LocalDate.now(), null);
+        projectService.save(project1);
+        projectService.save(project2);
+        projectService.save(project3);
+        Optional<Project> project2ById = projectService.findProjectById(project2.getId());
+        Optional<Project> project3ById = projectService.findProjectById(project3.getId());
+        if (project2ById.isPresent()) {
+            project2ById.get().setCreated(LocalDate.parse("2020-11-06"));
+            projectService.save(project2ById.get());
+        }
+        if (project3ById.isPresent()) {
+            project3ById.get().setCreated(LocalDate.parse("2020-11-22"));
+            projectService.save(project3ById.get());
+        }
+        assertAll(
+                () -> {
+                    assertEquals(3, projectService.findAllProjects().size(),
+                            "Three elements should be saved");
+                },
+                () -> {
+                    List<Project> sorted = projectService.findSorted();
+                    assertEquals(project1.toString(), sorted.get(0).toString(),
+                            "Project1 should be first on the list");
+                    assertEquals(project3.toString(), sorted.get(1).toString(),
+                            "Project3 should be second on the list");
+                    assertEquals(project2.toString(), sorted.get(2).toString(),
+                            "Project2 should be last on the list");
+                }
+        );
     }
 }
