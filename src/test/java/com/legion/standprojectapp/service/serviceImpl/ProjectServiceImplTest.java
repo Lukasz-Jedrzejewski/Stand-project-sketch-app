@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 
@@ -156,11 +157,40 @@ class ProjectServiceImplTest {
     }
 
     @Test
+    @DisplayName("test readSingleProject")
+    @Transactional
     void readSingleProject() {
+        projectService.save(project1);
+        assertNotNull(projectService.readSingleProject(project1.getId()), "This element should be saved");
+        assertEquals(project1.toString(), projectService.readSingleProject(project1.getId()).toString(),
+                "elements should be same");
     }
 
     @Test
+    @DisplayName("test findUserProjects")
+    @Transactional
     void findUserProjects() {
+        Project project2 = new Project("4", "4", typeOfBuilding, false, true,
+                "3", false, false, floorBoard, 2, branch, "bbb",
+                "bbb@mail.com", LocalDate.now(), null);
+        Project project3 = new Project("3", "3", typeOfBuilding, false, true,
+                "3", true, false, floorBoard, 2, branch, "aaa",
+                "aaa@mail.com", LocalDate.now(), null);
+        projectService.save(project1);
+        projectService.save(project2);
+        projectService.save(project3);
+        assertAll(
+                () -> {
+                    assertEquals(3, projectService.findAllProjects().size(),
+                            "Three elements should be saved");
+                },
+                () -> {
+                    assertEquals(2, projectService.findUserProjects(project1.getCompanyMail()).size(),
+                            "Two elements should be found");
+                    assertEquals(1, projectService.findUserProjects(project2.getCompanyMail()).size(),
+                            "One elements should be found");
+                }
+        );
     }
 
     @Test

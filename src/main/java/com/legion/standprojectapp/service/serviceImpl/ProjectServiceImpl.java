@@ -5,7 +5,6 @@ import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
