@@ -3,16 +3,17 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.StandProjectAppApplication;
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.repository.RoleRepository;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = StandProjectAppApplication.class)
+@ActiveProfiles("test")
 class RoleServiceImplTest {
 
     @Autowired
@@ -26,10 +27,21 @@ class RoleServiceImplTest {
     Role modRole = new Role("ROLE_MOD");
     Role guestRole = new Role("ROLE_GUEST");
 
+    @BeforeEach
+    public void init() {
+        roleService.save(userRole);
+        roleService.save(adminRole);
+    }
+
+    @AfterEach
+    public void delete() {
+        roleRepository.delete(modRole);
+        roleRepository.delete(guestRole);
+    }
+
     @Test
     @DisplayName("test save")
     void save() {
-        System.out.println(roleRepository.findAll().size() + " 111");
         assertAll(
                 () -> {
                     assertEquals(2, roleRepository.findAll().size(),

@@ -3,7 +3,6 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.service.UserService;
-import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.repository.RoleRepository;
 import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
