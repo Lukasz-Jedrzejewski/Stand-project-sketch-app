@@ -26,14 +26,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkAdmin() {
+    public boolean checkAdminExist() {
         List<User> byAdmin = this.userRepository.findByAdmin();
         return byAdmin.size() > 0;
     }
 
     @Override
     public void save(User user) {
-        user.setAdmin(!checkAdmin());
+        user.setAdmin(!checkAdminExist());
         List<User> userList = this.userRepository.findAll();
         Role userRole;
         if (userList.size() == 0) {
