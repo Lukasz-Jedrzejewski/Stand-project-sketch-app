@@ -19,9 +19,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void save(Role role) {
-        boolean existUser = existsByName("ROLE_USER");
-        boolean existAdmin = existsByName("ROLE_ADMIN");
-        if (!existUser || !existAdmin) {
+        boolean existRole = existsByName(role.getName());
+        if (!existRole) {
             this.roleRepository.save(role);
         }
     }

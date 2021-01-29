@@ -18,7 +18,7 @@ public class Project {
     @NotNull
     @Pattern(regexp = "\\d+|\\d+\\.\\d+")
     private String depth;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="type_of_building_id")
     @Convert(converter = LongToIntFunction.class)
     private TypeOfBuilding typeOfBuilding;
@@ -29,14 +29,14 @@ public class Project {
     private String standHeight;
     private boolean utilityRoom;
     private boolean vipRoom;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="floor_board_id")
     @Convert(converter = LongToIntFunction.class)
     private FloorBoard floorBoard;
     @NotNull
     @Max(4)
     private int walls;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="branch_id")
     @Convert(converter = LongToIntFunction.class)
     private Branch branch;
@@ -46,6 +46,31 @@ public class Project {
     private LocalDate created;
     @OneToMany(mappedBy = "project")
     private List<File> files;
+
+    public Project() {
+    }
+
+    public Project(@NotNull @Pattern(regexp = "\\d+|\\d+\\.\\d+") String width,
+                   @NotNull @Pattern(regexp = "\\d+|\\d+\\.\\d+") String depth, TypeOfBuilding typeOfBuilding,
+                   boolean withFloor, boolean withHanger, @NotNull @Pattern(regexp = "\\d+|\\d+\\.\\d+") String standHeight,
+                   boolean utilityRoom, boolean vipRoom, FloorBoard floorBoard, @NotNull @Max(4) int walls,
+                   Branch branch, String companyName, @Email String companyMail, LocalDate created, List<File> files) {
+        this.width = width;
+        this.depth = depth;
+        this.typeOfBuilding = typeOfBuilding;
+        this.withFloor = withFloor;
+        this.withHanger = withHanger;
+        this.standHeight = standHeight;
+        this.utilityRoom = utilityRoom;
+        this.vipRoom = vipRoom;
+        this.floorBoard = floorBoard;
+        this.walls = walls;
+        this.branch = branch;
+        this.companyName = companyName;
+        this.companyMail = companyMail;
+        this.created = created;
+        this.files = files;
+    }
 
     @PrePersist
     public void prePersist() {

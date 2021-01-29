@@ -2,7 +2,7 @@
 <header>
     <div id="head">
         <div id="logo">
-            <img src="/resources/images/logo/company-logo.jpeg"/>
+            <img src="/resources/images/logo/company-logo.jpg"/>
         </div>
         <div id="actions">
             <c:if test="${user.companyMail != null}">

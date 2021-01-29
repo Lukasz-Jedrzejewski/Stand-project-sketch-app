@@ -29,19 +29,14 @@ public class CompanyContentController {
         return "/admin/menageCompanyInfo";
     }
 
-    @GetMapping("/add-logo/{id}")
-    public String addLogoGetAction(Model model, @PathVariable long id, HttpSession session) {
-        model.addAttribute("companyInfo", companyInfoService.getOne(id));
-        session.setAttribute("info", companyInfoService.getOne(id));
+    @GetMapping("/add-logo")
+    public String addLogoGetAction() {
         return "/admin/logoForm";
     }
 
     @PostMapping("/add-logo")
-    public String addLogoPostAction(@RequestParam MultipartFile file, @ModelAttribute CompanyInfo companyInfo,
-                                    HttpSession session) throws IOException {
-        CompanyInfo info = (CompanyInfo) session.getAttribute("info");
-        FileUtils.cleanDirectory(new File("src/main/webapp/resources/images/logo/"));
-        companyInfoService.addLogo(info, file);
+    public String addLogoPostAction(@RequestParam MultipartFile file) throws IOException {
+        companyInfoService.addLogo(file);
         return "redirect:/admin/about-company";
     }
 

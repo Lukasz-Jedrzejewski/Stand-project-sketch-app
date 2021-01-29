@@ -13,8 +13,8 @@ import javax.persistence.*;
 @Table(name = "realizations")
 public class Realization {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long id;
     private String fileName;
     private boolean important;

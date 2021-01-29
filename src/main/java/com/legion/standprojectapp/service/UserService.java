@@ -4,7 +4,7 @@ import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.model.CurrentUser;
 
 public interface UserService {
-    boolean checkAdmin();
+    boolean checkAdminExist();
     void save(User user);
     User findByCompanyMail(String companyMail);
     boolean checkRole(long id);

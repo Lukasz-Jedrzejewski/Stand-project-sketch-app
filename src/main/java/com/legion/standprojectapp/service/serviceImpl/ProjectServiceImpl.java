@@ -3,24 +3,22 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.Project;
 import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
-import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
     private ProjectRepository projectRepository;
-    private UserRepository userRepository;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, UserRepository userRepository) {
+    public ProjectServiceImpl(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;
-        this.userRepository = userRepository;
     }
 
     @Override
     public void save(Project project) {
-        this.projectRepository.save(project);
+            this.projectRepository.save(project);
     }
 
     @Override

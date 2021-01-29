@@ -10,8 +10,8 @@
 <c:forEach items="${companyInfo}" var="info">
     <div>
         <ul>
-            <li><img src="/resources/images/logo/company-logo.jpeg"/></li>
-                <a href="/admin/add-logo/${info.id}">zmień logo</a>
+            <li><img src="/resources/images/logo/company-logo.jpg"/></li>
+                <a href="/admin/add-logo">zmień logo</a>
             <li>
                 ${info.country}
             </li>

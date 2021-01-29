@@ -1,9 +1,9 @@
-package com.legion.standprojectapp.service;
+package com.legion.standprojectapp.service.serviceImpl;
 
 import com.legion.standprojectapp.entity.Branch;
 import com.legion.standprojectapp.repository.BranchRepository;
-import com.legion.standprojectapp.service.serviceImpl.BranchServiceImpl;
 import org.junit.Before;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -36,6 +36,7 @@ class BranchServiceImplTest {
     }
     
     @Test
+    @DisplayName("test findAll")
     void findAll() {
         List<Branch> branches = branchService.findAll();
         assertNotNull(branches);
@@ -59,6 +60,10 @@ class BranchServiceImplTest {
     void delete() {
         branchService.delete(ID);
         verify(branchRepository).delete(branchService.getOne(ID));
+    }
+
+    @Test
+    void existsByName() {
 
     }
 }

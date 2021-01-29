@@ -15,6 +15,13 @@ public class Branch {
     @OneToMany(mappedBy = "branch", orphanRemoval = true, cascade = CascadeType.PERSIST)
     private List<Project> projects;
 
+    public Branch() {
+    }
+
+    public Branch(@NotBlank String name) {
+        this.name = name;
+    }
+
     public List<Project> getProjects() {
         return projects;
     }

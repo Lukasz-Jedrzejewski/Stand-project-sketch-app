@@ -3,7 +3,6 @@ package com.legion.standprojectapp.service.serviceImpl;
 import com.legion.standprojectapp.entity.Role;
 import com.legion.standprojectapp.entity.User;
 import com.legion.standprojectapp.service.UserService;
-import com.legion.standprojectapp.model.CurrentUser;
 import com.legion.standprojectapp.repository.RoleRepository;
 import com.legion.standprojectapp.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,14 +26,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean checkAdmin() {
+    public boolean checkAdminExist() {
         List<User> byAdmin = this.userRepository.findByAdmin();
         return byAdmin.size() > 0;
     }
 
     @Override
     public void save(User user) {
-        user.setAdmin(!checkAdmin());
+        user.setAdmin(!checkAdminExist());
         List<User> userList = this.userRepository.findAll();
         Role userRole;
         if (userList.size() == 0) {
