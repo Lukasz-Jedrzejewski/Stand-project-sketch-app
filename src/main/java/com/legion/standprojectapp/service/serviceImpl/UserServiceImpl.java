@@ -81,7 +81,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existByMail(String companyMail) {
-        return userRepository.existsUserByCompanyMail(companyMail);
+        return userRepository.existsUserByCompanyMailLike(companyMail) ||
+                userRepository.existsUserByCompanyMailContaining(companyMail) ||
+                userRepository.existsUserByCompanyMailEndingWith(companyMail) ||
+                userRepository.existsUserByCompanyMailStartingWith(companyMail);
     }
 
     @Override

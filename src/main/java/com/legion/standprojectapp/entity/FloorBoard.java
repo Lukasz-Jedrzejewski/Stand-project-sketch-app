@@ -12,7 +12,7 @@ public class FloorBoard {
     private Long id;
     @NotBlank
     private String name;
-    @OneToMany(mappedBy = "floorBoard", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "floorBoard", orphanRemoval = true, cascade = CascadeType.MERGE)
     private List<Project> projects;
 
     public FloorBoard() {
