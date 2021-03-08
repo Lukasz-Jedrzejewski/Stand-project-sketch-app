@@ -5,6 +5,7 @@ import com.legion.standprojectapp.service.ProjectService;
 import com.legion.standprojectapp.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,7 +54,21 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> findUserProjects(String companyMail) {
-        return projectRepository.findAllByCompanyMailLike(companyMail);
+        List<Project> resultList = new ArrayList<>();
+        List<Project> companyMailLike = projectRepository.findAllByCompanyMailLike(companyMail);
+        List<Project> companyMailContaining = projectRepository.findAllByCompanyMailContaining(companyMail);
+        List<Project> companyMailStartingWith = projectRepository.findAllByCompanyMailStartingWith(companyMail);
+        List<Project> companyMailEndingWith = projectRepository.findAllByCompanyMailEndingWith(companyMail);
+        if (!companyMailLike.isEmpty()) {
+            resultList.addAll(companyMailLike);
+        } else if (!companyMailContaining.isEmpty()) {
+            resultList.addAll(companyMailContaining);
+        } else if (!companyMailStartingWith.isEmpty()) {
+            resultList.addAll(companyMailStartingWith);
+        } else if (!companyMailEndingWith.isEmpty()) {
+            resultList.addAll(companyMailEndingWith);
+        }
+        return resultList;
     }
 
     @Override

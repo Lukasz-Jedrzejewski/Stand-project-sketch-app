@@ -12,7 +12,7 @@ public class Branch {
     private Long id;
     @NotBlank
     private String name;
-    @OneToMany(mappedBy = "branch", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "branch", orphanRemoval = true, cascade = CascadeType.MERGE)
     private List<Project> projects;
 
     public Branch() {

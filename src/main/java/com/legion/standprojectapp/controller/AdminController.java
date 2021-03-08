@@ -201,8 +201,8 @@ public class AdminController {
     @GetMapping("/userProjects/")
     public String singleUserProjects(Model model, @RequestParam String companyMail) {
         boolean exist = userService.existByMail(companyMail);
-        model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
         if (exist) {
+            model.addAttribute("userProjects", projectService.findUserProjects(companyMail));
             return "/admin/userProjectList";
         } else {
             return "/admin/userNotExist";

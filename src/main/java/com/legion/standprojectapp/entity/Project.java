@@ -36,7 +36,7 @@ public class Project {
     @NotNull
     @Max(4)
     private int walls;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="branch_id")
     @Convert(converter = LongToIntFunction.class)
     private Branch branch;
